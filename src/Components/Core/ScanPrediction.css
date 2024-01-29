@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.scan-prediction-container {
+    font-family: "Montserrat", sans-serif;
+}
+.scan-prediction-box-shadow {
+    box-shadow: 0.2px 3px #000000;
+}
