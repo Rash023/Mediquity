@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.css'
 const Login = () => {
   return (
@@ -9,7 +9,7 @@ const Login = () => {
           Health <span className='text-[#008E7B]'>Care</span>
         </div>
         <div>
-          <input type='text' placeholder='Username' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white' />
+          <input type='text' placeholder='Email' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white text-[31px] leading-[63px]' />
           <br />
           <input type='text' placeholder='Password  ' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white mt-[5%]' />
         </div>
