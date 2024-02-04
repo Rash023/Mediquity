@@ -4,6 +4,7 @@ import './App.css';
 import { Home } from './Components/Core/Home';
 import Login from './Components/Common/Login';
 import SignUp from './Components/Common/SignUp';
+import BrainTumor from './Components/Core/Disease/BrainTumor';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/detection/brain' element={<BrainTumor/>}/>
       </Routes>
     </div>
   );
