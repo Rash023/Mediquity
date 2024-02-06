@@ -1,22 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-.hero-container{
-    font-family: "Montserrat", sans-serif;
-}
-.hero-section-box-shadow {
-    box-shadow: 0.2px 3px #000000;
-}
 .gemini-font {
     -webkit-background-clip: text;
-    /* -webkit-text-fill-color: rgba(0, 0, 0, 0); */
-    background-image: linear-gradient(to right, #e3d5cf 20%, #4d90f0 40%, #4d90f0 60%,#e3d5cf 80%);;
+    background-image: linear-gradient(to right, #e3d5cf 20%, #4d90f0 40%, #4d90f0 60%, #e3d5cf 80%);
     background-clip: text;
     color: transparent;
-    animation: gradient 5s linear infinite
+    animation: gradient 5s linear infinite;
+    background-size: 200% 100%;
 }
 
 @keyframes gradient {
     to {
-        background-position: 200% center
-    }
+        background-position: 200% center;
+    }
 }
