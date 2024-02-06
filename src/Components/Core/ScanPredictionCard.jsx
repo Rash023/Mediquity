@@ -1,15 +1,40 @@
 import React from 'react'
+import { HoverEffect } from '../UI/HoverEffect.tsx'
+import { projects } from '../../Util/Projects.js'
+import { PinContainer } from '../UI/3D-Pin.tsx'
 
-const ScanPredictionCard = ({data}) => {
+const ScanPredictionCard = ({ data }) => {
     return (
-        <div className='text-black border-[4px] border-[#21C4AF] w-[308px] h-[280px] rounded-[15px] bg-green-100 scan-prediction-box-shadow'>
-            <div className='w-[198px] h-[125px] border-[4px] border-[#21C4AF] ml-[17%] mt-[10%] rounded-[15px] text-center'>
-                <img src={data.src} className='h-full w-full rounded-xl' alt={data.label} />
-                <div className='uppercase font-[16px] font-[700] text-center leading-[63px] '>{data.label}</div>
-                <button className='uppercase w-[139px] h-[41px] leading-[24px] font-[19px] tracking-[0.1px] bg-[#21C4AF] border border-[#000000] rounded-[5px] font-bold scan-prediction-box-shadow'>Learn More</button>
+        <div className='flex flex-col text-center'>
+            <p className="text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b uppercase mt-[9%] from-neutral-200 to-neutral-500 py-8 tracking-[2px]">
+                Scans & Predictions
+            </p>
+            <div className="max-w-6xl mx-auto px-8 mt-[12%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+                {
+                    projects.map((project) => (
+                        <div className="h-[40rem] w-full flex items-center justify-center -mt-[70%]">
+                            <PinContainer
+                                title="/ui.aceternity.com"
+                                href="https://twitter.com/mannupaaji"
+                            >
+                                <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[20rem] ">
+                                    <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
+                                        Aceternity UI
+                                    </h3>
+                                    <div className="text-base !m-0 !p-0 font-normal">
+                                        <span className="text-slate-500 ">
+                                            Customizable Tailwind CSS and Framer Motion Components.
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-1 w-full rounded-lg mt-4 bg-[url('https://static.vecteezy.com/vite/assets/photo-masthead-375-b8ae1548.webp')] bg-cover " />
+                                </div>
+                            </PinContainer>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )
-}
+}   
 
 export default ScanPredictionCard

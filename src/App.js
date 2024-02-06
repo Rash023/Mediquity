@@ -1,12 +1,12 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home } from './Components/Core/Home';
 import Login from './Components/Common/Login';
 import SignUp from './Components/Common/SignUp';
 import BrainTumor from './Components/Core/Disease/BrainTumor';
 import DiseasePredictor from './Components/Core/Disease/DiseasePredictor';
 import Contributor from './Components/Core/Contributor';
+import { Home } from './Components/Core/Home';
 
 function App() {
   return (
