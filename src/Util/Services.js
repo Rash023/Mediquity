@@ -20,7 +20,7 @@ export const services = [
   {
     title: "Video Conference",
     description:
-      "Experience personalized consultations, receive expert medical advice, and discuss treatment options remotely.",
+      "Experience our personalized consultations, receive expert medical advice, and discuss treatment options remotely.",
     link: "https://meta.com",
   },
   {
