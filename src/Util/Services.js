@@ -1,26 +1,26 @@
-export const ProvideCardData = [
+export const services = [
   {
-    title: "Personal Care",
+    title: "Chat With Doctors",
     description:
-      "Elevate your well-being with our comprehensive array of health-focused solutions.",
+      "Engage in real-time conversations with qualified medical professionals, offering expert advice, guidance, and support for various health concerns.",
     link: "https://stripe.com",
   },
   {
-    title: "Health Equity",
+    title: "Scan Reports",
     description:
-      "Ensuring fair access to quality healthcare for all, regardless of socio-economic status or demographic factors.",
+      "Access and review your health reports effortlessly. Simply upload your medical documents, including scans and test results, to our secure platform for quick analysis and interpretation.",
     link: "https://netflix.com",
   },
   {
-    title: "Patient Monitoring",
+    title: "Health Blogs",
     description:
-      "Real-time tracking and analysis of vital signs and health metrics, enabling healthcare professionals to remotely monitor patients' well-being and intervene promptly when needed.",
+      " Stay informed about the latest trends in nutrition, fitness, mental health, and more.",
     link: "https://google.com",
   },
   {
-    title: "Wellness Promotion",
+    title: "Video Conference",
     description:
-      " holistic well-being through tailored strategies and resources, promoting healthy lifestyles and positive mental health practices.",
+      "Experience personalized consultations, receive expert medical advice, and discuss treatment options remotely.",
     link: "https://meta.com",
   },
   {
