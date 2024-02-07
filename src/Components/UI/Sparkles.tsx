@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
