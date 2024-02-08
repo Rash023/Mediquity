@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Chatbot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="w-full min-h-screen flex flex-col p-3">
+    <main
+      class="w-full bg-gemLight min-h-[calc(100vh-1rem)] max-h-[calc(100vh-1rem)] flex flex-col"
+    >
+      <!-- Header -->
+      <header class="p-2 bg-gemRegular flex gap-5 items-center">
+        <img
+          src="chat-bot.jpg"
+          alt="chatbot image"
+          class="w-10 h-10 rounded-lg"
+        />
+        <h1 class="text-gemDeep text-lg font-medium">Gemini Chatbot</h1>
+      </header>
+      <!-- Chat Box -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- Chat area -->
+        <div class="p-2 flex flex-col gap-4" id="chat-container"></div>
+      </div>
+      <!-- prompt -->
+      <form action="" method="post" class="p-2 h-fit" id="chat-form">
+        <textarea
+          name="prompt"
+          id="prompt"
+          cols="30"
+          rows="4"
+          class="w-full p-2 rounded-md resize-none focus:outline-none"
+          placeholder="Enter message here..."
+        ></textarea>
+        <button type="submit" class="w-full p-1 bg-gemDeep rounded text-white">
+          Send
+        </button>
+      </form>
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
