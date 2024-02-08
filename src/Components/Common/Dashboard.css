@@ -1,0 +1,56 @@
+.apple-reboot-font {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  background-color: rgba(242, 183, 5, 0.3);
+  margin: 0;
+}
+
+/* In your CSS file or JSX */
+@keyframes custom-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-waving {
+  animation: custom-wave 1s ease-in-out infinite;
+}
+
+/* In your CSS file or JSX */
+@keyframes move-up {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move-down {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-move-up {
+  animation: move-up 1s ease-in-out infinite;
+}
+
+.animate-move-down {
+  animation: move-down 1s ease-in-out infinite;
+}

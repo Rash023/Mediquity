@@ -7,6 +7,7 @@ import BrainTumor from './Components/Core/Disease/BrainTumor';
 import DiseasePredictor from './Components/Core/Disease/DiseasePredictor';
 import Contributor from './Components/Core/Contributor';
 import { Home } from './Components/Core/Home';
+import { Dashboard } from './Components/Common/Dashboard';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/detection/brain' element={<BrainTumor/>}/>
         <Route path='/detection/diseasepredictor' element={<DiseasePredictor/>}/>

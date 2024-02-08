@@ -9,6 +9,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Google Sans Display', 'Arial', 'sans-serif'],
+        cursive: ['Protest Riot', 'sans-serif'],
+        ai: ['Single Day', 'cursive']
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
