@@ -20,7 +20,10 @@
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "tailwind-merge": "^2.2.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@google/generative-ai": "^0.2.0",
+    "dotenv": "^16.4.1",
+    "markdown-it": "^14.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

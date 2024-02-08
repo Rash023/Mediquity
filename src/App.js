@@ -8,6 +8,7 @@ import DiseasePredictor from './Components/Core/Disease/DiseasePredictor';
 import Contributor from './Components/Core/Contributor';
 import { Home } from './Components/Core/Home';
 import { Dashboard } from './Components/Common/Dashboard';
+import PersonalTherapist from './Components/Bot/PersonalTherapist';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/mental-therapist' element={<PersonalTherapist/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/detection/brain' element={<BrainTumor/>}/>
         <Route path='/detection/diseasepredictor' element={<DiseasePredictor/>}/>
