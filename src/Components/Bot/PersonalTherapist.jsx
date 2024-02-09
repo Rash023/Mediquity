@@ -5,6 +5,7 @@ import Markdown from "markdown-it";
 import './PersonalTherapist.css'
 import { BackgroundBeams } from '../UI/BackgroundBeam.tsx';
 import { TracingBeam } from '../UI/TracingBeam.tsx';
+import Starsvg from "../../Asset/BardStar.svg";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -129,7 +130,10 @@ const PersonalTherapist = () => {
         </p>
         <TracingBeam>
           <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
-            <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
+            <div className='flex justify-center gap-x-2'>
+              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
+              <img className='h-6 w-6'   src={Starsvg} alt="Hindol SVG" />
+            </div>
             <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
             <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}>
 
