@@ -71,46 +71,60 @@ export function Dashboard() {
 }
 
 const DummyContent = () => {
-    const avatar =[
+    const avatar = [
         'https://api.dicebear.com/7.x/open-peeps/svg?seed=Jasper',
         'https://api.dicebear.com/7.x/open-peeps/svg?seed=Missy',
         'https://api.dicebear.com/7.x/open-peeps/svg?seed=Charlie'
     ]
     const randomIndex = Math.floor(Math.random() * avatar.length);
     return (
-        <div className="flex gap-x-10 p-10 justify-center font-ai mt-9 text-5xl ">
-            <div className="flex flex-col gap-y-9 mt-[2%]">
-                <div className="flex gap-x-10 items-baseline">
-                    <div>Name - </div>
-                    <div>Hindol Roy</div>
-                </div>
-                <div className="flex gap-x-10 items-baseline">
-                    <div>Phone - </div>
-                    <div className="tracking-[2px]">
-                        {Array.from("+91 6290183645").map((char, index) => (
-                            <span
-                                key={index}
-                                className={`inline-block ${index % 2 === 0 ? "animate-move-up" : "animate-move-down"
-                                    }`}
-                            >
-                                {char}
-                            </span>
-                        ))}
+
+        <div className="flex  p-10 justify-center font-ai  text-5xl card-contain ">
+          
+            <div className="  flex flex-col gap-y-9 mt-[2%]  nft">
+            <hr />
+                <div className="flex justify-evenly ">
+                        <div>
+                            <div className="flex gap-x-10 items-baseline">
+                                <div>Name - </div>
+                                <div>Hindol Roy</div>
+                            </div>
+                            <div className="flex gap-x-10 items-baseline">
+                                <div>Phone - </div>
+                                <div className="tracking-[2px]">
+                                    {Array.from("+91 6290183645").map((char, index) => (
+                                        <span
+                                            key={index}
+                                            className={`inline-block ${index % 2 === 0 ? "animate-move-up" : "animate-move-down"
+                                                }`}
+                                        >
+                                            {char}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="flex gap-x-10 items-baseline">
+                                <div>Email - </div>
+                                <div>hindol.roy@gmail.com</div>
+                            </div>
+                            <div className="flex gap-x-10 items-baseline">
+                                <div>Blood Group - </div>
+                                <div>O +</div>
+                            </div>
+                        </div>
+                    
+                    <div className="">
+                        <img src={avatar[randomIndex]} alt="" width={350} height={350} />
                     </div>
                 </div>
-                <div className="flex gap-x-10 items-baseline">
-                    <div>Email - </div>
-                    <div>hindol.roy@gmail.com</div>
-                </div>
-                <div className="flex gap-x-10 items-baseline">
-                    <div>Blood Group - </div>
-                    <div>O +</div>
-                </div>
+               
             </div>
-            <div>
-                <img src={avatar[randomIndex]} alt="" width={350} height={350}/>
-            </div>
+
+            
+
         </div>
+
+
     );
 
 };

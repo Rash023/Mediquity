@@ -125,8 +125,8 @@ const PersonalTherapist = () => {
         <h1 className="text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
           Mediquity Mental Therapist
         </h1>
-        <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai">
-          Welcome to <span className='uppercase font-bold floating-animation'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-bold floating-animation'>Mediquity</span> is here for you every step of the way.
+        <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai font-bold">
+          Welcome to <span className='uppercase font-extrabold floating-animation'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-extrabold floating-animation'>Mediquity</span> is here for you every step of the way.
         </p>
         <TracingBeam>
           <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
@@ -149,7 +149,7 @@ const PersonalTherapist = () => {
 
             </div>
             <form onSubmit={handleSubmit} className='w-full flex place-items-center justify-center mt-[4%] gap-x-2'>
-              <input type="text" value={newMessage} className='rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl' placeholder='Enter your message' onChange={(e) => setNewMessage(e.target.value)} />
+              <input type="text" value={newMessage} className='rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl' placeholder='Enter your message . . ..' onChange={(e) => setNewMessage(e.target.value)} />
               <IoMdSend className='text-neutral-300' size={40} color='' />
             </form>
 
