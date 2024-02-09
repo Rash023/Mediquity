@@ -129,7 +129,11 @@ const PersonalTherapist = () => {
         </p>
         <TracingBeam>
           <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
-            <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
+            <div className='flex gap-x-2 mx-auto'>
+              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
+              <img src={Starsvg} alt='Star SVG' className='h-6 w-6'/>
+            </div>
+            
             <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
             <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}>
 
