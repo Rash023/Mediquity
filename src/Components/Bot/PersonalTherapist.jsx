@@ -26,12 +26,14 @@ const PersonalTherapist = () => {
   ]);
 
   useEffect(() => {
-    fetchAvatar('user').then(avatarUrl => setUserAvatar(avatarUrl));
-    fetchAvatar('model').then(avatarUrl => setModelAvatar(avatarUrl));
+    fetchAvatar("user").then((avatarUrl) => setUserAvatar(avatarUrl));
+    fetchAvatar("model").then((avatarUrl) => setModelAvatar(avatarUrl));
   }, []);
 
   async function fetchAvatar(role) {
-    const response = await fetch(`https://source.unsplash.com/random/100x100/?${role}`);
+    const response = await fetch(
+      `https://source.unsplash.com/random/100x100/?${role}`
+    );
     return response.url;
   }
 
@@ -62,7 +64,7 @@ const PersonalTherapist = () => {
     };
 
     setHistory([...history, userRole, modelRole]);
-    setNewMessage('');
+    setNewMessage("");
   };
 
   const scrollToBottom = () => {
@@ -82,7 +84,9 @@ const PersonalTherapist = () => {
       const points = message.split("- ").filter(Boolean);
 
       // Create a list using Markdown for each point
-      const listItems = points.map((point, index) => `- ${md.renderInline(point.trim())}`).join('\n');
+      const listItems = points
+        .map((point, index) => `- ${md.renderInline(point.trim())}`)
+        .join("\n");
 
       return `<ul>${listItems}</ul>`;
     }
@@ -90,13 +94,20 @@ const PersonalTherapist = () => {
     // Check if the message is in tabular format
     if (message.includes("|")) {
       // Split the message into rows
-      const rows = message.split("\n").map(row => row.trim());
+      const rows = message.split("\n").map((row) => row.trim());
 
       // Parse each row into a table row
-      const tableRows = rows.map(row => {
-        const columns = row.split("|").filter(Boolean).map(column => column.trim());
-        return `<tr>${columns.map(column => `<td>${md.renderInline(column)}</td>`).join('')}</tr>`;
-      }).join('');
+      const tableRows = rows
+        .map((row) => {
+          const columns = row
+            .split("|")
+            .filter(Boolean)
+            .map((column) => column.trim());
+          return `<tr>${columns
+            .map((column) => `<td>${md.renderInline(column)}</td>`)
+            .join("")}</tr>`;
+        })
+        .join("");
 
       return `<table>${tableRows}</table>`;
     }
