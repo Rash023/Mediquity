@@ -124,7 +124,7 @@ const MedicineAssistant = () => {
                     Pharmos
                 </h1>
                 <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai">
-                    Welcome to <span className='uppercase font-bold floating-animation'>Pharmos</span>, your personalized Medicine Assistant. We specialize in providing support and guidance for individuals seeking assistance with medication management. Whether you're in need of dosage information, guidance on medication timing, or advice for all age groups, <span className='uppercase font-bold floating-animation'>Pharmos</span> is here for you every step of the way. The name Pharmos represents our commitment to pharmacy and personalized care.
+                    Welcome to <span className='uppercase font-bold floating-animation gemini-font'>Pharmos</span>, your personalized Medicine Assistant. We specialize in providing support and guidance for individuals seeking assistance with medication management. Whether you're in need of dosage information, guidance on medication timing, or advice for all age groups, <span className='uppercase font-bold floating-animation gemini-font'>Pharmos</span> is here for you every step of the way. The name Pharmos represents our commitment to pharmacy and personalized care.
                 </p>
 
 

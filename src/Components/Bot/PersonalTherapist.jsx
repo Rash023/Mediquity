@@ -125,7 +125,7 @@ const PersonalTherapist = () => {
           Medora
         </h1>
         <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai font-bold">
-          Welcome to <span className='uppercase font-extrabold floating-animation'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-extrabold floating-animation'>Mediquity</span> is here for you every step of the way.
+          Welcome to <span className='uppercase font-extrabold floating-animation gemini-font'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-extrabold floating-animation gemini-font'>Mediquity</span> is here for you every step of the way.
         </p>
         <TracingBeam>
           <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
