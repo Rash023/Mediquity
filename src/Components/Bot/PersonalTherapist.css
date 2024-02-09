@@ -1,0 +1,32 @@
+.chat-name {
+  background: linear-gradient(
+    to right,
+    hsl(222, 80%, 62%),
+    hsl(235, 66%, 67%),
+    hsl(251, 54%, 65%),
+    hsl(266, 46%, 62%),
+    hsl(288, 34%, 57%),
+    hsl(310, 32%, 55%),
+    hsl(325, 33%, 55%),
+    hsl(335, 36%, 54%),
+    hsl(343, 37%, 53%),
+    hsl(351, 37%, 52%),
+    hsl(352, 43%, 55%),
+    hsl(353, 51%, 58%),
+    hsl(354, 60%, 62%)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient 10s linear infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes gradient {
+    to {
+        background-position: 200% center;
+    }
+}
+.chat-container::-webkit-scrollbar {
+    width: 0; 
+}
+
