@@ -22,11 +22,26 @@
 }
 
 @keyframes gradient {
-    to {
-        background-position: 200% center;
-    }
+  to {
+    background-position: 200% center;
+  }
 }
 .chat-container::-webkit-scrollbar {
-    width: 0; 
+  width: 0;
 }
 
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.floating-animation {
+  animation: floatAnimation 2s ease-in-out infinite;
+}

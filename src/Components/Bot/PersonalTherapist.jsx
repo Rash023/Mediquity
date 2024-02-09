@@ -4,6 +4,7 @@ import { IoMdSend } from "react-icons/io";
 import Markdown from "markdown-it";
 import './PersonalTherapist.css'
 import { BackgroundBeams } from '../UI/BackgroundBeam.tsx';
+import { TracingBeam } from '../UI/TracingBeam.tsx';
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -68,7 +69,7 @@ const PersonalTherapist = () => {
   };
 
   const scrollToBottom = () => {
-    if(chatContainerRef.current) {
+    if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   };
@@ -118,35 +119,41 @@ const PersonalTherapist = () => {
 
   return (
     <div className="h-full min-h-[100vh] w-full rounded-md bg-neutral-950 flex flex-col items-center justify-center antialiased">
-        {/* <BackgroundBeams /> */}
-        <div className="max-w-7xl mx-auto">
-            <h1 className="text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
-                Mediquity Mental Therapist
-            </h1>
-            <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center tracking-[1px]">
-                Welcome to <span className='uppercase font-bold'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-bold'>Mediquity</span> is here for you every step of the way.
-            </p>
+      {/* <BackgroundBeams /> */}
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+          Mediquity Mental Therapist
+        </h1>
+        <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai">
+          Welcome to <span className='uppercase font-bold floating-animation'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-bold floating-animation'>Mediquity</span> is here for you every step of the way.
+        </p>
+        <TracingBeam>
+          <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
+            <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
+            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
+            <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}>
 
-            <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
-                <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
-                <div className="chat-container max-h-[300px] overflow-y-auto" ref={chatContainerRef}>
-                    {history.slice(1).map((message, index) => (
-                        <div key={index} className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"}`}>
-                            { 
-                                message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
-                            }
-                            <div className={`bg-black p-4 rounded-[15px] max-w-[70%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
-                        </div>
-                    ))}
+              {history.slice(1).map((message, index) => (
+                <div key={index} className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"}`}>
+                  {
+                    message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
+                  }
+                  <div className={`bg-black p-4 rounded-[15px] max-w-[70%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
                 </div>
-                <form onSubmit={handleSubmit} className='w-full flex place-items-center justify-center mt-[4%] gap-x-2'>
-                    <input type="text" value={newMessage} className='rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl' placeholder='Enter your message' onChange={(e) => setNewMessage(e.target.value)} />
-                    <IoMdSend className='text-neutral-300' size={40} color='' />
-                </form>
+              ))}
+
+
             </div>
-        </div>
+            <form onSubmit={handleSubmit} className='w-full flex place-items-center justify-center mt-[4%] gap-x-2'>
+              <input type="text" value={newMessage} className='rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl' placeholder='Enter your message' onChange={(e) => setNewMessage(e.target.value)} />
+              <IoMdSend className='text-neutral-300' size={40} color='' />
+            </form>
+
+          </div>
+        </TracingBeam>
+      </div>
     </div >
-);
+  );
 
 
 }
