@@ -125,18 +125,20 @@ const PersonalTherapist = () => {
           Medora
         </h1>
         <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai font-bold">
-          Welcome to <span className='uppercase font-extrabold floating-animation gemini-font'>Mediquity</span>, your compassionate guide on the journey to mental well-being. We specialize in providing support and guidance for individuals seeking relief from mental health challenges. Whether you're in need of empathetic listening, personalized coping strategies, or a safe space to explore your emotions, <span className='uppercase font-extrabold floating-animation gemini-font'>Mediquity</span> is here for you every step of the way.
+     
+         
+         
+         I'm <span className='uppercase font-extrabold floating-animation gemini-font'>Medora</span>, your friendly AI companion on the path to mental well-being. Think of me as the therapist in your pocket, minus the couch and awkward silences.
         </p>
         <TracingBeam>
           <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
             <div className='flex gap-x-2 mx-auto'>
-              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
+              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Rashid</h1>
               <img src={Starsvg} alt='Star SVG' className='h-6 w-6'/>
             </div>
             
-            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
-            <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}>
-
+{/* //             <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1> */}
+           <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}> 
               {history.slice(1).map((message, index) => (
                 <div key={index} className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"}`}>
                   {
