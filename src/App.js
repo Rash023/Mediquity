@@ -10,6 +10,7 @@ import { Home } from './Components/Core/Home';
 import { Dashboard } from './Components/Common/Dashboard';
 import PersonalTherapist from './Components/Bot/PersonalTherapist';
 import MedicineAssistant from './Components/Bot/MedicineAssistant';
+import LawAssistant from './Components/Bot/LawAssistant';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/mental-therapist' element={<PersonalTherapist/>}/>
+        <Route path='/law-assistant' element={<LawAssistant/>}/>
         <Route path='/medicine-assistant' element={<MedicineAssistant/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/detection/brain' element={<BrainTumor/>}/>

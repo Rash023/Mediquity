@@ -137,14 +137,14 @@ const PersonalTherapist = () => {
               <img src={Starsvg} alt='Star SVG' className='h-6 w-6'/>
             </div>
             
-{/* //             <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1> */}
+            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
            <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}> 
               {history.slice(1).map((message, index) => (
                 <div key={index} className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"}`}>
                   {
                     message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
                   }
-                  <div className={`bg-black p-4 rounded-[15px] max-w-[50%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
+                  <div className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
                 </div>
               ))}
 
