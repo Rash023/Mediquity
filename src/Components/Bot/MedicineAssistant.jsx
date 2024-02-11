@@ -142,11 +142,12 @@ const MedicineAssistant = () => {
                             {history.slice(1).map((message, index) => (
                                 <div key={index} className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"}`}>
                                     {
-                                        message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
+                                        message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={modelAvatar} alt="Model Avatar" className="w-10 h-10 rounded-full" />
                                     }
-                                    <div className={`bg-black p-4 rounded-[15px] max-w-[50%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
+                                    <div className={`bg-black p-4 rounded-[15px] max-w-[50%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: message.role === "model" && history.length > 2 && index === history.length - 2 ? message.parts : parseMessage(message.parts) }} />
                                 </div>
                             ))}
+
 
 
                         </div>
