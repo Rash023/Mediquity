@@ -3,6 +3,7 @@ import { PiHandWavingFill } from "react-icons/pi";
 import { MdBloodtype } from "react-icons/md";
 import { Tabs } from "../UI/Tabs.tsx";
 import './Dashboard.css'
+import AllDocs from "../Core/AllDocs.jsx";
 export function Dashboard() {
 
     const tabs = [
@@ -10,19 +11,20 @@ export function Dashboard() {
             title: "Profile",
             value: "Profile",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 ">
+                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-r from-purple-900 via-sky-400 to-blue-700 ">
                     <p className="font-cursive text-6xl first-letter:text-7xl tracking-[1.5px] font-thin">Hello, Hindol <PiHandWavingFill size={50} color="white" className="inline-block animate-waving" /></p>
-                    <DummyContent />
+                    <MyProfile />
                 </div>
             ),
         },
         {
-            title: "Services",
-            value: "services",
+            title: "My Docs",
+            value: "My Docs",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Services tab</p>
-                    <DummyContent />
+                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-r from-slate-900 to-slate-700">
+                    <p className="text-4xl sm:text-7xl font-cursive font-thin bg-clip-text text-transparent bg-gradient-to-b   from-neutral-200 to-neutral-500 py-8 tracking-[1.5px]">My Docs <span className="text-4xl sm:text-7xl font-cursive font-thin bg-clip-text text-transparent bg-gradient-to-b   from-neutral-200 to-neutral-500 py-8 tracking-[1.5px] animate-spotlight">...</span></p>
+                    {/* <div className='bg-slate-300 h-[0.5px] w-[75rem] mt-[4%] '></div> */}
+                    <AllDocs/>
                 </div>
             ),
         },
@@ -30,9 +32,9 @@ export function Dashboard() {
             title: "Playground",
             value: "playground",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-r from-sky-500 to-pink-500">
                     <p>Playground tab</p>
-                    <DummyContent />
+                    
                 </div>
             ),
         },
@@ -42,7 +44,7 @@ export function Dashboard() {
             content: (
                 <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
                     <p>Content tab</p>
-                    <DummyContent />
+                    {/* <DummyContent /> */}
                 </div>
             ),
         },
@@ -52,7 +54,7 @@ export function Dashboard() {
             content: (
                 <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
                     <p>Random tab</p>
-                    <DummyContent />
+                    {/* <DummyContent /> */}
                 </div>
             ),
         },
@@ -70,7 +72,7 @@ export function Dashboard() {
     );
 }
 
-const DummyContent = () => {
+const MyProfile = () => {
     const avatar = [
         'https://api.dicebear.com/7.x/open-peeps/svg?seed=Jasper',
         'https://api.dicebear.com/7.x/open-peeps/svg?seed=Missy',
