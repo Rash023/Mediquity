@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMdSend } from "react-icons/io";
 import Markdown from "markdown-it";
-import './PersonalTherapist.css'
+import './MedicineAssistant.css'
 import { BackgroundBeams } from '../UI/BackgroundBeam.tsx';
 import { TracingBeam } from '../UI/TracingBeam.tsx';
 import Starsvg from "../../Asset/BardStar.svg";
@@ -19,7 +19,7 @@ const MedicineAssistant = () => {
     const [history, setHistory] = useState([
         {
             role: "user",
-            parts: "Hello, You need to act like a Medicine Assistant, If I ask you out of topic question simple give reply like Sorry I am just your  Medicine Assistant",
+            parts: "Hello, You need to act like a Medicine Assistant.I may ask for what medicine I can take or ask for their dosage info and other related to medicines. If I ask you out of topic question simple give reply like Sorry I am just your  Medicine Assistant",
         },
         {
             role: "model",
@@ -133,7 +133,7 @@ const MedicineAssistant = () => {
                     <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
                         <div className='flex gap-x-2 mx-auto'>
                             <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Hindol</h1>
-                            <img src={Starsvg} alt='Star SVG' className='h-6 w-6' />
+                            <img src={Starsvg} alt='Star SVG' className='h-6 w-6 animated-star' />
                         </div>
                         <h1 className="text-2xl md:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
                         <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}>
@@ -143,7 +143,7 @@ const MedicineAssistant = () => {
                                     {
                                         message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
                                     }
-                                    <div className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
+                                    <div className={`bg-black p-4 rounded-[15px] max-w-[50%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
                                 </div>
                             ))}
 

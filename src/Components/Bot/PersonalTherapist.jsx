@@ -142,7 +142,7 @@ const PersonalTherapist = () => {
                   {
                     message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
                   }
-                  <div className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
+                  <div className={`bg-black p-4 rounded-[15px] max-w-[50%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
                 </div>
               ))}
 
