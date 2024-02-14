@@ -10,15 +10,15 @@
 //     //     <div className="mt-[89px]  w-[650px] h-[241px] ">
 //     //         <div className='ml-[130px] flex flex-col space-y-[30px]'>
 //     //             <div className="leading-[40px]">
-//     //                 <span className='font-bold text-[50px] leading-[24px] '> Welcome To</span> 
+//     //                 <span className='font-bold text-[50px] leading-[24px] '> Welcome To</span>
 //     //                 <div className="font-bold text-[53px] leading-[24px] mt-[20px] text-[#008e7b] "><span>Healthcare.</span></div>
 //     //             </div>
 //     //             <div className="">
 //     //                 <span className='font-semibold text-[33px] leading-[47px] tracking-[0.1px]'>Your Personalized Healthcare Telemedicine Assistant Platform.</span>
 //     //             </div>
 //     //             <div className="font-[600] text-[15px] leading-[27px] tracking-[0.1px] w-[606px] h-[80px] text-justify">
-//     //                 Artificial Intelligence (AI) Has Revolutionized The Field Of Telemedicine And 
-//     //                 Healthcare, Offering Innovative Solutions To Enhance Patient Care, Improve 
+//     //                 Artificial Intelligence (AI) Has Revolutionized The Field Of Telemedicine And
+//     //                 Healthcare, Offering Innovative Solutions To Enhance Patient Care, Improve
 //     //                 Efficiency, And Streamline Various Processes.
 //     //             </div>
 //     //             <div>
@@ -29,7 +29,7 @@
 //     // </div>/
 
 //     <>
-        
+
 //     </>
 //   )
 // }
@@ -37,13 +37,13 @@
 // export default HeroSection
 import React from "react";
 import { SparklesCore } from "../UI/Sparkles.tsx";
-import './HeroSection.css'
+import "./HeroSection.css";
 
 export function HeroSection() {
   return (
     <div className="">
       <h1 className="mt-[25%] md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20 gemini-font">
-        Aceternity
+        Mediquity
       </h1>
       <div className="w-[40rem] h-40 relative">
         {/* Gradients */}

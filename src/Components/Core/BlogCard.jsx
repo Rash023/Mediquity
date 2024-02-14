@@ -1,5 +1,3 @@
-
-
 // const BlogCard = ({data}) => {
 //     return (
 //         <div className='text-black border-[4px] border-[#21C4AF] w-[308px] h-[456px] rounded-[15px] bg-green-100 our-blog-box-shadow'>
@@ -14,12 +12,10 @@
 
 // export default BlogCard
 
-
-
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "../UI/3DCard.tsx";
 
-const BlogCard=()=>{
+const BlogCard = () => {
   return (
     <CardContainer className="inter-var">
       <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] sm:w-[30rem] h-auto rounded-xl p-6 border  ">
@@ -27,14 +23,14 @@ const BlogCard=()=>{
           translateZ="50"
           className="text-xl font-bold text-neutral-600 dark:text-white"
         >
-          Make things float in air
+          Add your content
         </CardItem>
         <CardItem
           as="p"
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-          Hover over this card to unleash the power of CSS perspective
+          Add content
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <img
@@ -64,5 +60,5 @@ const BlogCard=()=>{
       </CardBody>
     </CardContainer>
   );
-}
-export default BlogCard
+};
+export default BlogCard;

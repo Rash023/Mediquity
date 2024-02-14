@@ -30,7 +30,7 @@ export const GoogleGeminiEffect = ({
       </p>
       <div className="w-full h-[890px] -top-60 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
         <button className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-[7%] mt-[10%] z-30 md:text-base text-black text-xs  w-fit mx-auto ">
-          ui.aceternity.com
+          Mediquity.gen
         </button>
       </div>
       <svg

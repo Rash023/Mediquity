@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMdSend } from "react-icons/io";
 import Markdown from "markdown-it";
-import './PersonalTherapist.css'
-import { BackgroundBeams } from '../UI/BackgroundBeam.tsx';
-import { TracingBeam } from '../UI/TracingBeam.tsx';
+import "./PersonalTherapist.css";
+import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
+import { TracingBeam } from "../UI/TracingBeam.tsx";
 import Starsvg from "../../Asset/BardStar.svg";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
@@ -12,14 +12,15 @@ const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const md = new Markdown();
 
 const PersonalTherapist = () => {
-  const [newMessage, setNewMessage] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [modelAvatar, setModelAvatar] = useState('');
+  const [newMessage, setNewMessage] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [modelAvatar, setModelAvatar] = useState("");
   const chatContainerRef = useRef(null);
   const [history, setHistory] = useState([
     {
       role: "user",
-      parts: "Hello, You need to act like a Mental Therapist, If I ask you out of topic question simple give reply like Sorry I am just your Mental Therapist",
+      parts:
+        "Hello, You need to act like a Mental Therapist, If I ask you out of topic question simple give reply like Sorry I am just your Mental Therapist",
     },
     {
       role: "model",
@@ -71,7 +72,8 @@ const PersonalTherapist = () => {
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   };
 
@@ -125,43 +127,79 @@ const PersonalTherapist = () => {
           Medora
         </h1>
         <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai font-bold">
-     
-         
-         
-         I'm <span className='uppercase font-extrabold floating-animation gemini-font'>Medora</span>, your friendly AI companion on the path to mental well-being. Think of me as the therapist in your pocket, minus the couch and awkward silences.
+          I'm{" "}
+          <span className="uppercase font-extrabold floating-animation gemini-font">
+            Medora
+          </span>
+          , your friendly AI companion on the path to mental well-being. Think
+          of me as the therapist in your pocket, minus the couch and awkward
+          silences.
         </p>
         <TracingBeam>
-          <div className='w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]'>
-            <div className='flex gap-x-2 mx-auto'>
-              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">Hello, Rashid</h1>
-              <img src={Starsvg} alt='Star SVG' className='h-6 w-6'/>
+          <div className="w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
+            <div className="flex gap-x-2 mx-auto">
+              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
+                Hello, User
+              </h1>
+              <img src={Starsvg} alt="Star SVG" className="h-6 w-6" />
             </div>
-            
-            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">How can I help you today?</h1>
-           <div className="chat-container max-h-[300px] overflow-y-auto mt-[2%]" ref={chatContainerRef}> 
+
+            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+              How can I help you today?
+            </h1>
+            <div
+              className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
+              ref={chatContainerRef}
+            >
               {history.slice(1).map((message, index) => (
-                <div key={index} className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"}`}>
-                  {
-                    message.role === "user" ? <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" /> : <img src={userAvatar} alt="User Avatar" className="w-10 h-10 rounded-full" />
-                  }
-                  <div className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${message.role === "user" ? "text-white" : "text-white"} max-w-xl break-words`} dangerouslySetInnerHTML={{ __html: parseMessage(message.parts) }} />
+                <div
+                  key={index}
+                  className={`flex place-items-center items-start space-x-2 ${
+                    message.role === "model" ? "justify-start" : "justify-end"
+                  }`}
+                >
+                  {message.role === "user" ? (
+                    <img
+                      src={userAvatar}
+                      alt="User Avatar"
+                      className="w-10 h-10 rounded-full"
+                    />
+                  ) : (
+                    <img
+                      src={userAvatar}
+                      alt="User Avatar"
+                      className="w-10 h-10 rounded-full"
+                    />
+                  )}
+                  <div
+                    className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${
+                      message.role === "user" ? "text-white" : "text-white"
+                    } max-w-xl break-words`}
+                    dangerouslySetInnerHTML={{
+                      __html: parseMessage(message.parts),
+                    }}
+                  />
                 </div>
               ))}
-
-
             </div>
-            <form onSubmit={handleSubmit} className='w-full flex place-items-center justify-center mt-[4%] gap-x-2'>
-              <input type="text" value={newMessage} className='rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl' placeholder='Enter your message . . ..' onChange={(e) => setNewMessage(e.target.value)} />
-              <IoMdSend className='text-neutral-300' size={40} color='' />
+            <form
+              onSubmit={handleSubmit}
+              className="w-full flex place-items-center justify-center mt-[4%] gap-x-2"
+            >
+              <input
+                type="text"
+                value={newMessage}
+                className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl"
+                placeholder="Enter your message . . .."
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              <IoMdSend className="text-neutral-300" size={40} color="" />
             </form>
-
           </div>
         </TracingBeam>
       </div>
-    </div >
+    </div>
   );
-
-
-}
+};
 
 export default PersonalTherapist;
