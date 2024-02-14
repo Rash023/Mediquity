@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./Components/Common/Login";
@@ -11,11 +12,28 @@ import PersonalTherapist from "./Components/Bot/PersonalTherapist";
 import PhysioAssistant from "./Components/Bot/PhysioAssistant";
 import MedicineAssistant from "./Components/Bot/MedicineAssistant";
 import LawAssistant from "./Components/Bot/LawAssistant";
+=======
+
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import Login from './Components/Common/Login';
+import SignUp from './Components/Common/SignUp';
+import BrainTumor from './Components/Core/Disease/BrainTumor';
+import DiseasePredictor from './Components/Core/Disease/DiseasePredictor';
+import Contributor from './Components/Core/Contributor';
+import { Home } from './Components/Core/Home';
+import { Dashboard } from './Components/Common/Dashboard';
+import PersonalTherapist from './Components/Bot/PersonalTherapist';
+import MedicineAssistant from './Components/Bot/MedicineAssistant';
+import LawAssistant from './Components/Bot/LawAssistant';
+import { News } from './Components/Common/News';
+>>>>>>> 21fae35e10d6f4cfef335f5e69c3f1b5cbf81fb6
 
 function App() {
   return (
     <div className="App">
       <Routes>
+<<<<<<< HEAD
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -31,6 +49,19 @@ function App() {
           element={<DiseasePredictor />}
         />
         <Route path="/contributor" element={<Contributor />} />
+=======
+        <Route path='/' element={<Home/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/mental-therapist' element={<PersonalTherapist/>}/>
+        <Route path='/law-assistant' element={<LawAssistant/>}/>
+        <Route path='/medicine-assistant' element={<MedicineAssistant/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/detection/brain' element={<BrainTumor/>}/>
+        <Route path='/detection/diseasepredictor' element={<DiseasePredictor/>}/>
+        <Route path='/contributor' element={<Contributor/>}/>
+        <Route path='/news' element={<News/>}/>
+>>>>>>> 21fae35e10d6f4cfef335f5e69c3f1b5cbf81fb6
       </Routes>
     </div>
   );
