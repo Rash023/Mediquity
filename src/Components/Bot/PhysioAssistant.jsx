@@ -129,7 +129,7 @@ const PhysioAssistant = () => {
         <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai font-bold">
           I'm{" "}
           <span className="uppercase font-extrabold floating-animation gemini-font">
-            PhysioPal
+            PhysioPal{" "}
           </span>
           your personal guide to rehabilitation and wellness. This intuitive
           chatbot utilizes advanced algorithms to provide tailored advice,
@@ -172,7 +172,7 @@ const PhysioAssistant = () => {
                     />
                   )}
                   <div
-                    className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${
+                    className={`bg-black p-4 rounded-[15px] max-w-[35%] tracking-[2px] ${
                       message.role === "user" ? "text-white" : "text-white"
                     } max-w-xl break-words`}
                     dangerouslySetInnerHTML={{

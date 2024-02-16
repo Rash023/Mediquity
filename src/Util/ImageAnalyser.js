@@ -22,7 +22,7 @@ async function run() {
   const prompt = "Explain about this disease.";
 
   const imageLinks = [
-    "https://img.medscapestatic.com/pi/meds/ckb/33/29533tn.jpg"
+    "https://www.skincancer.org/wp-content/uploads/basal-cell-carcinoma-4-scar.png"
   ];
 
   const imageParts = await Promise.all(imageLinks.map(fetchImage));
