@@ -86,12 +86,12 @@ const DiseaseAnalysis = () => {
         <div className="h-full min-h-[100vh] w-full rounded-md bg-neutral-950 flex flex-col items-center justify-center antialiased p-8">
             <div className="max-w-7xl mx-auto">
                 <h1 className="text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
-                    Medora
+                    VINICIUS
                 </h1>
                 <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai font-bold">
                     I'm{" "}
                     <span className="uppercase font-extrabold floating-animation gemini-font">
-                        Medora
+                        Vinicius
                     </span>
                     , your friendly AI companion on the path to mental well-being. Think
                     of me as the therapist in your pocket, minus the couch and awkward
@@ -135,7 +135,7 @@ const DiseaseAnalysis = () => {
                         {/* Messages go here */}
                         {responseText && (
                             <div
-                                dangerouslySetInnerHTML={{ __html: parseMessage(responseText) }}
+                                dangerouslySetInnerHTML={{ __html: responseText }}
                                 className="text-white font-ai text-xl"
                             />
                         )}

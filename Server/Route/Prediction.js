@@ -43,7 +43,7 @@ router.post("/disease-predict", async (req, res) => {
 async function generateContent(imageUrl) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
-    const prompt = "You are a Health Based Image Analyzer. You will provide with Description then Syptoms, Precaution, Medication and Youtube Video.";
+    const prompt = "You are a Health Based Image Analyzer. You will provide with Description then Syptoms, Precaution, Medication and Youtube Video.Give the response as in a Html Document. After each subheading apply two <br> tags for linespacing, keep in mind that the points under medications, symptoms should be in <li> tag and Youtube Video section will basically containt the video title. On Clicking it wil redirect to the link. The main heading size will be 48px subheadings will be 32 and normal text will be 20px and headings will be in caps.. Add 2 line break after the main heading";
     const imageParts = await fetchImage(imageUrl);
     const result = await model.generateContent([prompt, imageParts]);
     const response = await result.response;
