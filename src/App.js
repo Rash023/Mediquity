@@ -11,7 +11,7 @@ import PersonalTherapist from "./Components/Bot/PersonalTherapist";
 import PhysioAssistant from "./Components/Bot/PhysioAssistant";
 import MedicineAssistant from "./Components/Bot/MedicineAssistant";
 import LawAssistant from "./Components/Bot/LawAssistant";
-import { News } from './Components/Common/News';
+import { News } from "./Components/Common/News";
 import DiseaseAnalysis from "./Components/Bot/DiseaseAnalysis";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
           element={<DiseasePredictor />}
         />
         <Route path="/contributor" element={<Contributor />} />
-        <Route path='/news' element={<News/>}/>
+        <Route path="/news" element={<News />} />
       </Routes>
     </div>
   );
