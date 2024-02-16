@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "cloudinary": "^2.0.1",
-    "dotenv": "^16.4.4"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.4",
+    "express-fileupload": "^1.4.3"
   }
 }
