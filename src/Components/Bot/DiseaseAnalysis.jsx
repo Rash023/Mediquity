@@ -6,6 +6,7 @@ import "./PersonalTherapist.css";
 import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
 import { TracingBeam } from "../UI/TracingBeam.tsx";
 import Starsvg from "../../Asset/BardStar.svg";
+import axios from "axios"
 import { FaUpload } from "react-icons/fa";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
@@ -16,27 +17,25 @@ const DiseaseAnalysis = () => {
     const [newMessage, setNewMessage] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
     const [modelAvatar, setModelAvatar] = useState("");
-    const [uploadedImage, setUploadedImage] = useState(null); 
+    const [uploadedImage, setUploadedImage] = useState(null);
     const [responseText, setResponseText] = useState("");
     const chatContainerRef = useRef(null);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
-        if(file) {
+        if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => {
+            reader.onloadend = async () => {
                 setUploadedImage(reader.result);
                 const formData = new FormData();
                 formData.append("image", file);
-                fetch("http://localhost:4000/api/v1/predict", {
-                    method: "POST",
-                    body: formData,
+                const response = await axios.post("http://localhost:4000/api/v1/predict/disease-predict", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 })
-                .then(response => response.json())
-                .then(data => {
-                    setResponseText(data.message);
-                })
-                .catch(error => console.error("Error:", error));
+                console.log(response)
+                setResponseText(response?.data?.generatedContent)
             };
             reader.readAsDataURL(file);
         }
@@ -54,35 +53,33 @@ const DiseaseAnalysis = () => {
     };
 
     const parseMessage = (message) => {
-        if (message.startsWith("- ")) {
-            const points = message.split("- ").filter(Boolean);
+        const sections = message.split("\n\n");
 
-            const listItems = points
-                .map((point, index) => `- ${md.renderInline(point.trim())}`)
-                .join("\n");
+        let parsedMessage = "";
 
-            return `<ul>${listItems}</ul>`;
-        }
+        sections.forEach(section => {
+            if (section.startsWith("###")) {
+                parsedMessage += `<h3>${section.substring(6)}</h3>`;
+            } else if (section.startsWith("**")) {
+                const lines = section.split("\n");
+                const title = lines[0].substring(2, lines[0].length - 3);
+                parsedMessage += `<strong>${title}:</strong><br>`;
+                parsedMessage += "<ul>";
+                for (let i = 1; i < lines.length; i++) {
+                    parsedMessage += `<li>${lines[i]}</li>`;
+                }
+                parsedMessage += "</ul>";
+            } else if (section.includes("[") && section.includes("](")) {
+                const startIdx = section.indexOf("[");
+                const endIdx = section.indexOf("](");
+                const title = section.substring(startIdx + 1, endIdx);
+                const link = section.substring(endIdx + 2, section.length - 1);
+                parsedMessage += `<strong>${title}:</strong><br>`;
+                parsedMessage += `<a href="${link}" target="_blank">${title}</a><br>`;
+            }
+        });
 
-        if (message.includes("|")) {
-            const rows = message.split("\n").map((row) => row.trim());
-
-            const tableRows = rows
-                .map((row) => {
-                    const columns = row
-                        .split("|")
-                        .filter(Boolean)
-                        .map((column) => column.trim());
-                    return `<tr>${columns
-                        .map((column) => `<td>${md.renderInline(column)}</td>`)
-                        .join("")}</tr>`;
-                })
-                .join("");
-
-            return `<table>${tableRows}</table>`;
-        }
-
-        return md.render(message);
+        return parsedMessage;
     };
 
     return (
@@ -139,7 +136,7 @@ const DiseaseAnalysis = () => {
                         {responseText && (
                             <div
                                 dangerouslySetInnerHTML={{ __html: parseMessage(responseText) }}
-                                className="text-white"
+                                className="text-white font-ai text-xl"
                             />
                         )}
                     </div>
