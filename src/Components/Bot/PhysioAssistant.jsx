@@ -20,7 +20,7 @@ const PhysioAssistant = () => {
     {
       role: "user",
       parts:
-        "Hello, You need to act like a PhysioTherapist and recommend excercises and routines, If I ask you out of topic question simple give reply like Sorry I am just your PhysioTherapist",
+        "Please act as a Physiotherapist and recommend exercises and routines. If I ask about topics unrelated to physiotherapy or exercise, please respond with: 'Sorry, I am just your Physiotherapist.",
     },
     {
       role: "model",

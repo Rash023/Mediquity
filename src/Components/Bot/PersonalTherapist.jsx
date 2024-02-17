@@ -20,7 +20,7 @@ const PersonalTherapist = () => {
     {
       role: "user",
       parts:
-        "Hello, You need to act like a Mental Therapist, If I ask you out of topic question simple give reply like Sorry I am just your Mental Therapist",
+        "Please act as a Mental Therapist. If I ask about topics unrelated to mental health or therapy, please respond with: 'Sorry, I am just your Mental Therapist'",
     },
     {
       role: "model",
