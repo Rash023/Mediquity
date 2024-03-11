@@ -25,3 +25,5 @@ yarn-error.log*
 .env
 
 node_modules/
+
+Model/PNEUMONIA/Dataset
