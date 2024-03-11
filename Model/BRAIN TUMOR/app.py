@@ -7,7 +7,7 @@ import base64
 import io
 
 app = Flask(__name__)
-model = load_model('model.h5')
+model = load_model('/Model/model.h5')
 
 def preprocess_image(img):
     img = cv2.resize(img, (150, 150))
