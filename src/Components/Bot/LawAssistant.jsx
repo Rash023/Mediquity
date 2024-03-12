@@ -137,65 +137,67 @@ const LawAssistant = () => {
           , your trusted Health Law Advisor. We specialize in providing legal
           support and guidance for individuals navigating the complexities of
           healthcare law. Whether you're a healthcare professional, a patient,
-          or involved in healthcare administration,{" "}
-          <span className="uppercase font-bold floating-animation gemini-font">
+          or involved in healthcare administration.{" "}
+          {/* <span className="uppercase font-bold floating-animation gemini-font">
             Jurix
           </span>{" "}
           is here to help you understand your rights, obligations, and legal
           options. Our mission is to empower you with knowledge and confidence
-          in the realm of health law.
+          in the realm of health law. */}
         </p>
-
-        <TracingBeam containerRef={chatContainerRef}>
-          <div className="w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
+{/* containerRef={chatContainerRef} */}
+        <TracingBeam >
+          <div className="w-[800px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
             <div className="flex gap-x-2 mx-auto">
               <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
-                Hello, Hindol
+                Hello, User
               </h1>
               <img
                 src={Starsvg}
                 alt="Star SVG"
-                className="h-6 w-6 animated-star"
+                className="h-6 w-6"
               />
             </div>
-            <h1 className="text-2xl md:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
               How can I help you today?
             </h1>
             <div
               className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
               ref={chatContainerRef}
             >
-              {!loading &&
-                history.slice(1).map((message, index) => (
-                  <div
-                    key={index}
-                    className={`flex place-items-center items-start space-x-2 ${
-                      message.role === "model" ? "justify-start" : "justify-end"
+              
+              {history.slice(1).map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
                     }`}
-                  >
-                    {message.role === "user" ? (
-                      <img
-                        src={userAvatar}
-                        alt="User Avatar"
-                        className="w-10 h-10 rounded-full"
-                      />
-                    ) : (
-                      <img
-                        src={userAvatar}
-                        alt="User Avatar"
-                        className="w-10 h-10 rounded-full"
-                      />
-                    )}
-                    <div
-                      className={`bg-black p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${
-                        message.role === "user" ? "text-white" : "text-white"
-                      } max-w-xl break-words`}
-                      dangerouslySetInnerHTML={{
-                        __html: parseMessage(message.parts),
-                      }}
+                  style={{ marginTop: index > 0 && history[index - 1].role !== message.role ? '1rem' : 0 }}
+                >
+                  {message.role === "user" ? (
+                    <img
+                      src={userAvatar}
+                      alt="User Avatar"
+                      className="w-10 h-10 rounded-full"
                     />
-                  </div>
-                ))}
+                  ) : (
+                    <img
+                      src={userAvatar}
+                      alt="User Avatar"
+                      className="w-10 h-10 rounded-full"
+                      
+                      
+                    />
+                  )}
+                  <div
+                    className={`bg-black p-4 rounded-[15px] tracking-[2px] ${message.role === "user" ? "text-white w-1/2" : "text-white w-1/2"
+                      } max-w-xl break-words`}
+                    dangerouslySetInnerHTML={{
+                      __html: parseMessage(message.parts),
+                    }}
+                    style={{ margin: '0.5rem' }}
+                  />
+                </div>
+              ))}
               {loading && <span className="loader"></span>}
             </div>
             <form
@@ -210,10 +212,10 @@ const LawAssistant = () => {
                 onChange={(e) => setNewMessage(e.target.value)}
               />
               <IoMdSend
-                className="text-neutral-300 cursor-pointer"
+                className="text-neutral-300 "
                 size={40}
                 color=""
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
               />
             </form>
           </div>

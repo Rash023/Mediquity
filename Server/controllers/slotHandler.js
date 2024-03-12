@@ -1,6 +1,6 @@
-const User = require("../Models/User");
+const User = require("../models/User");
 
-const Doctor = require("../Models/Doctor");
+const Doctor = require("../models/Doctor");
 
 exports.SlotHandler = async (req, res) => {
   try {

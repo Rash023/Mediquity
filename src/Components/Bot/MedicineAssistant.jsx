@@ -15,6 +15,7 @@ const MedicineAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [modelAvatar, setModelAvatar] = useState("");
+  const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef(null);
   const [history, setHistory] = useState([
     {
@@ -41,10 +42,12 @@ const MedicineAssistant = () => {
   }
 
   async function getResponse(prompt) {
+    setLoading(true);
     const chat = await model.startChat({ history: history });
     const result = await chat.sendMessage(prompt);
     const response = await result.response;
     const text = response.text();
+    setLoading(false);
     return text;
   }
 
@@ -142,31 +145,32 @@ const MedicineAssistant = () => {
           commitment to pharmacy and personalized care.
         </p>
 
-        <TracingBeam containerRef={chatContainerRef}>
-          <div className="w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
+        <TracingBeam >
+          <div className="w-[800px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
             <div className="flex gap-x-2 mx-auto">
               <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
-                Hello, Hindol
+                Hello, User
               </h1>
               <img
                 src={Starsvg}
                 alt="Star SVG"
-                className="h-6 w-6 animated-star"
+                className="h-6 w-6"
               />
             </div>
-            <h1 className="text-2xl md:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
               How can I help you today?
             </h1>
             <div
               className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
               ref={chatContainerRef}
             >
+              
               {history.slice(1).map((message, index) => (
                 <div
                   key={index}
-                  className={`flex place-items-center items-start space-x-2 ${
-                    message.role === "model" ? "justify-start" : "justify-end"
-                  }`}
+                  className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
+                    }`}
+                  style={{ marginTop: index > 0 && history[index - 1].role !== message.role ? '1rem' : 0 }}
                 >
                   {message.role === "user" ? (
                     <img
@@ -176,26 +180,24 @@ const MedicineAssistant = () => {
                     />
                   ) : (
                     <img
-                      src={modelAvatar}
-                      alt="Model Avatar"
+                      src={userAvatar}
+                      alt="User Avatar"
                       className="w-10 h-10 rounded-full"
+                      
+                      
                     />
                   )}
                   <div
-                    className={`bg-black p-4 rounded-[15px] max-w-[50%] tracking-[2px] ${
-                      message.role === "user" ? "text-white" : "text-white"
-                    } max-w-xl break-words`}
+                    className={`bg-black p-4 rounded-[15px] tracking-[2px] ${message.role === "user" ? "text-white w-1/2" : "text-white w-1/2"
+                      } max-w-xl break-words`}
                     dangerouslySetInnerHTML={{
-                      __html:
-                        message.role === "model" &&
-                        history.length > 2 &&
-                        index === history.length - 2
-                          ? message.parts
-                          : parseMessage(message.parts),
+                      __html: parseMessage(message.parts),
                     }}
+                    style={{ margin: '0.5rem' }}
                   />
                 </div>
               ))}
+              {loading && <span className="loader"></span>}
             </div>
             <form
               onSubmit={handleSubmit}
@@ -209,10 +211,10 @@ const MedicineAssistant = () => {
                 onChange={(e) => setNewMessage(e.target.value)}
               />
               <IoMdSend
-                className="text-neutral-300 cursor-pointer"
+                className="text-neutral-300 "
                 size={40}
                 color=""
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
               />
             </form>
           </div>
@@ -221,5 +223,6 @@ const MedicineAssistant = () => {
     </div>
   );
 };
+
 
 export default MedicineAssistant;

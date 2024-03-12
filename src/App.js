@@ -18,6 +18,7 @@ import { DiabetesInputs } from "./Components/Predictions/Diabetes1.tsx";
 import Blogspage from "./Components/Common/Blogspage.jsx";
 import PageContent from "./Components/Common/PageContent.jsx";
 
+import Pneumonia from "./Components/Core/Disease/Pneumonia";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/disease-analysis" element={<DiseaseAnalysis />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/detection/brain" element={<BrainTumor />} />
+        <Route path="/detection/pneumonia" element={<Pneumonia />} />
         <Route
           path="/detection/diseasepredictor"
           element={<DiseasePredictor />}
