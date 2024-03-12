@@ -1,4 +1,5 @@
-
+import  Exercise  from "../Asset/Exercise-Blog.gif";
+import Nutrition from "../Asset/Nutrition.svg"
 
 export const BlogContent = [
     {
@@ -56,7 +57,8 @@ export const BlogContent = [
                 heading: "Set Realistic Goals",
                 innerContent: "Establish achievable fitness goals and celebrate your milestones, no matter how small."
             },
-        ]
+        ],
+        image:Exercise
     },
     {
         title: "Importance of Balanced Diet",
@@ -113,7 +115,8 @@ export const BlogContent = [
                 heading:"Practice Moderation",
                 innerContent:"Enjoy treats and indulgences in moderation, but prioritize nutrient-dense foods for the majority of your meals."
             },
-        ]
+        ],
+        image:Nutrition
     },
     {
         title: "Mental Health Awareness",
@@ -129,7 +132,8 @@ export const BlogContent = [
             {
 
             }
-        ]
+        ],
+        image:Nutrition
     },
     {
         title: "Importance of Sleep for Health",
@@ -145,7 +149,8 @@ export const BlogContent = [
             {
 
             }
-        ]
+        ],
+        image:Nutrition
     },
     {
         title: "Benefits of Hydration",
@@ -161,7 +166,8 @@ export const BlogContent = [
             {
 
             }
-        ]
+        ],
+        image:Nutrition
     },
     {
         title: "Stress Management Techniques",
@@ -177,6 +183,7 @@ export const BlogContent = [
             {
 
             }
-        ]
+        ],
+        image:Nutrition
     },
 ]

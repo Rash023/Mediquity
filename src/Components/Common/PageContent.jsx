@@ -4,14 +4,14 @@ import { GoDotFill } from "react-icons/go";
 
 const PageContent = ({ content, index }) => {
   return (
-    <div key={index} className='bg-black'>
+    <div key={index} className=' dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]'>
       <div className='pt-[3%] p-10'>
         <p className='className="text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b uppercase  text-center from-neutral-200 to-neutral-500 py-8 tracking-[2px]"'>
           {content.title}
         </p>
         <div className='flex items-center mt-10 w-full p-16'>
           <div className='w-[100%] pl-8'>
-            <img src={Exercise} alt="#" className='bg-white rounded-full ' />
+            <img src={content.image} alt="#" className='bg-white rounded-full ' />
           </div>
           <div className='pl-[8%]'>
             <p className='text-white uppercase tracking-[2px] text-5xl first-letter:text-6xl font-bold mb-[3%]'>Introduction</p>
@@ -32,7 +32,7 @@ const PageContent = ({ content, index }) => {
           ))
         }
         <p className='text-white uppercase tracking-[2px] text-5xl first-letter:text-6xl pl-20 font-bold mt-[5%] mb-[1.5%] '>Conclusion</p>
-        <h1 className='text-xl mb-[3%] text-neutral-300 text-justify tracking-[3px] font-extralight pl-[8 pr-10'>{content.Conclusion}</h1>
+        <h1 className='text-xl mb-[3%] text-neutral-300 text-justify tracking-[3px] font-extralight pl-[8%] pr-10'>{content.Conclusion}</h1>
         <p className='text-white uppercase tracking-[2px] text-5xl first-letter:text-6xl pl-20 font-bold mt-[5%] mb-[2.5%]'> Tips of the day</p>
         {
           content.Tips.map((value, index) => (
