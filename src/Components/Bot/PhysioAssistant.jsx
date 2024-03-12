@@ -15,6 +15,7 @@ const PhysioAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [modelAvatar, setModelAvatar] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
   const chatContainerRef = useRef(null);
   const [history, setHistory] = useState([
     {
@@ -41,10 +42,12 @@ const PhysioAssistant = () => {
   }
 
   async function getResponse(prompt) {
+    setLoading(true); // Set loading to true before making request
     const chat = await model.startChat({ history: history });
     const result = await chat.sendMessage(prompt);
     const response = await result.response;
     const text = response.text();
+    setLoading(false); // Set loading to false after response received
     return text;
   }
 
@@ -136,7 +139,7 @@ const PhysioAssistant = () => {
           exercises, and support for your physiotherapy journey.
         </p>
         <TracingBeam>
-          <div className="w-7xl flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
+          <div className="w-[800px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
             <div className="flex gap-x-2 mx-auto">
               <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
                 Hello, User
@@ -148,15 +151,15 @@ const PhysioAssistant = () => {
               How can I help you today?
             </h1>
             <div
-              className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
+              className="chat-container max-h-[300px] overflow-y-auto mt-[2%] gap-y-2"
               ref={chatContainerRef}
             >
               {history.slice(1).map((message, index) => (
                 <div
                   key={index}
-                  className={`flex place-items-center items-start space-x-2 ${
-                    message.role === "model" ? "justify-start" : "justify-end"
-                  }`}
+                  className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
+                    }`}
+                  style={{ marginTop: index > 0 && history[index - 1].role !== message.role ? '1rem' : 0 }}
                 >
                   {message.role === "user" ? (
                     <img
@@ -169,18 +172,22 @@ const PhysioAssistant = () => {
                       src={userAvatar}
                       alt="User Avatar"
                       className="w-10 h-10 rounded-full"
+                      
+                      
                     />
                   )}
                   <div
-                    className={`bg-black p-4 rounded-[15px] max-w-[35%] tracking-[2px] ${
-                      message.role === "user" ? "text-white" : "text-white"
-                    } max-w-xl break-words`}
+                    className={`bg-black p-4 rounded-[15px] tracking-[2px] ${message.role === "user" ? "text-white w-1/2" : "text-white w-1/2"
+                      } max-w-xl break-words`}
                     dangerouslySetInnerHTML={{
                       __html: parseMessage(message.parts),
                     }}
+                    style={{ margin: '0.5rem' }}
                   />
                 </div>
               ))}
+
+              {loading && <span className="loader"></span>}
             </div>
             <form
               onSubmit={handleSubmit}
@@ -190,7 +197,7 @@ const PhysioAssistant = () => {
                 type="text"
                 value={newMessage}
                 className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl"
-                placeholder="Enter your message . . .."
+                placeholder="Enter your message"
                 onChange={(e) => setNewMessage(e.target.value)}
               />
               <IoMdSend className="text-neutral-300" size={40} color="" />
