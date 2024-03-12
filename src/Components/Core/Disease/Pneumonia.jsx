@@ -51,13 +51,8 @@ const PneumoniaDetection = () => {
             Pneumonia Detection
           </h1>
           <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center tracking-[1px]">
-            Welcome to <span className="uppercase font-bold">Mediquity</span>,
-            your premier platform for brain tumor detection. We offer
-            state-of-the-art solutions tailored to accurately detect brain
-            tumors. Whether you need reliable diagnostic reports, scalable
-            imaging solutions, or customizable treatment plans,{" "}
-            <span className="uppercase font-bold">Mediquity</span> is your
-            trusted partner!
+            Welcome to <span className="uppercase font-bold">Pneumonia Detection</span>, your premier platform for pneumonia detection. We offer state-of-the-art solutions tailored to accurately detect pneumonia. Whether you need reliable diagnostic reports, scalable imaging solutions, or customizable treatment plans,{" "}
+            <span className="uppercase font-bold">Mediquity</span> is your trusted partner!
           </p>
           <div className="w-[450px] min-h-[300px] border rounded-[30px] mt-[7%] border-neutral-300 mx-auto flex flex-col bg-black p-14">
             {!selectedImage ? (
