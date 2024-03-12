@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
 
 # Load pneumonia prediction model
-pneumonia_model = load_model('D:\Minor\Model\PNEUMONIA\Model\Pneumonia.h5')
+pneumonia_model = load_model('C:\pclab\newMinor\Minor\Model\PNEUMONIA\Model')
 
 # Load diabetes prediction model
 with open('D:\ML\DISEASE PREDICTION\DIABETES\Model\diabetesPredictionModel.pkl', 'rb') as file:

@@ -37,4 +37,4 @@ def predict():
     return jsonify({'prediction': classes[predicted_class]})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
