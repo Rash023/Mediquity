@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@google/generative-ai": "^0.2.0",
+    "@radix-ui/react-label": "^2.0.2",
     "@tabler/icons-react": "^2.47.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@testing-library/jest-dom": "^5.17.0",
@@ -15,7 +16,7 @@
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.1",
-    "framer-motion": "^11.0.3",
+    "framer-motion": "^11.0.8",
     "markdown-it": "^14.0.0",
     "mini-svg-data-uri": "^1.4.4",
     "node-fetch": "^3.3.2",
