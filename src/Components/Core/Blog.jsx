@@ -9,8 +9,8 @@ const Blog = () => {
         Blogs
       </p>
       <div className="max-w-8xl mx-auto px-8 mt-[12%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 -mt-[3%]">
-        {services.map((service) => (
-          <BlogCard />
+        {services.map((service,index) => (
+          <BlogCard index={index}/>
         ))}
       </div>
     </div>

@@ -27,5 +27,6 @@ yarn-error.log*
 node_modules/
 
 Model/PNEUMONIA/Dataset
+Model/PNEUMONIA/Model
 Model/CATARACT/Dataset
 Model/CATARACT/Processed Image

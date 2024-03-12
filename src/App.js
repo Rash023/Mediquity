@@ -13,6 +13,12 @@ import MedicineAssistant from "./Components/Bot/MedicineAssistant";
 import LawAssistant from "./Components/Bot/LawAssistant";
 import { News } from "./Components/Common/News";
 import DiseaseAnalysis from "./Components/Bot/DiseaseAnalysis";
+import Diabetes from "./Components/Predictions/Diabetes";
+import { DiabetesInputs } from "./Components/Predictions/Diabetes1.tsx";
+import Blogspage from "./Components/Common/Blogspage.jsx";
+import PageContent from "./Components/Common/PageContent.jsx";
+
+import Pneumonia from "./Components/Core/Disease/Pneumonia";
 
 function App() {
   return (
@@ -28,12 +34,17 @@ function App() {
         <Route path="/disease-analysis" element={<DiseaseAnalysis />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/detection/brain" element={<BrainTumor />} />
+        <Route path="/detection/pneumonia" element={<Pneumonia />} />
         <Route
           path="/detection/diseasepredictor"
           element={<DiseasePredictor />}
         />
         <Route path="/contributor" element={<Contributor />} />
         <Route path="/news" element={<News />} />
+        <Route path="/diabetes" element={<Diabetes />} />
+        <Route path="/diabetes1" element={<DiabetesInputs />} />
+        <Route path="/bolgspage/:index" element={<Blogspage />} />
+        <Route path="/pagecontent" element={<PageContent />} />
       </Routes>
     </div>
   );

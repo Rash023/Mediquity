@@ -1,21 +1,15 @@
-// const BlogCard = ({data}) => {
-//     return (
-//         <div className='text-black border-[4px] border-[#21C4AF] w-[308px] h-[456px] rounded-[15px] bg-green-100 our-blog-box-shadow'>
-//             <div className='w-[230px] h-[228px] border-[4px] border-[#21C4AF] ml-[13%] mt-[10%] rounded-[15px] text-center'>
-//                 <img src={data.src} className='h-full w-full rounded-xl' alt={data.label} />
-//                 <div className='uppercase text-[21px] font-[700] text-center leading-[44px] mt-[5%] font-[700]'>{data.label}</div>
-//                 <button className='uppercase w-[139px] h-[41px] leading-[24px] font-[19px] tracking-[0.1px] bg-[#21C4AF] border border-[#000000] rounded-[5px] font-bold our-blog-box-shadow mt-[5%]'>Learn More</button>
-//             </div>
-//         </div>
-//     )
-// }
 
-// export default BlogCard
 
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "../UI/3DCard.tsx";
+import { useNavigate } from "react-router-dom";
 
-const BlogCard = () => {
+const BlogCard = ({index}) => {
+
+  const navigate =useNavigate();
+  const clickHandler=()=>{
+    navigate(`/bolgspage/${index}`)
+  }
   return (
     <CardContainer className="inter-var">
       <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] sm:w-[30rem] h-auto rounded-xl p-6 border  ">
@@ -49,13 +43,16 @@ const BlogCard = () => {
           >
             Try now →
           </CardItem>
-          <CardItem
+          {/* <CardItem
             translateZ={20}
             as="button"
             className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
           >
             Sign up
-          </CardItem>
+          </CardItem> */}
+          <button className="text-white" onClick={clickHandler}>
+            sign up
+          </button>
         </div>
       </CardBody>
     </CardContainer>
