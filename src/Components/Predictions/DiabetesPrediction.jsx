@@ -1,11 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsFillSearchHeartFill } from "react-icons/bs";
 
 const DiabetesPrediction = () => {
 
-    const submitHandler = () => {
-        console.log(first);
-    }
+    const [formData, setFormData] = useState({
+        age: '',
+        gender: '',
+        hypertension: '',
+        heart_disease: '',
+        smoking_history: '',
+        bmi: '',
+        HbA1c_level: '',
+        blood_glucose_level: ''
+    });
+    const [predictionResult, setPredictionResult] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+        let processedValue = value;
+        setFormData({ ...formData, [name]: processedValue });
+    };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        console.log(formData);
+        setLoading(true);
+        try {
+            const response = await fetch('http://127.0.0.1:5000/predict/diabetes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            console.log(data);
+            setPredictionResult(data.result);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className=" h-[190vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
             <h1 className="select-none text-lg md:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
@@ -27,40 +63,40 @@ const DiabetesPrediction = () => {
 
 
             <div className='flex justify-center mt-20'>
-                <div className='w-[550px] h-[110vh] border border-white rounded-[30px] bg-black p-10 '>
+                <div className='w-[630px] h-[110vh] border border-white rounded-[30px] bg-black p-10 '>
                     <form onSubmit={submitHandler}>
                         <div>
-                            <label htmlFor="age" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl uppercase select-none'>Age</label>
-                            <input type="number" placeholder='Enter Age' name='age' className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 py-3 placeholder:uppercase ' />
+                            <label htmlFor="age" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl uppercase select-none tracking-[1px] '>Age</label>
+                            <input type="text" placeholder='Enter Age' name='age' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
                         </div>
 
                         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 mb-4 mt-8">
                             <div>
-                                <label htmlFor="gender" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl uppercase select-none'>Gender</label>
+                                <label htmlFor="gender" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl uppercase select-none tracking-[1px]'>Gender</label>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='gender' className='block m-4 cursor-pointer' /><span className='text-neutral-500  select-none  tracking-[0.5px]  '>Male</span>
+                                    <input type="radio" name='gender' className='block m-4  cursor-pointer' value="1" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]'>Male</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='gender' className='block m-4 cursor-pointer' /><span className='text-neutral-500   select-none tracking-[0.5px]  '>Female</span>
+                                    <input type="radio" name='gender' className='block m-4 cursor-pointer' value="0" onChange={changeHandler} /><span className='text-neutral-500   select-none tracking-[0.5px]'>Female</span>
                                 </div>
                             </div>
 
                             <div>
-                                <label htmlFor="hypertension" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-2xl select-none '>Hypertension</label>
+                                <label htmlFor="hypertension" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-2xl select-none tracking-[1px]'>Hypertension</label>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='hypertension' className='block m-4 cursor-pointer' /><span className='text-neutral-500  select-none  tracking-[0.5px]  '>Yes</span>
+                                    <input type="radio" name='hypertension' className='block m-4 cursor-pointer' value="1" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]' >Yes</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='hypertension' className='block m-4 cursor-pointer' /><span className='text-neutral-500  select-none  tracking-[0.5px]  '>No</span>
+                                    <input type="radio" name='hypertension' className='block m-4 cursor-pointer' value="0" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]' >No</span>
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="heart_disease" className='bg-clip-text text-transparent uppercase bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl select-none '>Heart Disease</label>
+                                <label htmlFor="heart_disease" className='bg-clip-text text-transparent uppercase bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl select-none tracking-[1px]'>Heart Disease</label>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='heart_disease' className='block m-4 cursor-pointer' /><span className='text-neutral-500  select-none  tracking-[0.5px]  '>Yes</span>
+                                    <input type="radio" name='heart_disease' className='block m-4 cursor-pointer' value="1" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]  ' >Yes</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='heart_disease' className='block m-4 cursor-pointer' /><span className='text-neutral-500  select-none  tracking-[0.5px]  '>No</span>
+                                    <input type="radio" name='heart_disease' className='block m-4 cursor-pointer' value="0" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]  ' >No</span>
                                 </div>
                             </div>
 
@@ -69,34 +105,34 @@ const DiabetesPrediction = () => {
 
 
                         <div>
-                            <label htmlFor="smoking_history" className='bg-clip-text select-none uppercase text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl  '>Smoking History</label>
+                            <label htmlFor="smoking_history" className='bg-clip-text select-none uppercase text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl tracking-[1px]'>Smoking History</label>
                             <div className='flex md:flex-row space-y-2 md:space-y-0 md:space-x-8'>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' />
-                                    <span className='text-neutral-500  select-none  tracking-[0.5px]  '>No Info</span>
+                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' value="0" onChange={changeHandler} />
+                                    <span className='text-neutral-500  select-none  tracking-[0.5px]'>No Info</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' />
-                                    <span className='text-neutral-500  select-none  tracking-[0.5px]  '>Current</span>
+                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' value="1" onChange={changeHandler} />
+                                    <span className='text-neutral-500  select-none  tracking-[0.5px]'>Current</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' />
-                                    <span className='text-neutral-500   select-none tracking-[0.5px]  '>Ever</span>
+                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' onChange={changeHandler} value="2" />
+                                    <span className='text-neutral-500 select-none tracking-[0.5px]'>Ever</span>
                                 </div>
                             </div>
 
 
                             <div className='flex md:flex-row space-y-2 md:space-y-0 md:space-x-8'>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' />
-                                    <span className='text-neutral-500  select-none  tracking-[0.5px]  '>Former</span>
+                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' onChange={changeHandler} value="3" />
+                                    <span className='text-neutral-500  select-none  tracking-[0.5px]  ' >Former</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' />
+                                    <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' onChange={changeHandler} value="5" />
                                     <span className='text-neutral-500 select-none   tracking-[0.5px]  '>Not Current</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name='smoking_history' className='block m-4  cursor-pointer' />
+                                    <input type="radio" name='smoking_history' className='block m-4  cursor-pointer' onChange={changeHandler} value="4" />
                                     <span className='text-neutral-500  select-none  tracking-[0.5px]  '>Never</span>
                                 </div>
                             </div>
@@ -104,29 +140,44 @@ const DiabetesPrediction = () => {
                         <div className='h-[0.5px] w-[90%] bg-white  rounded-md ml-3 mb-6 mt-10' ></div>
 
                         <div>
-                            <label htmlFor="bmi" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl  '>BMI</label>
-                            <input type="number" name='bmi' placeholder="Enter BMI Value (Float)" className='block mt-3 mb-6  text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 py-3 placeholder:uppercase' />
+                            <label htmlFor="bmi" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 text-2xl tracking-[1px]'>BMI</label>
+                            <input type="text" name='bmi' onChange={changeHandler} placeholder="Enter BMI Value (Float)" className='block mt-3 mb-6  text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase  placeholder:tracking-[1px] placeholder:text-sm' />
                         </div>
 
                         <div>
-                            <label htmlFor="HbA1c_level" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-2xl  '>HbA1c level</label>
-                            <input type="number" name='HbA1c_level' placeholder="Enter HbA1c Level (Float)" className=' block mt-3 mb-6 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 py-3 placeholder:uppercase ' />
+                            <label htmlFor="HbA1c_level" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-2xl tracking-[1px]'>HbA1c level</label>
+                            <input type="text" name='HbA1c_level' onChange={changeHandler} placeholder="Enter HbA1c Level (Float)" className=' block mt-3 mb-6 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase  placeholder:tracking-[1px] placeholder:text-sm' />
                         </div>
 
                         <div>
-                            <label htmlFor="blood_glucose_level" className='select-none bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-2xl  '>Blood Glucose Level</label>
-                            <input type="number" name='blood_glucose_level' placeholder="Enter Blood Glucose level (Integer)" className=' block mt-3 mb-6 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 py-3 placeholder:uppercase' />
+                            <label htmlFor="blood_glucose_level" className='select-none bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-2xl tracking-[1px]'>Blood Glucose Level</label>
+                            <input type="text" name='blood_glucose_level' onChange={changeHandler} placeholder="Enter Blood Glucose level (Integer)" className=' block mt-3 mb-6 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase  placeholder:tracking-[1px] placeholder:text-sm' />
                         </div>
 
-                        <div className='text-center border border-white cursor-pointer rounded-[20px] py-5 mt-10 flex items-center justify-center space-x-6' >
-                            <button className='select-none uppercase text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold tracking-[1px]' >Predict</button>
-                            <BsFillSearchHeartFill  size={30} className='fill-neutral-500 '/>
+                        <div className='text-center border border-white cursor-pointer rounded-[20px] py-5 mt-10 flex items-center justify-center space-x-6'>
+                            {predictionResult ? (
+                                <span className='select-none uppercase text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold tracking-[1px]'>
+                                    {predictionResult}
+                                </span>
+                            ) : (
+                                <>
+                                    {loading ? (
+                                        <div className="loader" /> 
+                                    ) : (
+                                        <button className='select-none uppercase text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold tracking-[1px]'>
+                                            Predict
+                                        </button>
+                                    )}
+                                    <BsFillSearchHeartFill size={30} className='fill-neutral-500' />
+                                </>
+                            )}
                         </div>
+
 
                     </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

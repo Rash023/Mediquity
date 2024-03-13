@@ -45,27 +45,32 @@ def predict_pneumonia():
 @app.route('/predict/diabetes', methods=['POST'])
 def predict_diabetes():
     data = request.json
-    data['gender'] = 1 if data['gender'] == 'Male' else 0
+    gender = int(data['gender'])
+    age = float(data['age'])
+    hypertension = int(data['hypertension'])
+    heart_disease = int(data['heart_disease'])
+    smoking_history = int(data['smoking_history'])
+    bmi = float(data['bmi'])
+    HbA1c_level = float(data['HbA1c_level'])
+    blood_glucose_level = int(data['blood_glucose_level'])
     
     input_data = np.array([[
-        data['age'],
-        data['gender'],
-        data['hypertension'],
-        data['heart_disease'],
-        data['smoking_history'],
-        data['bmi'],
-        data['HbA1c_level'],
-        data['blood_glucose_level']
+        age,
+        gender,
+        hypertension,
+        heart_disease,
+        smoking_history,
+        bmi,
+        HbA1c_level,
+        blood_glucose_level
     ]])
     
     prediction = diabetes_model.predict(input_data)
     
-    if prediction[0] == 0:
-        result = "Non-diabetic"
-    else:
-        result = "Diabetic"
+    result = "Non-diabetic" if prediction[0] == 0 else "Diabetic"
     
     return jsonify({'result': result})
+
 
 @app.route('/predict/brain_tumor', methods=['POST'])
 def predict_brain_tumor():
