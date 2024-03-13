@@ -17,6 +17,7 @@ const DiseaseAnalysis = () => {
   const [newMessage, setNewMessage] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [modelAvatar, setModelAvatar] = useState("");
+  const [loading, setLoading] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [responseText, setResponseText] = useState("");
   const chatContainerRef = useRef(null);
@@ -29,6 +30,7 @@ const DiseaseAnalysis = () => {
         setUploadedImage(reader.result);
         const formData = new FormData();
         formData.append("image", file);
+        setLoading(true);
         const response = await axios.post(
           "http://localhost:4000/api/v1/predict/disease-predict",
           formData,
@@ -38,6 +40,7 @@ const DiseaseAnalysis = () => {
             },
           }
         );
+        setLoading(false);
         console.log(response);
         setResponseText(response?.data?.generatedContent);
       };
@@ -148,13 +151,15 @@ const DiseaseAnalysis = () => {
             )}
           </div>
           <div ref={chatContainerRef} className="flex flex-col gap-y-4 mt-4">
-            {/* Messages go here */}
-            {responseText && (
+            {loading ? (
+              <div className="loader"/>
+            ) : (
               <div
                 dangerouslySetInnerHTML={{ __html: responseText }}
-                className="text-white font-ai text-xl"
+                className="text-4xl uppercase tracking-[1px] select-none md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold"
               />
             )}
+
           </div>
         </div>
       </div>
