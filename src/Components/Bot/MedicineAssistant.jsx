@@ -13,6 +13,7 @@ const md = new Markdown();
 
 const MedicineAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
+
   const [userAvatar, setUserAvatar] = useState("");
   const [modelAvatar, setModelAvatar] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,10 +44,12 @@ const MedicineAssistant = () => {
 
   async function getResponse(prompt) {
     setLoading(true);
+    setLoading(true);
     const chat = await model.startChat({ history: history });
     const result = await chat.sendMessage(prompt);
     const response = await result.response;
     const text = response.text();
+    console.log(text);
     setLoading(false);
     return text;
   }
@@ -134,39 +137,41 @@ const MedicineAssistant = () => {
           <span className="uppercase font-bold floating-animation gemini-font">
             Pharmos
           </span>
-          , your exclusive medication ally. We specialize in customized medication support, offering expert guidance on precise dosages, strategic timing, and nuanced advice for all age groups.,{" "}
+          , your exclusive medication ally. We specialize in customized
+          medication support, offering expert guidance on precise dosages,
+          strategic timing, and nuanced advice for all age groups.,{" "}
           <span className="uppercase font-bold floating-animation gemini-font">
             Pharmos,
           </span>{" "}
-          epitomizes our steadfast dedication to pharmacy and personalized healthcare delivery.
+          epitomizes our steadfast dedication to pharmacy and personalized
+          healthcare delivery.
         </p>
 
-        <TracingBeam >
-          <div className="w-[800px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
-            <div className="flex gap-x-2 mx-auto">
-              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
-                Hello, User
-              </h1>
-              <img
-                src={Starsvg}
-                alt="Star SVG"
-                className="h-6 w-6"
-              />
-            </div>
-            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
-              How can I help you today?
+        <div className=" w-7xl  flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
+          <div className="Pharmos-inner-div flex gap-x-2 mx-auto">
+            <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
+              Hello, User
             </h1>
-            <div
-              className="chat-container max-h-[260px] overflow-y-auto mt-[2%]"
-              ref={chatContainerRef}
-            >
-              
-              {history.slice(1).map((message, index) => (
+            <img
+              src={Starsvg}
+              alt="Star SVG"
+              className="h-6 w-6 animated-star"
+            />
+          </div>
+          <h1 className="text-2xl md:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+            How can I help you today?
+          </h1>
+          <div
+            className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
+            ref={chatContainerRef}
+          >
+            {!loading &&
+              history.slice(1).map((message, index) => (
                 <div
                   key={index}
-                  className={`flex items-center space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
-                    }`}
-                  style={{ marginTop: index > 0 && history[index - 1].role !== message.role ? '1rem' : 0 }}
+                  className={`flex place-items-center items-start space-x-2 mt-[2%] ${
+                    message.role === "model" ? "justify-start" : "justify-end"
+                  }`}
                 >
                   {message.role === "user" ? (
                     <img
@@ -179,46 +184,45 @@ const MedicineAssistant = () => {
                       src={userAvatar}
                       alt="User Avatar"
                       className="w-10 h-10 rounded-full"
-                      
-                      
                     />
                   )}
                   <div
-                    className={`bg-black p-4 rounded-[15px] tracking-[2px] ${message.role === "user" ? "text-white w-1/2" : "text-white w-1/2"
-                      } max-w-xl break-words`}
+                    className={` p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${
+                      message.role === "user"
+                        ? "text-white bg-gray-800"
+                        : "text-white bg-slate-500"
+                    } max-w-xl break-words`}
                     dangerouslySetInnerHTML={{
                       __html: parseMessage(message.parts),
                     }}
-                    style={{ margin: '0.5rem' }}
+                    style={{ margin: "0.5rem" }}
                   />
                 </div>
               ))}
-              {loading && <span className="loader"></span>}
-            </div>
-            <form
-              onSubmit={handleSubmit}
-              className="w-full flex place-items-center justify-center mt-[4%] gap-x-2"
-            >
-              <input
-                type="text"
-                value={newMessage}
-                className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl"
-                placeholder="Enter your message"
-                onChange={(e) => setNewMessage(e.target.value)}
-              />
-              <IoMdSend
-                className="text-neutral-300 "
-                size={40}
-                color=""
-                // onClick={handleSubmit}
-              />
-            </form>
+            {loading && <span className="loader"></span>}
           </div>
-        </TracingBeam>
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex place-items-center justify-center mt-[4%] gap-x-2"
+          >
+            <input
+              type="text"
+              value={newMessage}
+              className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl"
+              placeholder="Enter your message"
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            <IoMdSend
+              className="text-neutral-300 cursor-pointer"
+              size={40}
+              color=""
+              onClick={handleSubmit}
+            />
+          </form>
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default MedicineAssistant;

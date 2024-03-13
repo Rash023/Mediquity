@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMdSend } from "react-icons/io";
-import Markdown from "markdown-it";
+import MarkdownIt from "markdown-it"; // Import markdown-it
 import "./LawAssistant.css";
 import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
 import { TracingBeam } from "../UI/TracingBeam.tsx";
@@ -9,7 +9,7 @@ import Starsvg from "../../Asset/BardStar.svg";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-const md = new Markdown();
+const md = new MarkdownIt(); // Initialize markdown-it
 
 const LawAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
@@ -47,6 +47,7 @@ const LawAssistant = () => {
     const result = await chat.sendMessage(prompt);
     const response = await result.response;
     const text = response.text();
+    console.log(text);
     setLoading(false);
     return text;
   }
@@ -84,42 +85,8 @@ const LawAssistant = () => {
     scrollToBottom();
   }, [history]);
 
+  // Function to parse message using markdown-it
   const parseMessage = (message) => {
-    // Check if the message is in pointwise format
-    if (message.startsWith("- ")) {
-      // Split the message into individual points
-      const points = message.split("- ").filter(Boolean);
-
-      // Create a list using Markdown for each point
-      const listItems = points
-        .map((point, index) => `- ${md.renderInline(point.trim())}`)
-        .join("\n");
-
-      return `<ul>${listItems}</ul>`;
-    }
-
-    // Check if the message is in tabular format
-    if (message.includes("|")) {
-      // Split the message into rows
-      const rows = message.split("\n").map((row) => row.trim());
-
-      // Parse each row into a table row
-      const tableRows = rows
-        .map((row) => {
-          const columns = row
-            .split("|")
-            .filter(Boolean)
-            .map((column) => column.trim());
-          return `<tr>${columns
-            .map((column) => `<td>${md.renderInline(column)}</td>`)
-            .join("")}</tr>`;
-        })
-        .join("");
-
-      return `<table>${tableRows}</table>`;
-    }
-
-    // If no specific format is detected, render the message as usual
     return md.render(message);
   };
 
@@ -136,42 +103,34 @@ const LawAssistant = () => {
           </span>
           , your trusted Health Law Advisor. We specialize in providing legal
           support and guidance for individuals navigating the complexities of
-          healthcare law. Whether you're a healthcare professional, a patient,
-          or involved in healthcare administration.{" "}
-          {/* <span className="uppercase font-bold floating-animation gemini-font">
-            Jurix
-          </span>{" "}
-          is here to help you understand your rights, obligations, and legal
-          options. Our mission is to empower you with knowledge and confidence
-          in the realm of health law. */}
+          healthcare law.
         </p>
-{/* containerRef={chatContainerRef} */}
-        <TracingBeam >
-          <div className="w-[800px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
-            <div className="flex gap-x-2 mx-auto">
-              <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
-                Hello, User
-              </h1>
-              <img
-                src={Starsvg}
-                alt="Star SVG"
-                className="h-6 w-6"
-              />
-            </div>
-            <h1 className="text-2xl md:text-5xl text-gray-500 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
-              How can I help you today?
+
+        <div className="w-[1000px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%] mb-6">
+          <div className="flex gap-x-2 mx-auto">
+            <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
+              Hello, User
             </h1>
-            <div
-              className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
-              ref={chatContainerRef}
-            >
-              
-              {history.slice(1).map((message, index) => (
+            <img
+              src={Starsvg}
+              alt="Star SVG"
+              className="h-6 w-6 animated-star"
+            />
+          </div>
+          <h1 className="text-2xl md:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+            How can I help you today?
+          </h1>
+          <div
+            className="chat-container max-h-[280px] overflow-y-auto mt-[2%]"
+            ref={chatContainerRef}
+          >
+            {!loading &&
+              history.slice(1).map((message, index) => (
                 <div
                   key={index}
-                  className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
-                    }`}
-                  style={{ marginTop: index > 0 && history[index - 1].role !== message.role ? '1rem' : 0 }}
+                  className={`flex place-items-center items-start space-x-2 mt-[2%] ${
+                    message.role === "model" ? "justify-start" : "justify-end"
+                  }`}
                 >
                   {message.role === "user" ? (
                     <img
@@ -184,42 +143,45 @@ const LawAssistant = () => {
                       src={userAvatar}
                       alt="User Avatar"
                       className="w-10 h-10 rounded-full"
-                      
-                      
                     />
                   )}
                   <div
-                    className={`bg-black p-4 rounded-[15px] tracking-[2px] ${message.role === "user" ? "text-white w-1/2" : "text-white w-1/2"
-                      } max-w-xl break-words`}
-                    dangerouslySetInnerHTML={{
-                      __html: parseMessage(message.parts),
-                    }}
-                    style={{ margin: '0.5rem' }}
-                  />
+                    className={` p-4 rounded-[15px] max-w-[40%] tracking-[2px] ${
+                      message.role === "user"
+                        ? "text-white bg-gray-800"
+                        : "text-white bg-slate-500"
+                    } max-w-xl break-words`}
+                  >
+                    {/* Render the message using parseMessage function */}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: parseMessage(message.parts),
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
-              {loading && <span className="loader"></span>}
-            </div>
-            <form
-              onSubmit={handleSubmit}
-              className="w-full flex place-items-center justify-center mt-[4%] gap-x-2"
-            >
-              <input
-                type="text"
-                value={newMessage}
-                className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl"
-                placeholder="Enter your message"
-                onChange={(e) => setNewMessage(e.target.value)}
-              />
-              <IoMdSend
-                className="text-neutral-300 "
-                size={40}
-                color=""
-                // onClick={handleSubmit}
-              />
-            </form>
+            {loading && <span className="loader"></span>}
           </div>
-        </TracingBeam>
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex place-items-center justify-center mt-[4%] gap-x-2"
+          >
+            <input
+              type="text"
+              value={newMessage}
+              className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl"
+              placeholder="Enter your message"
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            <IoMdSend
+              className="text-neutral-300 cursor-pointer"
+              size={40}
+              color=""
+              onClick={handleSubmit}
+            />
+          </form>
+        </div>
       </div>
     </div>
   );
