@@ -1,0 +1,26 @@
+@keyframes flow-left {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes flow-right {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .animate-flow-left {
+    animation: flow-left 2s linear infinite;
+  }
+  
+  .animate-flow-right {
+    animation: flow-right 2s linear infinite;
+  }
+  

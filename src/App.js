@@ -36,7 +36,7 @@ function App() {
         <Route path="/contributor" element={<Contributor />} />
         <Route path="/news" element={<News />} />
         <Route path="/detection/diabetes-prediction" element={<DiabetesPrediction />} />
-        <Route path="/bolgspage/:index" element={<Blogspage />} />
+        <Route path="/blogspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
       </Routes>
     </div>
