@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMdSend } from "react-icons/io";
-import MarkdownIt from "markdown-it"; // Import markdown-it
+import MarkdownIt from "markdown-it";
 import "./LawAssistant.css";
 import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
 import { TracingBeam } from "../UI/TracingBeam.tsx";
@@ -9,7 +9,7 @@ import Starsvg from "../../Asset/BardStar.svg";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-const md = new MarkdownIt(); // Initialize markdown-it
+const md = new MarkdownIt();
 
 const LawAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
@@ -85,7 +85,6 @@ const LawAssistant = () => {
     scrollToBottom();
   }, [history]);
 
-  // Function to parse message using markdown-it
   const parseMessage = (message) => {
     return md.render(message);
   };
@@ -106,7 +105,7 @@ const LawAssistant = () => {
           healthcare law.
         </p>
 
-        <div className="w-[1000px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%] mb-6">
+        <div className="w-full md:w-[1000px] flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%] mb-6">
           <div className="flex gap-x-2 mx-auto">
             <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
               Hello, User
@@ -117,7 +116,7 @@ const LawAssistant = () => {
               className="h-6 w-6 animated-star"
             />
           </div>
-          <h1 className="text-2xl md:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+          <h1 className="text-2xl md:text-5xl  text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
             How can I help you today?
           </h1>
           <div
@@ -152,7 +151,6 @@ const LawAssistant = () => {
                         : "text-white bg-slate-500"
                     } max-w-xl break-words`}
                   >
-                    {/* Render the message using parseMessage function */}
                     <div
                       dangerouslySetInnerHTML={{
                         __html: parseMessage(message.parts),
@@ -188,3 +186,4 @@ const LawAssistant = () => {
 };
 
 export default LawAssistant;
+
