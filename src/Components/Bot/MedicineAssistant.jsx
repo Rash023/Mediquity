@@ -21,7 +21,7 @@ const MedicineAssistant = () => {
     {
       role: "user",
       parts:
-        "Please act as a Medicine Assistant. I may ask for recommendations on medications, dosage information, or other queries related to medicines. If I inquire about a topic outside of medicine, please respond with: 'Sorry, I am just your Medicine Assistant.",
+        "Please act as a Medicine Assistant. I may ask for recommendations on medications, dosage information, or other queries related to medicines. Ignore other questions",
     },
     {
       role: "model",
@@ -124,7 +124,7 @@ const MedicineAssistant = () => {
   };
 
   return (
-    <div className="h-full min-h-[100vh] w-full rounded-md bg-neutral-950 flex flex-col items-center justify-center antialiased">
+    <div className="h-full min-h-[100vh] w-full  rounded-md  bg-neutral-950 flex flex-col items-center justify-center antialiased med-Assistant">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
           Pharmos
@@ -134,15 +134,11 @@ const MedicineAssistant = () => {
           <span className="uppercase font-bold floating-animation gemini-font">
             Pharmos
           </span>
-          , your personalized Medicine Assistant. We specialize in providing
-          support and guidance for individuals seeking assistance with
-          medication management. Whether you're in need of dosage information,
-          guidance on medication timing, or advice for all age groups,{" "}
+          , your exclusive medication ally. We specialize in customized medication support, offering expert guidance on precise dosages, strategic timing, and nuanced advice for all age groups.,{" "}
           <span className="uppercase font-bold floating-animation gemini-font">
-            Pharmos
+            Pharmos,
           </span>{" "}
-          is here for you every step of the way. The name Pharmos represents our
-          commitment to pharmacy and personalized care.
+          epitomizes our steadfast dedication to pharmacy and personalized healthcare delivery.
         </p>
 
         <TracingBeam >
@@ -161,14 +157,14 @@ const MedicineAssistant = () => {
               How can I help you today?
             </h1>
             <div
-              className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
+              className="chat-container max-h-[260px] overflow-y-auto mt-[2%]"
               ref={chatContainerRef}
             >
               
               {history.slice(1).map((message, index) => (
                 <div
                   key={index}
-                  className={`flex place-items-center items-start space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
+                  className={`flex items-center space-x-2 ${message.role === "model" ? "justify-start" : "justify-end"
                     }`}
                   style={{ marginTop: index > 0 && history[index - 1].role !== message.role ? '1rem' : 0 }}
                 >

@@ -3,7 +3,6 @@ import "./App.css";
 import Login from "./Components/Common/Login";
 import SignUp from "./Components/Common/SignUp";
 import BrainTumor from "./Components/Core/Disease/BrainTumor";
-import DiseasePredictor from "./Components/Core/Disease/DiseasePredictor";
 import Contributor from "./Components/Core/Contributor";
 import { Home } from "./Components/Core/Home";
 import { Dashboard } from "./Components/Common/Dashboard";
@@ -36,10 +35,6 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/detection/brain" element={<BrainTumor />} />
         <Route path="/detection/pneumonia" element={<Pneumonia />} />
-        <Route
-          path="/detection/diseasepredictor"
-          element={<DiseasePredictor />}
-        />
         <Route path="/contributor" element={<Contributor />} />
         <Route path="/news" element={<News />} />
         <Route path="/diabetes-prediction" element={<DiabetesPrediction />} />
