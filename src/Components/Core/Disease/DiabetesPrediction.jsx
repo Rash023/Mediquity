@@ -43,12 +43,12 @@ const DiabetesPrediction = () => {
         }
     };
     return (
-        <div className="min-h-[190vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+        <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
             <h1 className="select-none text-4xl lg:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
                 DIABETES PREDICTION
             </h1>
 
-            <p className="select-none text-neutral-500 max-w-lg mx-auto my-1 text-lg lg:text-center tracking-[1px] font-ai text-justify p-2 lg:p-0">
+            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] text-center tracking-[1px] font-ai p-3 lg:p-0">
                 Greetings from{" "}
                 <span className="uppercase font-bold floating-animation gemini-font">
                     DiaCheck
@@ -62,7 +62,7 @@ const DiabetesPrediction = () => {
             </p>
 
 
-            <div className='flex justify-center mt-20 p-7'>
+            <div className='flex justify-center mt-8 lg:mt-20 p-7'>
                 <div className='w-[630px] h-fit border border-white rounded-[30px] bg-black p-10 '>
                     <form onSubmit={submitHandler}>
                         <div>
