@@ -36,8 +36,8 @@ const PneumoniaDetection = () => {
       const data = await response.json();
       setPredictionResult(data.prediction);
     } catch (error) {
-      console.error("Error predicting brain tumor:", error);
-      alert("Error predicting brain tumor. Please try again later.");
+      console.error("Error predicting Pneumonia", error);
+      alert("Error predicting Pneumonia. Please try again later.");
     } finally {
       setIsLoading(false);
     }
