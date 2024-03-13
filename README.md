@@ -106,41 +106,23 @@ Mediquity is built using the following technologies:
 
 - ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
-  React provides robust state management capabilities through its built-in state and props system, as well as external libraries like Redux and MobX. This allows developers to manage the application's state, handle user inputs, and synchronize data between components effectively. In healthcare websites, state management is critical for maintaining the state of the application, managing user sessions, and coordinating interactions between different parts of the UI, such as chatbot dialogs and form submissions.
-
 - ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-  Tailwind CSS provides a comprehensive set of responsive utility classes that allow developers to create adaptive and mobile-friendly user interfaces. With Tailwind's responsive design system, developers can easily adjust the layout, typography, and spacing of elements based on screen size and device orientation. This ensures that healthcare websites built with Tailwind CSS provide a consistent and optimized user experience across various devices and screen resolutions.
 
 - ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 
-  Redux allows developers to maintain application state in a single, centralized store, making it easier to manage and synchronize data across different parts of the application. In healthcare websites like medicine assistants and medical services platforms, Redux can be used to store and manage patient data, medical records, appointment schedules, user preferences, and other application state. This centralized state management simplifies data access and manipulation, reduces the complexity of data flow, and ensures consistency and predictability in the application's behavior.
-
 - ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-
-  Figma's collaborative features enable designers, developers, and stakeholders to collaborate in real-time on the design of healthcare websites. Multiple team members can work on the same design file simultaneously, making it easy to brainstorm ideas, iterate on designs, and share feedback. Figma's commenting and annotation tools allow stakeholders to provide feedback directly on the design, streamlining the review and approval process. This collaborative workflow fosters communication and alignment among team members, resulting in better-designed healthcare websites.
 
 ### BACKEND
 
 - ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
-  Node.js excels in handling concurrent connections and high-throughput workloads, making it ideal for healthcare websites that need to support a large number of users and transactions simultaneously. Its non-blocking I/O model enables efficient handling of requests, ensuring fast response times and optimal performance. This scalability is crucial for medical services platforms that may experience spikes in traffic during peak hours or in emergency situations.
-
 - ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-
-  Express.js provides powerful routing and middleware capabilities, allowing developers to define clean and modular route handlers for different parts of the application. This makes it easy to organize and manage the application's logic, including handling HTTP requests, parsing request bodies, and authenticating users. For example, in a medical services platform, Express.js can be used to define routes for handling patient requests, appointment scheduling, and medical records management.
 
 - ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
-  Many healthcare applications require real-time data processing capabilities to support features such as patient monitoring, alerting, and decision support. MongoDB's support for real-time data processing through features like change streams and aggregation pipelines enables developers to build reactive and event-driven applications that can respond to changes in data in real time. This is particularly useful for chatbots and medicine assistants that need to provide timely and context-aware responses to user queries and interactions.
-
 - <img src="https://img.shields.io/badge/Cloudinary-white?style=for-the-badge&logo=Microsoft%20OneDrive&logoColor=0078D4">
 
-  Cloudinary with Flask-based healthcare websites like a medicine assistant, chatbot, or medical services platform can streamline media management, enhance user engagement, and improve the overall user experience. By leveraging Cloudinary's features for image upload, storage, manipulation, delivery, and organization, developers can build powerful and scalable healthcare applications that meet the needs of patients, healthcare professionals, and other stakeholders.
-
 - ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-
-  Flask's routing capabilities enable developers to define clean and intuitive URLs for different sections of the healthcare website. This makes navigation seamless for users, allowing them to access specific features such as medication reminders, appointment scheduling, and health tracking.
 
 ## FEEDBACK
 
