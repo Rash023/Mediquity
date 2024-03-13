@@ -16,7 +16,7 @@ import Blogspage from "./Components/Common/Blogspage.jsx";
 import PageContent from "./Components/Common/PageContent.jsx";
 
 import Pneumonia from "./Components/Core/Disease/Pneumonia";
-import DiabetesPrediction from "./Components/Predictions/DiabetesPrediction.jsx";
+import DiabetesPrediction from "./Components/Core/Disease/DiabetesPrediction.jsx";
 
 function App() {
   return (
