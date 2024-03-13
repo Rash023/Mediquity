@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMdSend } from "react-icons/io";
 import Markdown from "markdown-it";
-import "./MedicineAssistant.css";
+import "./LawAssistant.css";
 import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
 import { TracingBeam } from "../UI/TracingBeam.tsx";
 import Starsvg from "../../Asset/BardStar.svg";
@@ -11,7 +11,7 @@ const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const md = new Markdown();
 
-const MedicineAssistant = () => {
+const LawAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
 
   const [userAvatar, setUserAvatar] = useState("");
@@ -132,10 +132,10 @@ const MedicineAssistant = () => {
     <div className="h-full min-h-[100vh] w-full  rounded-md  bg-neutral-950 flex flex-col items-center justify-center antialiased med-Assistant">
       <div className="max-w-7xl mx-auto">
 
-        <h1 className="text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+        <h1 className="text-5xl  lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
           Jurix
         </h1>
-        <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai">
+        <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg lg:text-center tracking-[1px] font-ai  p-3 text-justify lg:p-0">
           Welcome to{" "}
           <span className="uppercase font-bold floating-animation gemini-font">
             Jurix
@@ -210,11 +210,14 @@ const MedicineAssistant = () => {
                 placeholder="Enter your message"
                 onChange={(e) => setNewMessage(e.target.value)}
               />
-              <IoMdSend
-                className="text-neutral-300 cursor-pointer absolute lg:relative right-20 lg:right-0 text-3xl lg:text-5xl"
-                color=""
-                onClick={handleSubmit}
-              />
+                {
+                newMessage?(<></>):
+                (<IoMdSend
+                  className="text-neutral-300 cursor-pointer absolute lg:relative right-20 lg:right-0 text-3xl lg:text-5xl"
+                  color=""
+                  onClick={handleSubmit}
+                />)
+              }
             </form>
           </div>
         </div>
@@ -223,4 +226,4 @@ const MedicineAssistant = () => {
   );
 };
 
-export default MedicineAssistant;
+export default LawAssistant;

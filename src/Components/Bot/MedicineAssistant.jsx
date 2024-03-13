@@ -44,7 +44,7 @@ const MedicineAssistant = () => {
 
   async function getResponse(prompt) {
     setLoading(true);
-    setLoading(true);
+
     const chat = await model.startChat({ history: history });
     const result = await chat.sendMessage(prompt);
     const response = await result.response;
@@ -188,8 +188,8 @@ const MedicineAssistant = () => {
                     )}
                     <div
                       className={` p-2 lg:p-4 rounded-[15px] lg:max-w-[50%] tracking-[2px] ${message.role === "user"
-                          ? "text-white bg-gray-800"
-                          : "text-white bg-slate-500"
+                        ? "text-white bg-gray-800"
+                        : "text-white bg-slate-500"
                         } max-w-xl break-words`}
                       dangerouslySetInnerHTML={{
                         __html: parseMessage(message.parts),
@@ -211,11 +211,14 @@ const MedicineAssistant = () => {
                 placeholder="Enter your message"
                 onChange={(e) => setNewMessage(e.target.value)}
               />
-              <IoMdSend
-                className="text-neutral-300 cursor-pointer absolute lg:relative right-20 lg:right-0 text-3xl lg:text-5xl"
-                color=""
-                onClick={handleSubmit}
-              />
+                {
+                newMessage?(<></>):
+                (<IoMdSend
+                  className="text-neutral-300 cursor-pointer absolute lg:relative right-20 lg:right-0 text-3xl lg:text-5xl"
+                  color=""
+                  onClick={handleSubmit}
+                />)
+              }
             </form>
           </div>
         </div>
