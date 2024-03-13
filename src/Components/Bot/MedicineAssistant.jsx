@@ -147,7 +147,7 @@ const MedicineAssistant = () => {
           healthcare delivery.
         </p>
 
-        <div className=" w-7xl  flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
+        <div className=" w-[1000px]  flex flex-col gap-x-2 border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
           <div className="Pharmos-inner-div flex gap-x-2 mx-auto">
             <h1 className="text-2xl md:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
               Hello, User
