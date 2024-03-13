@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Label } from "../UI/label.tsx";
 import { Input } from "../UI/input.tsx";
 import { Select, Option } from "../UI/select.jsx";
+
 
 import { cn } from "../../Util/cn.ts";
 import {
@@ -14,18 +15,48 @@ import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
 
 export function DiabetesInputs() {
   const [selectedValue, setSelectedValue] = useState("");
+  const [formData, setFormData] = useState({
+    age: '',
+    gender: '',
+    hypertension: '',
+    heart_disease: '',
+    Smoking_history: '',
+    bmi: '',
+    HbA1c_level: '',
+    blood_glucose_level: ''
+  });
+
+
+
+  const handleChange1 = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
   };
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
   return (
     <>
-      <div>
-        <h1 className="text-lg md:text-7xl mt-[5%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+      <div className=" dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+        <h1 className="text-lg md:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
           DIABETES PREDICTION
         </h1>
         <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg text-center tracking-[1px] font-ai">
@@ -47,7 +78,7 @@ export function DiabetesInputs() {
         <div className="max-w-md w-[130vh] mx-auto  md:rounded-2xl p-4 md:p-8 shadow-input mt-[4%]  border border-white rounded-[30px]">
           {/* <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to Mediquity
-      </h2> */}
+        </h2> */}
 
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
 
@@ -57,52 +88,55 @@ export function DiabetesInputs() {
             {/* <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4"> */}
             <LabelInputContainer className="mb-4">
               <Label htmlFor="Age">Age</Label>
-              <Input id="Age" placeholder="Enter the age" type="text" />
+              <Input id="Age" placeholder="Enter the age" type="text" onChange={handleChange1} value={formData.age} />
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
               <Label htmlFor="Gender">Gender</Label>
-              <Select id="gender" name="gender" onChange={handleChange} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                <Option className="z-10" value="Male">Male</Option>
-                <Option className="z-10" value="Female">Female</Option>
-            </Select>
+              <select name="gender" value={formData.gender}   onChange={handleChange} className="appearance-none rounded-md py-2 bg-transparent border border-gray-700  ">
+                <option value="" disabled>Select Gender</option>
+                <option className="bg-gray-700 appearance-none text-white" value="Male">Male</option>
+                <option className="bg-gray-700 bg-transparent text-white ml-[10%] appearance-none" value="Female">Female</option>
+              </select>
+
+
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
               <Label htmlFor="Hypertension">Hypertension</Label>
-              <Select id="hypertension" name="hypertension" onChange={handleChange} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                <Option  value="1">yes </Option>
+              <Select id="hypertension" name="hypertension" onChange={handleChange} value={formData.hypertension} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <Option value="1">yes </Option>
                 <Option value="0">no </Option>
-            </Select>
+              </Select>
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
               <Label htmlFor="Heart_disease">Heart_disease</Label>
-              <Select id="heart_disease" name="heart_disease" onChange={handleChange} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                <Option  value="1">yes </Option>
+              <Select id="heart_disease" name="heart_disease" onChange={handleChange} value={formData.heart_disease} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <Option value="1">yes </Option>
                 <Option value="0">no </Option>
-            </Select>
+              </Select>
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
               <Label htmlFor="Smoking_history">Smoking_history</Label>
-              <Select id="Smoking_history" name="Smoking_history" onChange={handleChange} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              <Select id="Smoking_history" name="Smoking_history" onChange={handleChange} value={formData.Smoking_history} className="text-sm font-medium text-white dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                 <Option value="0">no info</Option>
                 <Option value="1">current</Option>
                 <Option value="2">ever</Option>
                 <Option value="3">former</Option>
                 <Option value="3">not current</Option>
                 <Option value="4">never</Option>
-            </Select>
+              </Select>
             </LabelInputContainer>
             {/* </div> */}
             <LabelInputContainer className="mb-4">
               <Label htmlFor="bmi">bmi</Label>
-              <Input id="bmi" placeholder="Enter BMI Value (Float)" type="number" />
+              <Input id="bmi" placeholder="Enter BMI Value (Float)" type="number" onChange={handleChange1} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
               <Label htmlFor="HbA1c_level"> HbA1c_level</Label>
-              <Input id="HbA1c_level" placeholder="Enter HbA1c Level (Float)" type="password" />
+              <Input id="HbA1c_level" placeholder="Enter HbA1c Level (Float)" type="password" onChange={handleChange1} />
             </LabelInputContainer>
             <LabelInputContainer className="mb-8">
               <Label htmlFor="blood_glucose_level">blood_glucose_level</Label>
@@ -110,6 +144,7 @@ export function DiabetesInputs() {
                 id="blood_glucose_level"
                 placeholder="Enter Blood Glucose level (Integer)"
                 type="number"
+                onChange={handleChange1}
               />
             </LabelInputContainer>
 
@@ -126,7 +161,7 @@ export function DiabetesInputs() {
 
         </div>
       </div>
-      <BackgroundBeams className="-z-10 bg-black h-[150vh]" />
+
     </>
   );
 }

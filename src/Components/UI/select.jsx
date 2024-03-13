@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 
 function Select({ className, children, onChange, ...props }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const radius = 100; // change this to increase the rdaius of the hover effect
-    const [visible, setVisible] = React.useState(false);
+  const radius = 100; // change this to increase the radius of the hover effect
+  const [visible, setVisible] = React.useState(false);
 
-    let mouseX = useMotionValue(0);
-    let mouseY = useMotionValue(0);
+  let mouseX = useMotionValue(0);
+  let mouseY = useMotionValue(0);
 
-    function handleMouseMove({ currentTarget, clientX, clientY }) {
-      let { left, top } = currentTarget.getBoundingClientRect();
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    let { left, top } = currentTarget.getBoundingClientRect();
 
-      mouseX.set(clientX - left);
-      mouseY.set(clientY - top);
-    }
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -33,26 +32,26 @@ function Select({ className, children, onChange, ...props }) {
     <div className="relative inline-block text-left">
       <div>
         <motion.div
-        style={{
-          background: useMotionTemplate`
+          style={{
+            background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
           var(--blue-500),
           transparent 80%
         )
       `,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setVisible(true)}
-        onMouseLeave={() => setVisible(false)}
-        className={`p-[2px]  transition duration-300 group/input relative w-full bg-gray-50 dark:bg-zinc-800 border border-gray-300 dark:border-neutral-700 text-left rounded-md shadow-sm px-4 py-[15px] text-sm focus:outline-none focus:ring-2  ${className}`}
+          }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setVisible(true)}
+          onMouseLeave={() => setVisible(false)}
+          className={`p-[2px]  transition duration-300 group/input relative w-full bg-gray-50 dark:bg-zinc-800 border border-gray-300 dark:border-neutral-700 text-left rounded-md shadow-sm px-4 py-[15px] text-sm focus:outline-none focus:ring-2  ${className}`}
           type="button"
-          
           onClick={handleToggle}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {children.find(child => child.props.value === props.value)?.props.children || "Select an option"}
+          {children.find((child) => child.props.value === props.value)?.props
+            .children || "Select an option"}
           <svg
             className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-neutral-600 dark:text-neutral-400 pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +69,7 @@ function Select({ className, children, onChange, ...props }) {
       </div>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.95, zIndex: 9999 }} // Set higher z-index here
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.1 }}

@@ -19,6 +19,7 @@ import Blogspage from "./Components/Common/Blogspage.jsx";
 import PageContent from "./Components/Common/PageContent.jsx";
 
 import Pneumonia from "./Components/Core/Disease/Pneumonia";
+import DiabetesPrediction from "./Components/Predictions/DiabetesPrediction.jsx";
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
         />
         <Route path="/contributor" element={<Contributor />} />
         <Route path="/news" element={<News />} />
-        <Route path="/diabetes" element={<Diabetes />} />
+        <Route path="/diabetes-prediction" element={<DiabetesPrediction />} />
         <Route path="/diabetes1" element={<DiabetesInputs />} />
         <Route path="/bolgspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
