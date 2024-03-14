@@ -1,32 +1,32 @@
 export const ProvideCardData = [
   {
-    title: "Personal Care",
+    title: "Medora",
     description:
-      "Elevate your well-being with our comprehensive array of health-focused solutions.",
+      "Friendly AI companion on the path to mental well-being. Think of me as the therapist in your pocket, minus the couch and awkward silences.",
     link: "https://stripe.com",
   },
   {
-    title: "Health Equity",
+    title: "Jurix",
     description:
-      "Ensuring fair access to quality healthcare for all, regardless of socio-economic status or demographic factors.",
+      "Jurix is your trusted Health Law Advisor. We specialize in providing legal support and guidance for individuals navigating the complexities of healthcare law.",
     link: "https://netflix.com",
   },
   {
-    title: "Patient Monitoring",
+    title: "PhysioPal",
     description:
-      "Real-time tracking and analysis of vital signs and health metrics, enabling healthcare professionals to remotely monitor patients' well-being and intervene promptly when needed.",
+      "Personal guide to rehabilitation and wellness. This intuitive chatbot utilizes advanced algorithms to provide tailored advice, exercises, and support for your physiotherapy journey",
     link: "https://google.com",
   },
   {
-    title: "Wellness Promotion",
+    title: "Pharmos",
     description:
-      " holistic well-being through tailored strategies and resources, promoting healthy lifestyles and positive mental health practices.",
+      "Your exclusive medication ally. We specialize in customized medication support, offering expert guidance on precise dosages, strategic timing, and nuanced advice for all age groups.",
     link: "https://meta.com",
   },
   {
-    title: "Book Doctors",
+    title: "Vinicius",
     description:
-      "Easily schedule appointments with specialized physicians, ranging from primary care to specialists, tailored to your unique healthcare needs..",
+      "Your companion on the path to mental well-being. Think of me as the therapist in your pocket, minus the couch and awkward silences",
     link: "https://amazon.com",
   },
   {
