@@ -24,7 +24,6 @@ exports.createMedication = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: "User not found",
-        userId: decodedToken,
       });
     }
 

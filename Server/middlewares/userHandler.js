@@ -57,7 +57,7 @@ exports.isUser = (req, res, next) => {
 
 exports.isDoctor = (req, res, next) => {
   try {
-    if (req.user.role !== "User") {
+    if (req.user.role !== "Userx`") {
       return res.status(401).json({
         success: false,
         message: "This is a protected route for Doctors only",
