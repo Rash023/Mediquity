@@ -17,6 +17,7 @@
     "dotenv": "^16.4.4",
     "express-fileupload": "^1.4.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.2.1"
+    "mongoose": "^8.2.1",
+    "nodemon": "^3.1.0"
   }
 }

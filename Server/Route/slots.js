@@ -1,11 +1,11 @@
-const { docSignup } = require("../controllers/DoctorHandler");
-const { Signup } = require("../controllers/UserHandler");
+const { Signup, login } = require("../controllers/UserHandler");
+const { createMedication } = require("../controllers/medicationHandler");
 
-const { SlotHandler } = require("../controllers/slotHandler");
 const express = require("express");
 const router = express.Router();
 
-router.post("/bookSlot", SlotHandler);
-router.post("/docSignUp", docSignup);
+router.post("/login", login);
 router.post("/SignUp", Signup);
+router.post("/Medication", createMedication);
+
 module.exports = router;
