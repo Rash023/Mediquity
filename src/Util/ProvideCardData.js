@@ -33,6 +33,6 @@ export const ProvideCardData = [
     title: "SMS/Mail Service",
     description:
       "Stay on track with your medication regimen effortlessly. Receive timely reminders and personalized notifications via text message or email, ensuring you never miss a dose. ",
-    link: "https://microsoft.com",
+    link: "",
   },
 ];
