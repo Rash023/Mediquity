@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import "./Pneumonia.css";
+import { LuAsterisk } from "react-icons/lu";
 
 const PneumoniaDetection = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -51,7 +52,7 @@ const PneumoniaDetection = () => {
             <h1 className="text-4xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
               Pneumonia Detection
             </h1>
-            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] lg:text-center tracking-[1px] font-ai p-3 lg:p-0 text-justify">
+            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] tracking-[1px] font-ai p-3 lg:p-0 text-justify">
               Greetings from{" "}
               <span className="uppercase font-bold floating-animation gemini-font">
                 PneumoCheck
@@ -111,6 +112,10 @@ const PneumoniaDetection = () => {
               >
                 PREDICT
               </div>
+            </div>
+            <div className="flex lg:items-center mt-4 lg:ml-48 gap-1">
+              <div className="text-red-500 text-md"><LuAsterisk /></div>
+              <div className="text-neutral-500 my-1 text-[0.65rem] text-center tracking-[1px]">Information provided is subject to ongoing evolution and may not be entirely accurate.</div>
             </div>
           </div>
         </div>

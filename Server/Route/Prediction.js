@@ -43,7 +43,7 @@ router.post("/disease-predict", async (req, res) => {
 async function generateContent(imageUrl) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
-    const prompt = "You are a Health-Based Image Analyzer. Just identify the type of disease";
+    const prompt = "You are a Health-Based Image Analyzer. Just identify the type of disease. Tell me just the disease name, nothing more than that.";
     const imageParts = await fetchImage(imageUrl);
     const result = await model.generateContent([prompt, imageParts]);
     const response = await result.response;

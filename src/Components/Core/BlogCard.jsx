@@ -4,6 +4,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "../UI/3DCard.tsx";
 import { useNavigate } from "react-router-dom";
 import { Blogs } from "../../Util/Blogs.js";
+
 import './BlogCard.css';
 
 const BlogCard = ({ index }) => {
@@ -22,13 +23,6 @@ const BlogCard = ({ index }) => {
           {Blogs[index].title}
 
         </CardItem>
-        {/* <CardItem
-          as="p"
-          translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-        >
-          Add content
-        </CardItem> */}
         <CardItem translateZ="100" className="w-full mt-4">
           <img
             src={Blogs[index].image}
@@ -47,19 +41,12 @@ const BlogCard = ({ index }) => {
 
           </CardItem>
 
-        <div className="bg-[#3b82f6] p-2 rounded-lg">
-          <button className="text-white font-semibold tracking-wide" onClick={clickHandler}>
-            Read More →
-          </button>
-        </div>
-       
-         
-
-
-          
+          <div className="bg-[#3b82f6] p-2 rounded-lg">
+            <button className="text-white font-semibold tracking-wide" onClick={clickHandler}>
+              Read More →
+            </button>
           </div>
-
-        
+        </div>
       </CardBody>
     </CardContainer>
   );

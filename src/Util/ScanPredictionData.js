@@ -1,3 +1,7 @@
+import Pnuemonia from "../Asset/Pneumonia-icon.jpg";
+import Diabetes from "../Asset/Diabetes-icon.png";
+import Brain from "../Asset/Brain-icon.png"
+
 export const ScanPredictionData = [
   {
     label: "Pnuemonia Detection",

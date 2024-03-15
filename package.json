@@ -21,6 +21,7 @@
     "mini-svg-data-uri": "^1.4.4",
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",
+    "react-datepicker": "^6.3.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.0",
