@@ -1,6 +1,26 @@
 const jwt = require("jsonwebtoken");
-const Medication = require("../models/Medication");
 const User = require("../models/User");
+const cron = require("node-cron");
+const Medication = require("../models/Medication"); // Import your Medication model
+const twilio = require("twilio");
+
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
+// Function to send message using Twilio
+const sendMessage = async (phoneNumber, medicationName, time) => {
+  try {
+    await twilioClient.messages.create({
+      to: "+91" + phoneNumber,
+      from: "+13219855189",
+      body: `Hello {name}. It's time to take ${medicationName} (${time}).`,
+    });
+    console.log(`Message sent to ${phoneNumber}`);
+  } catch (error) {
+    console.error(`Error sending message to ${phoneNumber}: ${error.message}`);
+  }
+};
 
 exports.createMedication = async (req, res) => {
   try {
@@ -29,14 +49,34 @@ exports.createMedication = async (req, res) => {
 
     const { medicineName, type, dosage, days, times } = req.body;
 
+    // Convert times to hh:mm format
+    const formattedTimes = times.map((time) => {
+      const timeString = new Date(time);
+      const hours = timeString.getHours().toString().padStart(2, "0");
+      const minutes = timeString.getMinutes().toString().padStart(2, "0");
+      const formattedTime = `${hours}:${minutes}`;
+      return formattedTime;
+    });
+
+    // Convert days array to array of selected days
+    const daysOfWeek = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ].filter((day, index) => days[index]);
+
     // Create medication entity
     const medication = new Medication({
       userId: userId,
       name: medicineName,
       type: type,
       dosage: dosage,
-      days: days,
-      times: times,
+      days: daysOfWeek,
+      times: formattedTimes,
     });
 
     // Save medication to DB
@@ -54,3 +94,34 @@ exports.createMedication = async (req, res) => {
     });
   }
 };
+
+// Function to check medication schedule and send reminders
+// Function to check medication schedule and send reminders
+const checkMedicationSchedule = async () => {
+  try {
+    const currentDate = new Date();
+    const currentDay = currentDate.toLocaleString("en-US", { weekday: "long" });
+    const currentTime = currentDate.getHours() * 60 + currentDate.getMinutes();
+
+    // Query Medication collection
+    const medications = await Medication.find({
+      days: { $elemMatch: { $eq: currentDay } },
+    }).populate("userId");
+
+    for (const medication of medications) {
+      for (const time of medication.times) {
+        const timeParts = time.split(":");
+        const medicationTime =
+          parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
+        if (currentTime === medicationTime - 5) {
+          const user = await User.findById(medication.userId);
+          await sendMessage(user.phone, medication.name, time);
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error checking medication schedule:", error);
+  }
+};
+
+cron.schedule("* * * * *", checkMedicationSchedule);
