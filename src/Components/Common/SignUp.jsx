@@ -1,32 +1,109 @@
 import React, { useState } from 'react'
-import './Login.css'
-const Login = () => {
+// import './SignUp.css'
+const SignUp = () => {
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        role:""
+      });
+    
+      const changeHandler = (e) => {
+        const { name, value } = e.target;
+    
+        setFormData({
+          ...formData,
+          [name]: value
+        });
+      }
+
+      const submitHandler = async (e) => {
+        // e.preventDefault();
+        // console.log(formData);
+    
+        // try {
+        //   const response = await fetch('http://127.0.0.1:5000/predict/diabetes', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(formData)
+        //   });
+        //   const data = await response.json();
+        //   console.log(data);
+        //   setPredictionResult(data.result);
+        // } catch (error) {
+        //   console.error('Error:', error);
+        // } finally {
+        //   setLoading(false);
+        // }
+      };
+
+
+
+
+
+
     return (
-        <div className='login-container login-bg-container flex flex-col gap-y-12'>
-            <div className='uppercase leading-[63px] font-[700] text-[83px] text-center text-[#000000] h-[116px] mt-[115px]'>Don't Have Account ? <span className='text-[#008E7B]'>Register</span></div>
-            <div className='w-[1083px] h-fit border-[4px] border-[#21C4AF] rounded-[15px] login-box-shadow ml-[21%] mb-[2%] flex flex-col'>
-                <div className='uppercase tracking-[2px] w-[435px] h-[116px] leading-[63px] text-[42px] font-[700] text-center ml-[29%] mt-[2%]'>
-                    Health <span className='text-[#008E7B]'>Care</span>
-                </div>
-                <div>
-                    <input type='text' placeholder='First Name' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white text-[31px] leading-[63px]' />
-                    <br />
-                    <input type='text' placeholder='Last Name' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white text-[31px] leading-[63px] mt-[5%]' />
-                    <br />
-                    <input type='text' placeholder='Email' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white text-[31px] leading-[63px] mt-[5%]' />
-                    <br />
-                    <input type='text' placeholder='Password  ' className='border-[4px] border-[#21C4AF] rounded-[15px] w-[831px] h-[93px] placeholder:text-[31px] placeholder:leading-[63px] placeholder:font-[700] placeholder:uppercase placeholder:tracking-[2px] ml-[10%] placeholder:px-[2%] bg-gradient-to-r from-white to-white mt-[5%]' />
-                </div>
-                <button className='uppercase w-[207px] h-[56px] leading-[24px] text-[31px] tracking-[1px] bg-[#21C4AF] border border-[#000000] rounded-[5px] font-bold login-box-shadow ml-[40%] mt-[6%] px-[20px] py-[12px]'>REGISTER</button>
-                <div className='w-[734px] h-[53px] font-[700] leading-[27px] tracking-[1px] text-center ml-[15%] mt-[3%]'>
-                    By Continuing, You Agree To healthcare’s <span className='text-[#008E7B]'>Terms Of Service</span> Opens A New Tab And Acknowledge You've Read Our Privacy Policy. Notice At Collection
-                </div>
-                <div className='w-[734px] h-[53px] font-[600] text-[25px] leading-[27px] text-center mt-[5%] ml-[15%]'>
-                    Have An Account ? <span className='text-[#008E7B] underline'>Login</span>
-                </div>
+        <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+        <h1 className="select-none text-4xl lg:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[2.5%]">
+          MEDIQUITY
+        </h1>
+  
+        <p className="select-none text-neutral-500 max-w-[40rem] mx-auto text-lg lg:text-[1.55rem] text-center tracking-[1px] font-ai p-3 lg:p-0">
+          Welcome to  <span className="uppercase font-bold floating-animation gemini-font">
+            Mediquity
+          </span>. Delighted by your decision to embark on a path toward optimal health with us.
+        </p>
+
+        <div className='flex justify-center mt-8 lg:mt-10 p-7'>
+        <div className='w-[400px] h-fit border border-white rounded-[30px] bg-black p-10 '>
+          <form onSubmit={submitHandler}>
+            <div className=''>
+              <label htmlFor="name" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px] '>Name</label>
+              <input type="text" placeholder='Enter Your Name' name='age' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
             </div>
+
+            <div className='mt-[10%]'>
+              <label htmlFor="email" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px] '>Email</label>
+              <input type="text" placeholder='Enter Your Email' name='age' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
+            </div>
+
+            <div className='mt-[10%]'>
+              <label htmlFor="password" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px] '>Password</label>
+              <input type="text" placeholder='Enter Your Password' name='age' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
+            </div>
+
+            <div className='text-center w-full lg:py-11 mt-6'>
+              <button
+                className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-[15px] h-[6vh] font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] uppercase tracking-[2px]"
+                type="submit"
+              >
+                SignUp &rarr;
+                <BottomGradient />
+              </button>
+            </div>
+
+            <div className='flex gap-x-2 justify-center lg:-mt-4 mt-2'>
+              <div className='text-neutral-500 text-sm'>Already have an account?</div>
+              <a href="/login" className='font-bold floating-animation gemini-font text-sm cursor-pointer hover:underline'>Login</a>
+            </div>
+
+          </form>
         </div>
+      </div >
+    </div >
     )
 }
 
-export default Login
+export default SignUp
+
+const BottomGradient = () => {
+    return (
+      <>
+        <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+        <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+      </>
+    );
+  };
