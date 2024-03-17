@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 exports.Signup = async (req, res) => {
   try {
@@ -77,7 +76,7 @@ exports.login = async (req, res) => {
     if (await bcrypt.compare(password, user.password)) {
       //password matched
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "2h",
+        expiresIn: "24h",
       });
 
       user = user.toObject();

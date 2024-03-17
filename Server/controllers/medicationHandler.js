@@ -2,25 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const cron = require("node-cron");
 const Medication = require("../models/Medication"); // Import your Medication model
-const twilio = require("twilio");
-
-const twilioClient = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
-// Function to send message using Twilio
-const sendMessage = async (phoneNumber, medicationName, time) => {
-  try {
-    await twilioClient.messages.create({
-      to: "+91" + phoneNumber,
-      from: "+13219855189",
-      body: `Hello {name}. It's time to take ${medicationName} (${time}).`,
-    });
-    console.log(`Message sent to ${phoneNumber}`);
-  } catch (error) {
-    console.error(`Error sending message to ${phoneNumber}: ${error.message}`);
-  }
-};
+const mailSender = require("../Configuration/nodemailer");
 
 exports.createMedication = async (req, res) => {
   try {
@@ -115,7 +97,8 @@ const checkMedicationSchedule = async () => {
           parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
         if (currentTime === medicationTime - 5) {
           const user = await User.findById(medication.userId);
-          await sendMessage(user.phone, medication.name, time);
+          console.log("HI");
+          await mailSender(user.email, medication.name, medicationTime);
         }
       }
     }
