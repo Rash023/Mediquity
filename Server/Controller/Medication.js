@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../Model/User");
 const cron = require("node-cron");
-const Medication = require("../models/Medication"); // Import your Medication model
+const Medication = require("../Model/Medication"); // Import your Medication model
 const mailSender = require("../Configuration/nodemailer");
 
 exports.createMedication = async (req, res) => {
