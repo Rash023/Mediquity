@@ -3,6 +3,8 @@ import { GlobeDemo } from '../Common/ContactUs'
 import { motion } from "framer-motion";
 import CountryCode from "../../data/countrycode.json"
 import { useForm } from "react-hook-form"
+import "./Contact.css"
+
 export const Contact = () => {
   const {
     register,
@@ -17,40 +19,10 @@ export const Contact = () => {
     console.log("hu");
   }
   return (
-    <div className='flex flex-col lg:flex-row lg:min-h-screen h-full lg:min-w-screen bg-black'>
-      <div className='lg:w-[50%] w-[90%] flex flex-col ml-16'>
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-          }}
-          className="div mt-[5%]"
-        >
-          <h2 className="text-4xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px]">
-            Contact Us
-          </h2>
-          {/* <p className="text-center text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">
-            This globe is interactive and customizable. Have fun with it, and
-            don&apos;t forget to share it. :)
-          </p> */}
-        </motion.div>
-        <div className='w-full h-fit rounded-[30px] bg-black p-10 mt-8 mx-auto'>
+    <div className='flex flex-col lg:flex-row lg:min-h-screen h-full lg:min-w-screen bg-black overflow-clip'>
+      <div className='lg:w-[50%] w-[90%] flex flex-col lg:ml-16 mx-auto contact-glass '>
+        <div className='lg:w-[55%] w-[90%] h-fit rounded-[30px] mt-16 mx-auto border p-6 '>
           <form onSubmit={submitHandler}>
-            <div className='flex flex-col gap-y-4'>
-              <div className='text-4xl text-white font-bold font-ai'>
-                Got a Idea? We've got the skills. Let's team up
-              </div>
-              <div className='text-2xl text-neutral-500 font-ai'>
-                Tell us more about yourself and what you're got in mind.
-              </div>
-            </div>
 
             <div className='grid lg:grid-cols-2 grid-cols-1 items-baseline gap-x-3  mt-8'>
               <div>
@@ -78,8 +50,8 @@ export const Contact = () => {
                       name="firstname"
                       id="firstname"
                       placeholder="Enter first name"
-                      className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm"
-                      {...register("countrycode", { required: true })}
+                      className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm appearance-none"
+                      // {...register("countrycode", { required: true })}
                     >
                       {CountryCode.map((ele, i) => {
                         return (
@@ -92,7 +64,7 @@ export const Contact = () => {
                   </div>
                 </div>
                 <div className='w-[70%]'>
-                  <input type="text" placeholder='123456789' name='age' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
+                  <input type="text" placeholder='' name='age' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
                 </div>
               </div>
             </div>
@@ -104,11 +76,11 @@ export const Contact = () => {
               <textarea
                 name="message"
                 id="message"
-                cols="30"
-                rows="7"
+                cols="20"
+                rows="4"
                 placeholder="Enter your message here"
-                className=" rounded-lg bg-zinc-800 placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm border border-gray-100 placeholder:pt-3"
-                {...register("message", { required: true })}
+                className=" rounded-lg bg-zinc-800 placeholder:pl-4 pl-4 py-3 placeholder:tracking-[1px] placeholder:text-sm border border-gray-100 placeholder:pt-3 text-white placeholder:text-2xl placeholder:font-ai"
+                // {...register("message", { required: true })}
               />
               {errors.message && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
@@ -133,6 +105,7 @@ export const Contact = () => {
         </div>
 
       </div>
+      <div className="border lg:w-[2px] lg:h-[600px] lg:mt-[10%] border-gray-500 w-[60%] mx-auto mt-[15%]"></div>
 
       <div className='lg:w-[50%] w-[100%]'>
         <GlobeDemo />
