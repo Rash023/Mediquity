@@ -1,10 +1,12 @@
 const bcrypt = require("bcrypt");
 const User = require("../Model/User");
 const jwt = require("jsonwebtoken");
+const express = require("express");
+const cors = require("cors");
 
 exports.Signup = async (req, res) => {
   try {
-    const { name, email, password, role, phone } = req.body;
+    const { name, email, password, role } = req.body;
     //check if user already exists
     const existingUser = await User.findOne({ email });
 
@@ -32,7 +34,6 @@ exports.Signup = async (req, res) => {
       email,
       password: hashPassword,
       role,
-      phone,
     });
 
     return res.status(200).json({
@@ -48,6 +49,8 @@ exports.Signup = async (req, res) => {
   }
 };
 
+const app = express();
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -55,12 +58,12 @@ exports.login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "please fill all the details carefully",
+        message: "Please fill in all the details carefully",
       });
     }
 
     let user = await User.findOne({ email });
-    //if not a registered user
+
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -74,7 +77,7 @@ exports.login = async (req, res) => {
     };
 
     if (await bcrypt.compare(password, user.password)) {
-      //password matched
+      // Password matched
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "24h",
       });
@@ -93,13 +96,13 @@ exports.login = async (req, res) => {
         success: true,
         token,
         user,
-        message: "User logged in succesfully",
+        message: "User logged in successfully",
       });
     } else {
-      //password do not match
+      // Password does not match
       return res.status(403).json({
         success: false,
-        message: "Password Incorrect",
+        message: "Incorrect password",
       });
     }
   } catch (error) {

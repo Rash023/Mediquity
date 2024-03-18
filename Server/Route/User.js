@@ -1,5 +1,5 @@
-const { Signup, login } = require("../controllers/UserHandler");
-const { createMedication } = require("../controllers/medicationHandler");
+const { Signup, login } = require("../Controller/User");
+const { createMedication } = require("../Controller/Medication");
 
 const express = require("express");
 const router = express.Router();
