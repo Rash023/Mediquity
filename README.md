@@ -40,9 +40,6 @@
 
 <p>Introducing Mediquity, a pinnacle of healthcare innovation, where cutting-edge AI meets compassionate care. Our platform is a symphony of precision and efficacy, harnessing the boundless potential of artificial intelligence to revolutionize wellness. Mediquity empowers users with personalized insights and proactive guidance, fostering healthy lifestyles and preventing illness. With unparalleled efficiency, we streamline healthcare delivery, optimizing outcomes and resource utilization. Join us on this transformative journey towards a future where health and well-being know no bounds. Welcome to Mediquity, where every interaction is a step towards a brighter, healthier tomorrow.</p>
 
-<p align="center">
-  <img src = "http://i.imgur.com/HowF6aM.png" width=350>
-</p>
 
 # HEALTHBOT SERVICES
 
