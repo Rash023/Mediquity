@@ -18,6 +18,7 @@ import PageContent from "./Components/Common/PageContent.jsx";
 import Pneumonia from "./Components/Core/Disease/Pneumonia";
 import DiabetesPrediction from "./Components/Core/Disease/DiabetesPrediction.jsx";
 import MedicationForm from "./Components/Core/Medication.jsx";
+import { Contact } from "./Components/Core/Contact.jsx";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/detection/diabetes-prediction" element={<DiabetesPrediction />} />
         <Route path="/blogspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
+        <Route path="/contactUs" element={<Contact />} />
       </Routes>
     </div>
   );
