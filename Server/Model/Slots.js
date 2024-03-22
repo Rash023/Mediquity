@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const cron = require("node-cron");
 
 const SlotSchema = new mongoose.Schema({
   name: {
