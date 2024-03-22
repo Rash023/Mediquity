@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const cron = require("node-cron");
 
 const SlotSchema = new mongoose.Schema({
   name: {
@@ -19,12 +20,10 @@ const SlotSchema = new mongoose.Schema({
       bookings: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          default: null,
           ref: "User", // Reference to the User model
         },
       ],
     },
   ],
 });
-
 module.exports = mongoose.model("Slot", SlotSchema);

@@ -6,8 +6,9 @@ const fileUpload = require("express-fileupload");
 const PORT = process.env.PORT || 4000;
 const { cloudinaryConnect } = require("./Configuration/cloudinary");
 const predictionRoute = require("./Route/Prediction");
+const cronScheduler = require("./Configuration/Cron");
 require("./Configuration/database").connect();
-
+cronScheduler.start();
 dotenv.config();
 app.use(express.json());
 app.use(
