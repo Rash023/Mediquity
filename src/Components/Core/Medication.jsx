@@ -4,9 +4,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { MdAdd, MdDelete } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import axios from "axios";
 const MedicationForm = () => {
   const [medication, setMedication] = useState({
+    token: sessionStorage.getItem("token"),
     medicineName: "",
     type: "",
     dosage: "", // Changed to string to capture single dosage
@@ -59,13 +60,12 @@ const MedicationForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/Medication", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(medication),
-      });
+      const response = await axios.get(
+        "http://localhost:4000/api/v1/Medication",
+        {
+          medication,
+        }
+      );
 
       if (response.ok) {
         toast.success("Your data is Saved Successfully", { autoClose: 2000 });
