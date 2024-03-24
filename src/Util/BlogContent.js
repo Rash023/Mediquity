@@ -9,7 +9,7 @@ export const BlogContent = [
   {
     title: "Benefits of Regular Exercise",
     intro:
-      "In our fast-paced lives, finding time for regular exercise can be a challenge. However, the benefits of incorporating physical activity into your routine extend far beyond just physical fitness. In this blog, we'll explore the numerous advantages of regular exercise and how it contributes to a healthier, happier lifestyle. lorem.10",
+      "In our fast-paced lives, finding time for regular exercise can be a challenge. However, the benefits of incorporating physical activity into your routine extend far beyond just physical fitness. In this blog, we'll explore the numerous advantages of regular exercise and how it contributes to a healthier, happier lifestyle.",
     content: [
       {
         heading: "Physical Health",
