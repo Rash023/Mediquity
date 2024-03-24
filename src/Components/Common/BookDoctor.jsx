@@ -88,7 +88,7 @@ const BookDoctor = () => {
   return (
     <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
       <h1 className="select-none text-4xl lg:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
-        Medication Details
+        Book Appointment
       </h1>
 
       <div className="flex justify-center mt-8 lg:mt-20 p-7">
