@@ -56,7 +56,7 @@ export default function VideoConference() {
 
   return (
     <div
-      className="myCallContainer"
+      className="myCallContainer dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2]"
       ref={myMeeting}
       style={{ width: '100vw', height: '100vh' }}
     ></div>
