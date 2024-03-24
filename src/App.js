@@ -19,6 +19,7 @@ import Pneumonia from "./Components/Core/Disease/Pneumonia";
 import DiabetesPrediction from "./Components/Core/Disease/DiabetesPrediction.jsx";
 import MedicationForm from "./Components/Core/Medication.jsx";
 import { Contact } from "./Components/Core/Contact.jsx";
+import VideoConference from "./Components/Common/VideoConference.jsx";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/blogspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
         <Route path="/contactUs" element={<Contact />} />
+        <Route path="/video-call" element={<VideoConference />} />
       </Routes>
     </div>
   );
