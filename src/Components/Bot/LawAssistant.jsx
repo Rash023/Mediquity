@@ -194,7 +194,7 @@ const LawAssistant = () => {
                       }}
                       style={{ margin: "0.5rem" }}
                     />
-                    
+
                   </div>
                 ))}
               {loading && <span className="loader"></span>}
@@ -210,14 +210,11 @@ const LawAssistant = () => {
                 placeholder="Enter your message"
                 onChange={(e) => setNewMessage(e.target.value)}
               />
-                {
-                newMessage?(<></>):
-                (<IoMdSend
-                  className="text-neutral-300 cursor-pointer absolute lg:relative right-20 lg:right-0 text-3xl lg:text-5xl"
-                  color=""
-                  onClick={handleSubmit}
-                />)
-              }
+              <IoMdSend
+                className={`text-neutral-300 absolute cursor-pointer lg:relative right-20 lg:right-0 text-3xl lg:text-5xl`}
+                color=""
+                onClick={handleSubmit}
+              />
             </form>
           </div>
         </div>

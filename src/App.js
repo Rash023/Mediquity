@@ -20,6 +20,7 @@ import DiabetesPrediction from "./Components/Core/Disease/DiabetesPrediction.jsx
 import MedicationForm from "./Components/Core/Medication.jsx";
 import { Contact } from "./Components/Core/Contact.jsx";
 import VideoConference from "./Components/Common/VideoConference.jsx";
+import BookDoctor from "./Components/Common/BookDoctor.jsx";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/pagecontent" element={<PageContent />} />
         <Route path="/contactUs" element={<Contact />} />
         <Route path="/video-call" element={<VideoConference />} />
+        <Route path="/book-doctor" element={<BookDoctor/>}/>
       </Routes>
     </div>
   );
