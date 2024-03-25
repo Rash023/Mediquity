@@ -7,14 +7,14 @@ const { contactUsController } = require("../Controller/ContactUs");
 const express = require("express");
 const router = express.Router();
 
-router.post("/Login", login);
-router.post("/Signup", Signup);
-router.post("/Medication", createMedication);
-router.post("/Createslot", CreateSlots);
-router.post("/Bookslot", BookSlots);
+router.post("/login", login);
+router.post("/signup", Signup);
+router.post("/medication", createMedication);
+router.post("/createSlot", CreateSlots);
+router.post("/bookSlot", BookSlots);
 router.post("/upload", fileuploader);
-router.post("/Search", SearchFile);
-router.get("/ViewFiles", getFiles);
+router.post("/search", SearchFile);
+router.get("/viewFiles", getFiles);
 router.post("/contactUs", contactUsController);
 
 module.exports = router;
