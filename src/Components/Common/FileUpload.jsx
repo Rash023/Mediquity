@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { LuAsterisk } from "react-icons/lu";
+import axios from 'axios';
 
 const FileUpload = () => {
     const [FormDataa, setFormData] = useState({
@@ -8,6 +9,7 @@ const FileUpload = () => {
     })
     const token = sessionStorage.getItem("token");
     const [SelectedFile, setSelectedFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -21,24 +23,35 @@ const FileUpload = () => {
     };
 
     const submitHandler = async (e) => {
+        e.preventDefault();
+        setIsLoading(true); 
+  
         const formData = new FormData();
-        formData.append("image", SelectedFile);
-        formData.append("name", FormDataa.name);
-        
+        formData.append("file", SelectedFile);
+        formData.append("filename", FormDataa.name);
+
+
         try {
-            const response = await fetch("http://localhost:4000/api/v1/upload", {
-                method: "POST",
+            const response = await axios.post("http://localhost:4000/api/v1/upload", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
                 },
-                body: formData,
             });
-            const data = await response.json();
-            console.log(data);
+
+            console.log(response.data);
+
+            
+            setFormData({ name: "" });
+            setSelectedFile(null);
+            setIsLoading(false);
         } catch (error) {
-            console.error("Error uploading file:", error);
+            console.error("Error uploading file:", error.message);
+            setIsLoading(false); 
         }
     };
+
+
     return (
         <div className="min-h-screen min-w-screen dark:bg-black bg-white dark:bg-dot-white-[0.2] bg-dot-black-[0.2] relative flex items-center justify-center">
             <div className="rounded-md flex flex-col items-center justify-center antialiased">
@@ -67,7 +80,7 @@ const FileUpload = () => {
                                     <div className="mx-auto w-[100%]">
                                         <div className="w-full mx-auto flex flex-col items-center">
                                             <label htmlFor="name" className='text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 font-sans font-bold uppercase tracking-[1px] mt-[3%]'> Name</label>
-                                            <input type="text" placeholder='Enter File Name' name='name' onChange={changeHandler} className='block mt-3 mb-3 text-white w-full bg-transparent border border-gray-100 rounded-lg placeholder:pl-4  py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm ' />
+                                            <input type="text" placeholder='Enter File Name' name='name' value={FormDataa.name} onChange={changeHandler} className='block mt-3 mb-3 pl-3 text-white w-full bg-transparent border border-gray-100 rounded-lg placeholder:pl-4  py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm ' />
                                         </div>
 
                                     </div>
@@ -87,7 +100,7 @@ const FileUpload = () => {
                                                 <input
                                                     type="file"
                                                     id="uploadInput"
-                                                    accept="image/*"
+                                                    accept=".jpg, .jpeg, .png, .pdf, .docx"
                                                     className="hidden"
                                                     onChange={handleImageUpload}
                                                 />
@@ -97,13 +110,7 @@ const FileUpload = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <div className="w-full h-auto rounded-[15px] mb-4 overflow-hidden">
-                                                    <img
-                                                        src={URL.createObjectURL(SelectedFile)}
-                                                        alt="Uploaded"
-                                                        className="w-full h-auto"
-                                                    />
-                                                </div>
+                                                <span className="loader" ></span>
 
                                             </>
                                         )}
