@@ -36,6 +36,13 @@ export const FloatingNav = ({
       }
     }
   });
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+
+   
+    window.location.href = "/"; 
+  };
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -67,10 +74,23 @@ export const FloatingNav = ({
             <span className="hidden sm:block text-sm uppercase tracking-[2px]">{navItem.name}</span>
           </Link>
         ))}
-        <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-          <span className="uppercase tracking-[2px]">Login</span>
-          <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-        </button>
+    {
+  !sessionStorage.getItem("token") ? 
+  (
+    <a href="/login">
+      <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
+        <span className="uppercase tracking-[2px]">Login</span>
+        <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+      </button>
+    </a>
+  )
+  : (
+    <button onClick={handleLogout} className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
+      <span className="uppercase tracking-[2px]">Logout</span>
+    </button>
+  )
+}
+        
       </motion.div>
     </AnimatePresence>
   );

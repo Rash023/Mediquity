@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { GlobeDemo } from '../Common/ContactUs'
-// import { motion } from "framer-motion";
 import CountryCode from "../../data/countrycode.json"
 import { useForm } from "react-hook-form"
 import { apiConnector } from "../../services/apiConnector"
 import { contactusEndpoint } from "../../services/apis"
-// import "./Contact.css"
 import { toast } from "react-toastify";
+// import { motion } from "framer-motion";
+// import "./Contact.css"
+
 
 export const Contact = () => {
   const [loading,setLoading]=useState(false)

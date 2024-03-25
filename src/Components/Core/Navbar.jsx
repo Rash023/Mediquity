@@ -16,15 +16,17 @@ export function Navbar() {
     },
     {
       name: "Contact",
-      link: "/contact",
+      link: "/contactUs",
       icon: (
         <IconMessage className="h-4 w-4 text-neutral-500 dark:text-white" />
       ),
     },
+ 
   ];
   return (
     <div className="relative  w-full">
       <FloatingNav navItems={navItems} />
+
     </div>
   );
 }
