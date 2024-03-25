@@ -21,7 +21,7 @@ const FileUpload = () => {
         setFormData({ ...FormDataa, [name]: processedValue });
     };
 
-    const submitHandler = async(e) => {
+    const submitHandler = async (e) => {
         const formData = new FormData();
         formData.append("image", SelectedFile);
         formData.append("name", FormDataa.name);
@@ -35,7 +35,7 @@ const FileUpload = () => {
                 body: formData,
             });
             const data = await response.json();
-            console.log(data); 
+            console.log(data);
         } catch (error) {
             console.error("Error uploading file:", error);
         }
@@ -65,9 +65,12 @@ const FileUpload = () => {
                         <div className="max-w-[450px] min-h-[300px] border rounded-[30px] mt-[7%] border-neutral-300 mx-auto flex flex-col bg-black p-14">
                             <form onSubmit={submitHandler}>
                                 <div className="flex flex-col gap-y-7">
-                                    <div>
-                                        <label htmlFor="name" className='text-lg md:text-3xl bg-clip-text  text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 pl-28 font-sans font-bold uppercase tracking-[1px] mt-[3%]'> Name</label>
-                                        <input type="text" placeholder='Enter File Name' name='name' onChange={changeHandler} className='block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm' />
+                                    <div className="mx-auto w-[100%]">
+                                        <div className="w-full mx-auto flex flex-col items-center">
+                                            <label htmlFor="name" className='text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 font-sans font-bold uppercase tracking-[1px] mt-[3%]'> Name</label>
+                                            <input type="text" placeholder='Enter File Name' name='name' onChange={changeHandler} className='block mt-3 mb-3 text-white w-full bg-transparent border border-gray-100 rounded-lg placeholder:pl-4  py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm ' />
+                                        </div>
+
                                     </div>
 
                                     <div>
@@ -107,9 +110,12 @@ const FileUpload = () => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="border rounded-[10px] border-neutral-300 w-[10vw] px-8 pt-2 h-16 mx-auto mt-8 -mb-8">
-                                    <button className="text-lg  md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mt-[3%]">
-                                        Upload
+                                <div className="flex w-full justify-center">
+                                    <button
+                                        type="submit"
+                                        className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]"
+                                    >
+                                        Submit
                                     </button>
                                 </div>
                             </form>
