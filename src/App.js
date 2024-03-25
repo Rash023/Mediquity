@@ -21,6 +21,7 @@ import MedicationForm from "./Components/Core/Medication.jsx";
 import { Contact } from "./Components/Core/Contact.jsx";
 import VideoConference from "./Components/Common/VideoConference.jsx";
 import BookDoctor from "./Components/Common/BookDoctor.jsx";
+import FileUpload from "./Components/Common/FileUpload.jsx";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/contactUs" element={<Contact />} />
         <Route path="/video-call" element={<VideoConference />} />
         <Route path="/book-doctor" element={<BookDoctor/>}/>
+        <Route path="/file-upload" element={<FileUpload/>}/>
       </Routes>
     </div>
   );
