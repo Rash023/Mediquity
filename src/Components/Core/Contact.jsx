@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { GlobeDemo } from '../Common/ContactUs'
-import CountryCode from "../../data/countrycode.json"
+import CountryCode from "../../Data/countrycode.json"
 import { useForm } from "react-hook-form"
-import { apiConnector } from "../../services/apiConnector"
-import { contactusEndpoint } from "../../services/apis"
+import { apiConnector } from "../../Service/apiConnector"
+import { contactusEndpoint } from "../../Service/apis"
 import { toast } from "react-toastify";
 // import { motion } from "framer-motion";
 // import "./Contact.css"

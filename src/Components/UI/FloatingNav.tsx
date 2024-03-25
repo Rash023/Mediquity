@@ -39,7 +39,7 @@ export const FloatingNav = ({
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("user")
     window.location.href = "/";
   };
   return (
