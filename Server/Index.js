@@ -31,6 +31,6 @@ app.listen(PORT, () => {
   console.log(`App is listening at ${PORT}`);
 });
 
-const route = require("./Route/User");
+const userRoute = require("./Route/User");
 
-app.use("/api/v1", route);
+app.use("/api/v1", userRoute);

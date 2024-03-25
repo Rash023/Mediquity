@@ -22,56 +22,69 @@ function isFileTypeSupported(type, supportTypes) {
 
 exports.fileuploader = async (req, res) => {
   try {
-    const { userId, filename, tags } = req.body;
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Bearer token not found in Authorization header",
+      });
+    }
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Token not found",
+      });
+    }
+    const filename = req.body.filename;
+    if (!filename) {
+      return res.status(400).json({
+        success: false,
+        message: "Filename is required",
+      });
+    }
+    let decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decodedToken.id;
     const file = req.files.file;
-
     if (!userId) {
       return res.status(401).json({
         success: false,
         message: "Invalid Input",
       });
     }
-
+    const user = await User.findById({ _id: userId });
     const supportedTypes = ["jpg", "png", "pdf", "jpeg", "docx"];
     const type = file.name.split(".")[1].toLowerCase();
-
     if (!isFileTypeSupported(type, supportedTypes)) {
       return res.status(401).json({
         success: false,
         message: "File type not supported",
       });
     }
-
-    const response = await uploadFiletoCloudinary(file, "Docs");
-
-    const fileData = {
-      filename,
+    const response = await uploadFiletoCloudinary(
+      file,
+      `Mediquity/${user._id}`
+    );
+    const uploadedFile = await File.create({
+      userId,
+      filename: filename,
       fileUrl: response.secure_url,
-      tags,
-    };
-
-    const user = await File.findById(userId);
-
-    if (!user) {
-      const entry = await File.create({
-        userId,
-
-        files: fileData,
-      });
-
-      return res.status(200).json({
-        success: true,
-        message: "File uploaded Succesfully",
-      });
-    } else {
-      user.files.push(fileData);
-
-      return res.status(200).json({
-        success: false,
-        message: "File Uploaded Sucesfully",
-      });
-    }
+    });
+    await User.findByIdAndUpdate(
+      { _id: user._id },
+      {
+        $push: {
+          files: uploadedFile._id,
+        },
+      }
+    );
+    return res.status(200).json({
+      success: true,
+      url: file.secure_url,
+      message: "File uploaded Succesfully",
+    });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
@@ -79,14 +92,11 @@ exports.fileuploader = async (req, res) => {
   }
 };
 
-//controller to search the file
-
 exports.SearchFile = async (req, res) => {
   try {
     const token = req.body.token;
     const { name } = req.body;
-
-    if (!token) {
+    if(!token) {
       return res.status.json({
         success: false,
         message: "Token is missing",
@@ -125,8 +135,6 @@ exports.SearchFile = async (req, res) => {
     });
   }
 };
-
-//handler to get all the files of the user
 
 exports.getFiles = async (req, res) => {
   try {

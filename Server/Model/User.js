@@ -14,12 +14,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
   role: {
     type: String,
     enum: ["User", "Doctor"],
     default: "User",
   },
+  files: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "File",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", UserSchema);
