@@ -95,33 +95,32 @@ exports.fileuploader = async (req, res) => {
 exports.SearchFile = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
-    if(!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
         message: "Bearer token not found in Authorization header",
       });
     }
     const token = authHeader.split(" ")[1];
-    if(!token) {
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Token not found",
       });
     }
     const { searchQuery } = req.body;
-    const regex = new RegExp(searchQuery, 'i');
+    const regex = new RegExp(searchQuery, "i");
     let decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.id;
     const files = await File.find({
       userId: userId,
-      filename: { $regex: regex }
+      filename: { $regex: regex },
     });
     return res.status(500).json({
       success: true,
       files: files,
-      message: 'Successfully Fetched Files'
-    })
-    
+      message: "Successfully Fetched Files",
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -133,14 +132,14 @@ exports.SearchFile = async (req, res) => {
 exports.getFiles = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
-    if(!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
         message: "Bearer token not found in Authorization header",
       });
     }
     const token = authHeader.split(" ")[1];
-    if(!token) {
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Token not found",
@@ -155,8 +154,7 @@ exports.getFiles = async (req, res) => {
       data: files,
       message: "Files Fetched Succesfully",
     });
-  } 
-  catch (error) {
+  } catch (error) {
     return res.status(500).json({
       success: false,
       message: "Interval Server Error",
