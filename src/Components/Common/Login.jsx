@@ -10,7 +10,7 @@ const Login = () => {
   });
 
   const changeHandler = (e) => {
-    const { name, value } = e.target; // Change 'email' to 'name'
+    const { name, value } = e.target;
 
     setFormData({
       ...formData,
@@ -24,13 +24,14 @@ const Login = () => {
       const response = await axios.post(
         "http://localhost:4000/api/v1/login",
         formData
-      ); // Use Axios post method
-      console.log(response);
+      );
       if (response.status === 200) {
         // Show success toast if login is successful
         toast.success("Login successful!", { autoClose: 2000 });
-        console.log(response.data); // You might want to handle this data depending on your application logic
-        window.location.href = "/";
+        console.log(response.data);
+        sessionStorage.setItem('token', response?.data?.token);
+        sessionStorage.setItem('user', response?.data?.user?.name);
+        window.location.href = '/';
       } else {
         // Show error toast if login fails
         toast.error("Login failed. Please check your credentials.", {
@@ -72,9 +73,10 @@ const Login = () => {
                 Email
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder="Enter email"
                 name="email"
+                value={formData.email} // Add value attribute
                 onChange={changeHandler}
                 className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm"
               />
@@ -91,6 +93,7 @@ const Login = () => {
                 type="password"
                 placeholder="Enter Password"
                 name="password"
+                value={formData.password} // Add value attribute
                 onChange={changeHandler}
                 className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm"
               />

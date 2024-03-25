@@ -8,7 +8,6 @@ const FileUpload = () => {
     })
     const token = sessionStorage.getItem("token");
     const [SelectedFile, setSelectedFile] = useState(null);
-    // const [isLoading, setIsLoading] = useState(false);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -25,7 +24,7 @@ const FileUpload = () => {
         const formData = new FormData();
         formData.append("image", SelectedFile);
         formData.append("name", FormDataa.name);
-
+        
         try {
             const response = await fetch("http://localhost:4000/api/v1/upload", {
                 method: "POST",
