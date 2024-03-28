@@ -4,20 +4,30 @@ import numpy as np
 import io
 import pickle as pkl
 from tensorflow.keras.models import load_model
+from keras.preprocessing.image import ImageDataGenerator
 from flask_cors import CORS
+import tensorflow as tf
 import base64
 
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
 
-# Load pneumonia prediction model
+
 pneumonia_model = load_model('D:\Minor\Model\PNEUMONIA\Model\Pneumonia.h5')
 
-# Load diabetes prediction model
+osteoporosis_model = load_model(r'D:\Minor\Model\OSTEOPOROSIS\Model\Osteoporosis.h5')
+
+
+class_labels = ['Healthy', 'Osteoporosis']
+
+image_gen = ImageDataGenerator(
+    preprocessing_function=tf.keras.applications.mobilenet_v2.preprocess_input)
+
+
 with open('D:\ML\DISEASE PREDICTION\DIABETES\Model\diabetesPredictionModel.pkl', 'rb') as file:
     diabetes_model = pkl.load(file)
 
-# Load brain tumor prediction model
+
 brain_tumor_model = load_model('D:\Minor\Model\BRAIN TUMOR\Model\model.h5')
 
 def preprocess_image(img):
@@ -85,6 +95,20 @@ def predict_brain_tumor():
     predicted_tumor_type = tumor_types[predicted_class]
 
     return jsonify({'prediction': predicted_tumor_type})
+
+@app.route('/predict/osteoporosis', methods=['POST'])
+def predict_osteoporosis():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file provided'})
+    image_file = request.files['image']
+    image = cv2.imdecode(np.frombuffer(
+        image_file.read(), np.uint8), cv2.IMREAD_COLOR)
+    image = cv2.resize(image, (224, 224))
+    image = image_gen.standardize(image)
+    image = np.expand_dims(image, axis=0)
+    pred = osteoporosis_model.predict(image)
+    pred_class = class_labels[np.argmax(pred)]
+    return jsonify({'prediction': pred_class})
 
 if __name__ == '__main__':
     app.run(debug=True)

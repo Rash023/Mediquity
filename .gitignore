@@ -27,6 +27,8 @@ yarn-error.log*
 node_modules/
 
 Model/PNEUMONIA/Dataset
+Model/BRAIN TUMOR/Model
 Model/PNEUMONIA/Model
 Model/CATARACT/Dataset
+Model/OSTEOPOROSIS/Model
 Model/CATARACT/Processed Image

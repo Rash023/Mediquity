@@ -16,13 +16,14 @@ import Blogspage from "./Components/Common/Blogspage.jsx";
 import PageContent from "./Components/Common/PageContent.jsx";
 
 import Pneumonia from "./Components/Core/Disease/Pneumonia";
-import DiabetesPrediction from "./Components/Core/Disease/DiabetesPrediction.jsx";
+import DiabetesPrediction from "./Components/Core/Disease/Diabetes.jsx";
 import MedicationForm from "./Components/Core/Medication.jsx";
 import { Contact } from "./Components/Core/Contact.jsx";
 import VideoConference from "./Components/Common/VideoConference.jsx";
 import BookDoctor from "./Components/Common/BookDoctor.jsx";
 import FileUpload from "./Components/Common/FileUpload.jsx";
 import ViewDocument from "./Components/Common/ViewDocument.jsx";
+import OsteoporosisDetection from "./Components/Core/Disease/Osteoporosis.jsx";
 
 function App() {
   return (
@@ -42,14 +43,21 @@ function App() {
         <Route path="/contributor" element={<Contributor />} />
         <Route path="/ping" element={<MedicationForm />} />
         <Route path="/news" element={<News />} />
-        <Route path="/detection/diabetes-prediction" element={<DiabetesPrediction />} />
+        <Route
+          path="/detection/diabetes-prediction"
+          element={<DiabetesPrediction />}
+        />
+        <Route
+          path="/detection/osteoporosis-prediction"
+          element={<OsteoporosisDetection />}
+        />
         <Route path="/blogspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
         <Route path="/contactUs" element={<Contact />} />
         <Route path="/video-call" element={<VideoConference />} />
-        <Route path="/book-doctor" element={<BookDoctor/>}/>
-        <Route path="/file-upload" element={<FileUpload/>}/>
-        <Route path='/view-document' element={<ViewDocument/>}/>
+        <Route path="/book-doctor" element={<BookDoctor />} />
+        <Route path="/file-upload" element={<FileUpload />} />
+        <Route path="/view-document" element={<ViewDocument />} />
       </Routes>
     </div>
   );
