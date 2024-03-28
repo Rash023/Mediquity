@@ -90,7 +90,7 @@ const OsteoporosisDetection = () => {
                 </>
               ) : (
                 <>
-                  <div className="w-full h-auto rounded-[15px] mb-4 overflow-hidden">
+                  <div className="w-full h-[400px] rounded-[15px] mb-4 overflow-hidden">
                     <img
                       src={URL.createObjectURL(selectedImage)}
                       alt="Uploaded"
@@ -110,7 +110,7 @@ const OsteoporosisDetection = () => {
                 PREDICT
               </div>
             </div>
-            <div className="flex lg:items-center mt-4 lg:ml-48 gap-1">
+            <div className="lg:items-center mt-4 gap-1 flex justify-center">
               <div className="text-red-500 text-md"><LuAsterisk /></div>
               <div className="text-neutral-500 my-1 text-[0.65rem] text-center tracking-[1px]">Information provided is subject to ongoing evolution and may not be entirely accurate.</div>
             </div>
