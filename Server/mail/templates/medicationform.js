@@ -1,17 +1,16 @@
-exports.contactUsEmail = (
-  email,
-  firstname,
-  lastname,
-  message,
-  phoneNo,
-  countrycode
-) => {
-  return `<!DOCTYPE html>
+exports.medicationEmail = (
+    name,
+    type,
+    dosage, 
+    days,
+    times,
+  ) => {
+    return `<!DOCTYPE html>
   <html>
   
   <head>
       <meta charset="UTF-8">
-      <title>Contact Form Confirmation</title>
+      <title>Medication Information</title>
       <style>
           body {
               background-color: #ffffff;
@@ -74,23 +73,19 @@ exports.contactUsEmail = (
   
   <body>
       <div class="container">
-          <a href="http://localhost:3000">Mediquity</a>
-          <div class="message">Contact Form Confirmation</div>
+      <a href="http://localhost:3000">Mediquity</a>
+          <div class="message">Medication Information</div>
           <div class="body">
-              <p>Dear ${firstname} ${lastname},</p>
-              <p>Thank you for contacting us. We have received your message and will respond to you as soon as possible.
-              </p>
-              <p>Here are the details you provided:</p>
-              <p>Name: ${firstname} ${lastname}</p>
-              <p>Email: ${email}</p>
-              <p>Phone Number: ${phoneNo}</p>
-              <p>Message: ${message}</p>
-              <p>We appreciate your interest and will get back to you shortly. </p>
+              <p>Dear ${name},</p>
+              <p>Thank you for providing your medication details. Here's the information:</p>
+              <p>Type: ${type}</p>
+              <p>Dosage: ${dosage}</p>
+              <p>Frequency: ${days} days, ${times} times a day</p>
           </div>
-          <div class="support">If you have any further questions or need immediate assistance, please feel free to reach
-              out to us at <a href="mailto:info@studybay.com">info@studybay.com</a>. We are here to help!</div>
+          <div class="support">If you have any questions or concerns, feel free to contact us at <a href="mailto:info@example.com">info@example.com</a>.</div>
       </div>
   </body>
   
-  </html>`
-}
+  </html>`;
+  }
+  

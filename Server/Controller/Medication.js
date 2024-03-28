@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../Model/User");
 const cron = require("node-cron");
-const Medication = require("../Model/Medication"); // Import your Medication model
-const mailSender = require("../Configuration/nodemailer");
+const Medication = require("../Model/Medication");
+const { medicationEmail } = require("../mail/templates/medicationform");
+const mailSender = require("../Util/mailSender");
 
 exports.createMedication = async (req, res) => {
   try {
-    // Decode token to get user ID
     const token = req.body.token;
 
     if (!token) {
@@ -19,7 +19,6 @@ exports.createMedication = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.id;
 
-    // Fetch user from DB
     const user = await User.findById(userId);
 
     if (!user) {
@@ -31,16 +30,13 @@ exports.createMedication = async (req, res) => {
 
     const { medicineName, type, dosage, days, times } = req.body;
 
-    // Convert times to hh:mm format
     const formattedTimes = times.map((time) => {
       const timeString = new Date(time);
       const hours = timeString.getHours().toString().padStart(2, "0");
       const minutes = timeString.getMinutes().toString().padStart(2, "0");
-      const formattedTime = `${hours}:${minutes}`;
-      return formattedTime;
+      return `${hours}:${minutes}`;
     });
 
-    // Convert days array to array of selected days
     const daysOfWeek = [
       "Monday",
       "Tuesday",
@@ -51,7 +47,6 @@ exports.createMedication = async (req, res) => {
       "Sunday",
     ].filter((day, index) => days[index]);
 
-    // Create medication entity
     const medication = new Medication({
       userId: userId,
       name: medicineName,
@@ -61,7 +56,6 @@ exports.createMedication = async (req, res) => {
       times: formattedTimes,
     });
 
-    // Save medication to DB
     await medication.save();
 
     return res.status(200).json({
@@ -77,15 +71,12 @@ exports.createMedication = async (req, res) => {
   }
 };
 
-// Function to check medication schedule and send reminders
-// Function to check medication schedule and send reminders
 const checkMedicationSchedule = async () => {
   try {
     const currentDate = new Date();
     const currentDay = currentDate.toLocaleString("en-US", { weekday: "long" });
     const currentTime = currentDate.getHours() * 60 + currentDate.getMinutes();
 
-    // Query Medication collection
     const medications = await Medication.find({
       days: { $elemMatch: { $eq: currentDay } },
     }).populate("userId");
@@ -93,12 +84,14 @@ const checkMedicationSchedule = async () => {
     for (const medication of medications) {
       for (const time of medication.times) {
         const timeParts = time.split(":");
-        const medicationTime =
-          parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
+        const medicationTime = parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
         if (currentTime === medicationTime - 5) {
           const user = await User.findById(medication.userId);
-          console.log("HI");
-          await mailSender(user.email, medication.name, medicationTime);
+          await mailSender(
+            user.email,
+            "Medication Reminder",
+            medicationEmail(medication.name, medication.type, medication.dosage, medication.days, medication.times)
+          );
         }
       }
     }

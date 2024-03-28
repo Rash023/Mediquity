@@ -58,16 +58,14 @@ const MedicationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(medication);
     try {
-      const response = await axios.get(
-        "http://localhost:4000/api/v1/Medication",
-        {
-          medication,
-        }
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/medication",
+        medication,
       );
 
-      if (response.ok) {
+      if(response) {
         toast.success("Your data is Saved Successfully", { autoClose: 2000 });
       } else {
         toast.error("Failed to save data", { autoClose: 2000 });
@@ -203,9 +201,8 @@ const MedicationForm = () => {
                   <button
                     type="button"
                     onClick={() => removeTimeField(index)}
-                    className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg text-xl p-2 ${
-                      timeFields.length <= 1 ? "cursor-not-allowed" : ""
-                    }`}
+                    className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg text-xl p-2 ${timeFields.length <= 1 ? "cursor-not-allowed" : ""
+                      }`}
                     disabled={timeFields.length <= 1}
                   >
                     <MdDelete />

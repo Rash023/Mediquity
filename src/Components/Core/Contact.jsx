@@ -35,10 +35,7 @@ export const Contact = () => {
       setLoading(false)
     }
   }
-  // const submitHandler = () => {
-  //   console.log("hu");
-  // }
-
+ 
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset({
@@ -51,9 +48,7 @@ export const Contact = () => {
     }
   }, [reset, isSubmitSuccessful])
 
-  // const changeHandler = () => {
-  //   console.log("hu");
-  // }
+ 
   return (
     <div className='flex flex-col lg:flex-row lg:min-h-screen h-full lg:min-w-screen bg-black overflow-clip'>
       <div className='lg:w-[50%] w-[90%] flex flex-col lg:ml-16 mx-auto contact-glass '>

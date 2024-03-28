@@ -17,6 +17,8 @@ export const HoverEffect = ({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
+
+
   return (
     <div
       className={cn(
@@ -30,7 +32,7 @@ export const HoverEffect = ({
           className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
-          onClick={() => navigate(`/${item.link}`)}
+          onClick={()=>navigate(`${item.link}`)}
         >
           <AnimatePresence>
             {hoveredIndex === idx && (

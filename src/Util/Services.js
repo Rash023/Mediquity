@@ -1,21 +1,22 @@
 export const services = [
-  {
-    title: "Chat With Doctors",
-    description:
-      "Engage in real - time, empathetic conversations with qualified medical professionals and doctors, offering expert advice, personalized guidance, and unwavering support for various health concerns.",
-    link: "https://stripe.com/",
-  },
+
   {
     title: "Scan Reports",
     description:
       "Access and review your health reports effortlessly. Simply upload your medical documents, including scan and test results, to our secure and user-friendly platform for quick analysis, interpretation, and comprehensive insights",
-    link: "https://netflix.com/",
+    link: "/file-upload",
   },
   {
-    title: "Health Blogs",
+    title: "View Reports",  
+    description:
+      "Engage in real - time, empathetic conversations with qualified medical professionals and doctors, offering expert advice, personalized guidance, and unwavering support for various health concerns.",
+    link: "/view-document",
+  },
+  {
+    title: "Health News",
     description:
       " Stay informed about the latest trends in nutrition, fitness, mental health, and more.",
-    link: "https://google.com/",
+    link: "/news",
   },
   {
     title: "Video Conference",

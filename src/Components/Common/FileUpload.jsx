@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { LuAsterisk } from "react-icons/lu";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const FileUpload = () => {
+    const navigate  = useNavigate();
+    
     const [FormDataa, setFormData] = useState({
         name: "",
     })
@@ -50,7 +53,11 @@ const FileUpload = () => {
             setIsLoading(false); 
         }
     };
-
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+        }
+    }, []);
 
     return (
         <div className="min-h-screen min-w-screen dark:bg-black bg-white dark:bg-dot-white-[0.2] bg-dot-black-[0.2] relative flex items-center justify-center">

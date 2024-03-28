@@ -4,6 +4,7 @@ import { LuAsterisk } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { IoSearchOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const ViewDocument = () => {
     const [documents, setDocuments] = useState([]);
@@ -11,6 +12,7 @@ const ViewDocument = () => {
     const [searchResults, setSearchResults] = useState([]);
     const token = sessionStorage.getItem("token");
     const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -62,7 +64,11 @@ const ViewDocument = () => {
         setSearchResults([]);
     };
 
-
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+        }
+    }, []);
     return (
         <div className="min-h-screen min-w-screen dark:bg-black bg-white dark:bg-dot-white-[0.2] bg-dot-black-[0.2] relative flex items-center justify-center">
             <div className="rounded-md flex flex-col items-center justify-center antialiased">
