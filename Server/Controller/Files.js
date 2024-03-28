@@ -93,6 +93,7 @@ exports.fileuploader = async (req, res) => {
 };
 
 exports.SearchFile = async (req, res) => {
+  // console.log("hello");
   try {
     const authHeader = req.headers["authorization"];
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -102,6 +103,7 @@ exports.SearchFile = async (req, res) => {
       });
     }
     const token = authHeader.split(" ")[1];
+    // console.log(token);
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -116,7 +118,8 @@ exports.SearchFile = async (req, res) => {
       userId: userId,
       filename: { $regex: regex },
     });
-    return res.status(500).json({
+    console.log(files)
+    return res.status(200).json({
       success: true,
       files: files,
       message: "Successfully Fetched Files",
