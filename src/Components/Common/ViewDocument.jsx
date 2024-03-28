@@ -92,26 +92,32 @@ const ViewDocument = () => {
                     <div className="lg:p-0 p-3">
                         <div className="lg:w-[50vw] w-[90vw] min-h-[300px] border rounded-[30px] mt-[7%] border-neutral-300 mx-auto flex-col bg-black p-14 grid lg:grid-cols-3 gap-5 grid-cols-1 items-baseline">
                             {/* Display documents */}
-                            {documents.slice(currentIndex, currentIndex + 3).map((document, index) => (
-                                <div key={index} className="w-full h-[200px] relative mb-4 overflow-hidden cursor-pointer" onClick={() => handleClick(document.fileUrl)}>
-                                    {/* Render document content */}
-                                    {document.fileUrl.toLowerCase().endsWith('.pdf') ? (
-                                        <div className="w-full h-full relative flex flex-col justify-center">
-                                            <FaFilePdf className="w-full h-[90%] object-cover rounded-[15px] p-2" color="red" size={50} />
+                            {
+                                !documents.length ? (
+                                    <div className="text-white text-center">No files found.</div>
+                                ) : (
+                                    documents.slice(currentIndex, currentIndex + 3).map((document, index) => (
+                                        <div key={index} className="w-full h-[200px] relative mb-4 overflow-hidden cursor-pointer" onClick={() => handleClick(document.fileUrl)}>
+                                            {/* Render document content */}
+                                            {document.fileUrl.toLowerCase().endsWith('.pdf') ? (
+                                                <div className="w-full h-full relative flex flex-col justify-center">
+                                                    <FaFilePdf className="w-full h-[90%] object-cover rounded-[15px] p-2" color="red" size={50} />
 
-                                            <div className="text-lg text-white uppercase tracking-[1.2px] truncate mx-auto mt-[2%]">{document.filename.length > 15 ? document.filename.substring(0, 12) + "..." : document.filename}</div>
+                                                    <div className="text-lg text-white uppercase tracking-[1.2px] truncate mx-auto mt-[2%]">{document.filename.length > 15 ? document.filename.substring(0, 12) + "..." : document.filename}</div>
 
+                                                </div>
+                                            ) : (
+                                                <div className="w-full h-full relative flex flex-col justify-center">
+                                                    <img src={document.fileUrl} alt={document.filename} className="w-full h-[85%] object-cover border rounded-[15px]" />
+
+                                                    <div className="text-lg text-white uppercase tracking-[1.2px] truncate mx-auto mt-[2%]">{document.filename.length > 15 ? document.filename.substring(0, 12) + "..." : document.filename}</div>
+
+                                                </div>
+                                            )}
                                         </div>
-                                    ) : (
-                                        <div className="w-full h-full relative flex flex-col justify-center">
-                                            <img src={document.fileUrl} alt={document.filename} className="w-full h-[85%] object-cover border rounded-[15px]" />
-
-                                            <div className="text-lg text-white uppercase tracking-[1.2px] truncate mx-auto mt-[2%]">{document.filename.length > 15 ? document.filename.substring(0, 12) + "..." : document.filename}</div>
-
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                    ))
+                                )
+                            }
                         </div>
                         {documents.length > 3 && (
                             <div className="flex justify-center mt-4">
