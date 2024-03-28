@@ -20,6 +20,7 @@ const ScanPredictionCard = ({ data }) => {
           <div
             key={project.id}
             className="h-[40rem] w-full flex items-center justify-center -mt-[70%]"
+            onClick={() => navigate(`${project.route}`)}
           >
             <PinContainer title="Predict" onClick={() => clickHandler(project)}>
               <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[20rem]">
