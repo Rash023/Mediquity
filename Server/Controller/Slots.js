@@ -50,3 +50,26 @@ exports.addSlots = async (req, res) => {
     });
   }
 };
+
+//handler to get all the slots of the doctor
+
+exports.getSlots = async (req, res) => {
+  try {
+    const token = req.body.token;
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const id = decodedToken.id;
+
+    const data = await Slots.find({ doctorId: id });
+    return res.status(200).json({
+      success: true,
+      data: data,
+      message: "Data found Sucessfully",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};

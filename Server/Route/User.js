@@ -3,7 +3,7 @@ const { createMedication } = require("../Controller/Medication");
 const { fileuploader, SearchFile, getFiles } = require("../Controller/Files");
 const { contactUsController } = require("../Controller/ContactUs");
 const { docSignup, docLogin } = require("../Controller/Doctor");
-const { addSlots } = require("../Controller/Slots");
+const { addSlots, getSlots } = require("../Controller/Slots");
 const {
   createAppointment,
   getCurrentAppointments,
@@ -24,6 +24,7 @@ router.post("/doctorSignup", docSignup); //route for doctor signup
 router.post("/doctorLogin", docLogin); //route to login for the doctor
 router.post("/addSlots", addSlots); //route to add slots for the doctor
 router.post("/bookAppointment", createAppointment); //route to book appointments for the user
-router.get("/ViewAppointments", getCurrentAppointments); //route to view all the appointments of the user
-router.get("/AppointmentHistory", getPastAppointments);
+router.get("/ViewAppointments", getCurrentAppointments); //route to view all the current appointments of the user
+router.get("/AppointmentHistory", getPastAppointments); //route to view the history of appointments of the user
+router.get("/getSlots", getSlots); //route to view all the slots of the doctor
 module.exports = router;
