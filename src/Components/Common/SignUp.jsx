@@ -25,7 +25,8 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/SignUp",
+        "https://mediquity.onrender.com/api/v1/Signup",
+        //"http://localhost:4000/api/v1/SignUp",
         formData
       );
       console.log(response);

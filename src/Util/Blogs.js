@@ -1,13 +1,13 @@
 import Exercise from "../Asset/Exercise-icon.gif";
-import Diet from "../Asset/Diet-icon.gif"
-import Mental from "../Asset/Mental-icon.gif"
+import Diet from "../Asset/Diet-icon.gif";
+import Mental from "../Asset/Mental-icon.gif";
 import Sleep from "../Asset/Sleep-icon.gif";
 import Hydrate from "../Asset/Hydration-icon.gif";
 import Stress from "../Asset/Stress-icon.gif";
 
 export const Blogs = [
   {
-    title: "Benifits of Regukar Exercise",
+    title: "Benifits of Regular Exercise",
     image: Exercise,
   },
   {
@@ -29,7 +29,5 @@ export const Blogs = [
   {
     title: "Stress Management Techniques",
     image: Stress,
-
   },
-
 ];

@@ -31,7 +31,7 @@ const ScanPredictionCard = ({ data }) => {
                   <span className="text-slate-500 "></span>
                 </div>
                 <div
-                  className="image flex flex-1 w-full rounded-lg mt-4 bg-cover"
+                  className="image flex flex-1 w-full rounded-lg mt-4 bg-cover opacity-90"
                   style={{ backgroundImage: `url(${project.src})` }}
                 />
               </div>

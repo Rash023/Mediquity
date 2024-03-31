@@ -22,7 +22,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/login",
+        "https://mediquity.onrender.com/api/v1/Login",
+        //"http://localhost:4000/api/v1/Login",
         formData
       );
       if (response.status === 200) {
