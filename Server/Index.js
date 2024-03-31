@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const PORT = process.env.PORT || 4000;
-const { cloudinaryConnect } = require("./Configuration/cloudinary");
+const { cloudinaryConnect } = require("./Configuration/Cloudinary");
 const predictionRoute = require("./Route/Prediction");
 const cronScheduler = require("./Configuration/Cron");
 require("./Configuration/database").connect();

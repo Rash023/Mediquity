@@ -1,84 +1,52 @@
 const express = require("express");
 const Slots = require("../Model/Slots");
+const Doctor = require("../Model/Doctor");
+const jwt = require("jsonwebtoken");
 
-exports.CreateSlots = async (req, res) => {
+exports.addSlots = async (req, res) => {
   try {
-    const { name, specialization, slots } = req.body;
+    const { days, time } = req.body;
+    const token = req.body.token;
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const id = decodedToken.id;
 
-    if (!name || !specialization || !slots) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid input",
+    const doctor = await Doctor.findById(id);
+
+    // Find all existing slots for the doctor
+    const existingSlots = await Slots.find({ doctorId: doctor._id });
+
+    // Filter out the slots whose day and time match with the entries already present
+    const newSlots = days
+      .map((day) => ({
+        doctorId: doctor._id,
+        day,
+        time,
+      }))
+      .filter((newSlot) => {
+        return !existingSlots.some(
+          (existingSlot) =>
+            existingSlot.day === newSlot.day &&
+            existingSlot.time === newSlot.time
+        );
       });
-    }
 
-    const newSlot = new Slots({
-      name,
-      specialization,
-      slots,
-    });
+    const createdSlots = await Slots.insertMany(newSlots);
 
-    const savedSlot = await newSlot.save();
+    const newSlotIds = createdSlots.map((slot) => slot._id);
 
-    return res.status(200).json({
-      success: true,
-      message: "Slots Created Succesffully",
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
-  }
-};
-
-exports.BookSlots = async (req, res) => {
-  try {
-    const { doctorId, userId, slotIndex } = req.body;
-    console.log(doctorId, userId, slotIndex);
-
-    if (!doctorId || !userId) {
-      return res.status(401).json({
-        success: false,
-        messsage: "Invalid Input",
-      });
-    }
-
-    const doctor = await Slots.findById(doctorId);
-
-    if (!doctor) {
-      return res.status(401).json({
-        success: false,
-        message: "Doctor not found",
-      });
-    }
-
-    if (slotIndex < 0 || slotIndex > doctor.slots.length) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid Slot",
-      });
-    }
-
-    if (doctor.slots[slotIndex].bookings.length >= 4) {
-      return res.status(400).json({
-        success: false,
-        message: "All slots booked :(",
-      });
-    }
-
-    doctor.slots[slotIndex].bookings.push(userId);
-
+    doctor.slots.push(...newSlotIds);
     await doctor.save();
 
     return res.status(200).json({
       success: true,
-      message: "Slot booked succesfully",
+      message: "New Slots added Successfully",
+      newSlotIds,
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       success: false,
-      message: "Interval Server Error",
+      message: "Internal Server Error",
     });
   }
 };
