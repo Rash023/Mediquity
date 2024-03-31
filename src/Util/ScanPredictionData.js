@@ -1,11 +1,8 @@
-import Pnuemonia from "../Asset/Pneumonia-icon.jpg";
-import Diabetes from "../Asset/Diabetes-icon.png";
-import Brain from "../Asset/Brain-icon.png"
-
+import Osteoporosis from "../Asset/Osteoporosis.jpeg"
 export const ScanPredictionData = [
   {
     label: "Pnuemonia Detection",
-    src: "https://i.pinimg.com/originals/d4/55/e3/d455e3be112235e6f70ce41be9ffd6d2.gif",
+    src: "https://fit-buddy-app.vercel.app/assets/images/Lung-image.jpg",
     route: "/detection/pneumonia",
   },
   {
@@ -15,13 +12,13 @@ export const ScanPredictionData = [
   },
   {
     label: "Brain Tumor Detection",
-    src: "https://media1.giphy.com/media/K61ByIKDUSs9P2KdGY/giphy.gif",
+    src: "https://fit-buddy-app.vercel.app/assets/images/brain.png",
     route: "/detection/brain",
   },
   {
-    label: "Lung Cancer Detection",
-    src: "https://res.cloudinary.com/ekincare/image/upload/t_blog-large-img/v1684752816/Blogs%2C%20Webinars/NYT-BeMoreProductive-ToDoList-01-jumbo-v3.gif",
-    route: "/detection/lung-cancer",
+    label: "Tuberculosis Detection",
+    src: Osteoporosis,
+    route: "/detection/tuberculosis",
   },
   {
     label: "Kidney Stone Detection",
@@ -29,7 +26,7 @@ export const ScanPredictionData = [
     route: "/detection/kidney-stone",
   },
   {
-    label: "Ostopriosis Detection",
+    label: "Osteoporosis Detection",
     src: "https://res.cloudinary.com/ekincare/image/upload/t_blog-large-img/v1684752816/Blogs%2C%20Webinars/NYT-BeMoreProductive-ToDoList-01-jumbo-v3.gif",
     route: "/detection/osteoporosis-prediction",
   },

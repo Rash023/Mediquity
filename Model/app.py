@@ -4,6 +4,7 @@ import numpy as np
 import io
 import pickle as pkl
 from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
 from flask_cors import CORS
 import tensorflow as tf
@@ -12,29 +13,38 @@ import base64
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
 
-
+# MODEL
 pneumonia_model = load_model('D:\Minor\Model\PNEUMONIA\Model\Pneumonia.h5')
-
 osteoporosis_model = load_model(r'D:\Minor\Model\OSTEOPOROSIS\Model\Osteoporosis.h5')
-
-
-class_labels = ['Healthy', 'Osteoporosis']
-
+kidney_stone_model = load_model(r'D:\Minor\Model\KIDNEY STONE\Model\Kidney_Stone.h5')
+tuberculosis_model = load_model(r'D:\Minor\Model\TUBERCULOSIS\Model\Tuberculosis.h5')
+brain_tumor_model = load_model('D:\Minor\Model\BRAIN TUMOR\Model\model.h5')
 image_gen = ImageDataGenerator(
     preprocessing_function=tf.keras.applications.mobilenet_v2.preprocess_input)
-
-
 with open('D:\ML\DISEASE PREDICTION\DIABETES\Model\diabetesPredictionModel.pkl', 'rb') as file:
     diabetes_model = pkl.load(file)
 
-
-brain_tumor_model = load_model('D:\Minor\Model\BRAIN TUMOR\Model\model.h5')
-
+# PREPROCESSING
 def preprocess_image(img):
     img = cv2.resize(img, (150, 150))
     img_array = np.array(img)
     img_array = img_array.reshape(1, 150, 150, 3)
     return img_array
+
+def preprocess_image_kidney_stone(img):
+    img_pil = image.load_img(img, target_size=(200, 200), color_mode='grayscale')
+    img_array = image.img_to_array(img_pil)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array = img_array / 255.0
+    return img_array
+
+def preprocess_image_tuberculosis(image_content):
+    target_size = (64, 64)
+    img = cv2.imdecode(np.frombuffer(image_content, np.uint8), -1)
+    img = cv2.resize(img, target_size)
+    img = np.expand_dims(img, axis=0)
+    img = img / 255.0  # Normalize the image
+    return img
 
 @app.route('/predict/pneumonia', methods=['POST'])
 def predict_pneumonia():
@@ -107,8 +117,34 @@ def predict_osteoporosis():
     image = image_gen.standardize(image)
     image = np.expand_dims(image, axis=0)
     pred = osteoporosis_model.predict(image)
+    class_labels = ['Healthy', 'Osteoporosis']
     pred_class = class_labels[np.argmax(pred)]
     return jsonify({'prediction': pred_class})
+
+@app.route('/predict/kidney-stone', methods=['POST'])
+def predict_kidney_stone():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'})
+    file = request.files['file']
+    img_bytes = io.BytesIO(file.read())
+    img_array = preprocess_image_kidney_stone(img_bytes)
+    prediction = kidney_stone_model.predict(img_array)
+    predicted_class = np.argmax(prediction, axis=1)
+    class_labels = ['Cyst', 'Normal', 'Stone', 'Tumor']
+    predicted_label = class_labels[predicted_class[0]]
+    return jsonify({'prediction': predicted_label})
+
+@app.route('/predict/tuberculosis', methods=['POST'])
+def predict_tuberculosis():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'})
+    file = request.files['file']
+    image_content = file.read()
+    processed_image = preprocess_image_tuberculosis(image_content)
+    prediction = tuberculosis_model.predict(processed_image)
+    predicted_class = int(np.round(prediction)[0][0])
+    class_labels = ['Normal', 'Tuberculosis']
+    return jsonify({'prediction': class_labels[predicted_class]})
 
 if __name__ == '__main__':
     app.run(debug=True)

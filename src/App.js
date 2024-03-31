@@ -24,6 +24,8 @@ import BookDoctor from "./Components/Common/BookDoctor.jsx";
 import FileUpload from "./Components/Common/FileUpload.jsx";
 import ViewDocument from "./Components/Common/ViewDocument.jsx";
 import OsteoporosisDetection from "./Components/Core/Disease/Osteoporosis.jsx";
+import TuberculosisDetection from "./Components/Core/Disease/Tuberculosis.jsx";
+import KidneyStoneDetection from "./Components/Core/Disease/KidneyStone.jsx";
 
 function App() {
   return (
@@ -38,11 +40,12 @@ function App() {
         <Route path="/physiotherapy-assistant" element={<PhysioAssistant />} />
         <Route path="/disease-analysis" element={<DiseaseAnalysis />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/detection/brain" element={<BrainTumor />} />
-        <Route path="/detection/pneumonia" element={<Pneumonia />} />
         <Route path="/contributor" element={<Contributor />} />
         <Route path="/ping" element={<MedicationForm />} />
         <Route path="/news" element={<News />} />
+        {/* DETECTION */}
+        <Route path="/detection/brain" element={<BrainTumor />} />
+        <Route path="/detection/pneumonia" element={<Pneumonia />} />
         <Route
           path="/detection/diabetes-prediction"
           element={<DiabetesPrediction />}
@@ -51,6 +54,15 @@ function App() {
           path="/detection/osteoporosis-prediction"
           element={<OsteoporosisDetection />}
         />
+        <Route
+          path="/detection/tuberculosis"
+          element={<TuberculosisDetection />}
+        />
+        <Route
+          path="/detection/kidney-stone"
+          element={<KidneyStoneDetection />}
+        />
+        {/* DETECTION */}
         <Route path="/blogspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
         <Route path="/contactUs" element={<Contact />} />
