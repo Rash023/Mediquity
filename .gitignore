@@ -31,4 +31,6 @@ Model/BRAIN TUMOR/Model
 Model/PNEUMONIA/Model
 Model/CATARACT/Dataset
 Model/OSTEOPOROSIS/Model
+Model/TUBERCULOSIS/Model
+Model/KIDNEY STONE/Model
 Model/CATARACT/Processed Image

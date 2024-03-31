@@ -1,21 +1,14 @@
 const bcrypt = require("bcrypt");
-const Model = require("../Model/Doctor");
-const Slots = require("../Model/Slots");
+const Doctor = require("../Model/Doctor");
 const jwt = require("jsonwebtoken");
 
 //controller for doctor Signup
 
-exports.docSignup = async (req, res) => {
+exports.signup = async (req, res) => {
   try {
-    const {
-      name,
-      email,
-      password,
-      specialization,
-      slots: { days, time },
-    } = req.body;
+    const { name, email, password, specialization } = req.body;
 
-    const existingUser = await Model.findOne({ email });
+    const existingUser = await Doctor.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({
@@ -34,43 +27,12 @@ exports.docSignup = async (req, res) => {
       });
     }
 
-    //creating the entry for the doctor
-
-    await Model.create({
+    await Doctor.create({
       name,
       email,
       password: hashPassword,
       specialization,
     });
-
-    const user = await Model.findOne({ email });
-
-    //adding slots in the slots schema
-    for (const day of days) {
-      const slot = new Slots({
-        doctorId: user._id,
-        day,
-        time,
-      });
-      const savedSlot = await slot.save();
-    }
-    const id = user._id;
-
-    const foundSlots = await Slots.find({ doctorId: id });
-
-    if (!foundSlots || foundSlots.length == 0) {
-      return res.status(200).json({
-        success: true,
-        message: "Doctor created successfully",
-      });
-    }
-
-    //updating the doctor data with the slots object id
-    const updatedDoctor = await Model.findByIdAndUpdate(
-      id,
-      { $push: { slots: { $each: foundSlots.map((slot) => slot._id) } } },
-      { new: true }
-    );
 
     return res.status(200).json({
       success: true,
@@ -85,9 +47,7 @@ exports.docSignup = async (req, res) => {
   }
 };
 
-//controller for doctor login
-
-exports.docLogin = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -98,7 +58,7 @@ exports.docLogin = async (req, res) => {
       });
     }
 
-    let user = await Model.findOne({ email });
+    let user = await Doctor.findOne({ email });
 
     if (!user) {
       return res.status(401).json({
@@ -146,3 +106,23 @@ exports.docLogin = async (req, res) => {
     });
   }
 };
+
+
+exports.getDoctorBySpecialisation = async(req, res) => {
+  try {
+    const {specialization} = req.body;
+    const doctors = await Doctor.find({specialization: specialization});
+    return res.status(200).json({
+      success: true,
+      doctors: doctors,
+      message: "Successfully fetched Doctor By Specialization"
+    })
+  }
+  catch(err) {
+    console.error(err);
+    return res.status(500).json({
+      successs: false,
+      message: "Error Getting Doctor By Specialization"
+    })
+  }
+}

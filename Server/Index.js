@@ -6,9 +6,11 @@ const fileUpload = require("express-fileupload");
 const PORT = process.env.PORT || 4000;
 const { cloudinaryConnect } = require("./Configuration/Cloudinary");
 const predictionRoute = require("./Route/Prediction");
-const cronScheduler = require("./Configuration/Cron");
+const userRoute = require("./Route/User");
+const doctorRoute = require("./Route/Doctor");
+
 require("./Configuration/database").connect();
-cronScheduler.start();
+
 dotenv.config();
 app.use(express.json());
 app.use(
@@ -31,6 +33,7 @@ app.listen(PORT, () => {
   console.log(`App is listening at ${PORT}`);
 });
 
-const userRoute = require("./Route/User");
+
 
 app.use("/api/v1", userRoute);
+app.use("/api/v1/doctor",doctorRoute);
