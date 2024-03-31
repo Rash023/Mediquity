@@ -17,7 +17,7 @@ export const ScanPredictionData = [
   },
   {
     label: "Tuberculosis Detection",
-    src: Osteoporosis,
+    src: "https://res.cloudinary.com/ekincare/image/upload/t_blog-large-img/v1684752816/Blogs%2C%20Webinars/NYT-BeMoreProductive-ToDoList-01-jumbo-v3.gif",
     route: "/detection/tuberculosis",
   },
   {
@@ -27,7 +27,7 @@ export const ScanPredictionData = [
   },
   {
     label: "Osteoporosis Detection",
-    src: "https://res.cloudinary.com/ekincare/image/upload/t_blog-large-img/v1684752816/Blogs%2C%20Webinars/NYT-BeMoreProductive-ToDoList-01-jumbo-v3.gif",
+    src: Osteoporosis,
     route: "/detection/osteoporosis-prediction",
   },
 ];
