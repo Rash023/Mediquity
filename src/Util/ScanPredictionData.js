@@ -1,3 +1,10 @@
+import Pnuemonia from "../Asset/Pneumonia-icon.jpg";
+import Brain from "../Asset/Brain-icon.png"
+import Diabetes from "../Asset/diabetes.jpg"
+import Tuberculosis from "../Asset/Tuberculosis.jpg"
+import Kidney from "../Asset/Kidney-Stone.jpg"
+
+
 import Osteoporosis from "../Asset/Osteoporosis.jpeg"
 export const ScanPredictionData = [
   {
@@ -7,7 +14,7 @@ export const ScanPredictionData = [
   },
   {
     label: "Diabetes Prediction",
-    src: "https://blog.dingtone.me/wp-content/uploads/2020/06/telemedicine-gif.gif",
+    src: Diabetes,
     route: "/detection/diabetes-prediction",
   },
   {
@@ -17,12 +24,12 @@ export const ScanPredictionData = [
   },
   {
     label: "Tuberculosis Detection",
-    src: "https://res.cloudinary.com/ekincare/image/upload/t_blog-large-img/v1684752816/Blogs%2C%20Webinars/NYT-BeMoreProductive-ToDoList-01-jumbo-v3.gif",
+    src: Tuberculosis,
     route: "/detection/tuberculosis",
   },
   {
     label: "Kidney Stone Detection",
-    src: "https://res.cloudinary.com/ekincare/image/upload/t_blog-large-img/v1684752816/Blogs%2C%20Webinars/NYT-BeMoreProductive-ToDoList-01-jumbo-v3.gif",
+    src: Kidney,
     route: "/detection/kidney-stone",
   },
   {
