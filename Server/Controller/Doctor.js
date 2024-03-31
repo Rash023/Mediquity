@@ -128,7 +128,7 @@ exports.getDoctorBySpecialisation = async (req, res) => {
 
 exports.getSlots = async (req, res) => {
   try {
-    const { id } = req.body;
+    const {id} = req.query;
     if (!id) {
       return res.status(500).json({
         success: false,
