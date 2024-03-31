@@ -110,7 +110,8 @@ exports.login = async (req, res) => {
 
 exports.getDoctorBySpecialisation = async(req, res) => {
   try {
-    const {specialization} = req.body;
+    const {specialization} = req.query;
+    console.log(specialization);
     const doctors = await Doctor.find({specialization: specialization});
     return res.status(200).json({
       success: true,

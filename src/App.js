@@ -26,6 +26,7 @@ import ViewDocument from "./Components/Common/ViewDocument.jsx";
 import OsteoporosisDetection from "./Components/Core/Disease/Osteoporosis.jsx";
 import TuberculosisDetection from "./Components/Core/Disease/Tuberculosis.jsx";
 import KidneyStoneDetection from "./Components/Core/Disease/KidneyStone.jsx";
+import GetDoctorBySpecialist from "./Components/Common/GetDoctorBySpecialist.jsx";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
         <Route path="/book-doctor" element={<BookDoctor />} />
         <Route path="/file-upload" element={<FileUpload />} />
         <Route path="/view-document" element={<ViewDocument />} />
+        <Route path="/get-doctor/:specialist" element={<GetDoctorBySpecialist />} />
       </Routes>
     </div>
   );

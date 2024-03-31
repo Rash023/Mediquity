@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const BookDoctor = () => {
   const [patientName, setPatientName] = useState("");
@@ -11,6 +12,8 @@ const BookDoctor = () => {
   const [specialist, setSpecialist] = useState("");
   const [slotTiming, setSlotTiming] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const navigate = useNavigate();
 
   const specialistOptions = [
     "Anesthesiology",
@@ -83,6 +86,7 @@ const BookDoctor = () => {
       console.error("Error:", error);
       toast.error("An error occurred", { autoClose: 2000 });
     }
+    navigate(`/get-doctor/${specialist}`);
   };
 
   return (
@@ -142,7 +146,7 @@ const BookDoctor = () => {
               </select>
             </div>
 
-            <div className="flex lg:flex-row flex-col w-full gap-x-2 lg:mt-[4%] mt-[10%]">
+            {/* <div className="flex lg:flex-row flex-col w-full gap-x-2 lg:mt-[4%] mt-[10%]">
               <div className="lg:w-[60%] w-full">
                 <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
                   Slot Timing
@@ -178,7 +182,7 @@ const BookDoctor = () => {
                 </div>
               </div>
             </div>
-
+ */}
 
 
             <div className="flex justify-center">
