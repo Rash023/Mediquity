@@ -12,10 +12,8 @@ exports.addSlots = async (req, res) => {
 
     const doctor = await Doctor.findById(id);
 
-    // Find all existing slots for the doctor
     const existingSlots = await Slots.find({ doctorId: doctor._id });
 
-    // Filter out the slots whose day and time match with the entries already present
     const newSlots = days
       .map((day) => ({
         doctorId: doctor._id,

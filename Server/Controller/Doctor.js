@@ -3,6 +3,8 @@ const Model = require("../Model/Doctor");
 const Slots = require("../Model/Slots");
 const jwt = require("jsonwebtoken");
 
+//controller for doctor Signup
+
 exports.docSignup = async (req, res) => {
   try {
     const {
@@ -43,7 +45,7 @@ exports.docSignup = async (req, res) => {
 
     const user = await Model.findOne({ email });
 
-    //adding all the slots to the slots schema
+    //adding slots in the slots schema
     for (const day of days) {
       const slot = new Slots({
         doctorId: user._id,
@@ -63,6 +65,7 @@ exports.docSignup = async (req, res) => {
       });
     }
 
+    //updating the doctor data with the slots object id
     const updatedDoctor = await Model.findByIdAndUpdate(
       id,
       { $push: { slots: { $each: foundSlots.map((slot) => slot._id) } } },
@@ -81,6 +84,8 @@ exports.docSignup = async (req, res) => {
     });
   }
 };
+
+//controller for doctor login
 
 exports.docLogin = async (req, res) => {
   try {
