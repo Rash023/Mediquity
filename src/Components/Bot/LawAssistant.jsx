@@ -6,6 +6,7 @@ import "./LawAssistant.css";
 import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
 import { TracingBeam } from "../UI/TracingBeam.tsx";
 import Starsvg from "../../Asset/BardStar.svg";
+import { useNavigate } from "react-router-dom";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -13,9 +14,7 @@ const md = new Markdown();
 
 const LawAssistant = () => {
   const [newMessage, setNewMessage] = useState("");
-
-  const [userAvatar, setUserAvatar] = useState("");
-  const [modelAvatar, setModelAvatar] = useState("");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef(null);
   const [history, setHistory] = useState([
@@ -33,16 +32,9 @@ const LawAssistant = () => {
 
 
   useEffect(() => {
-    fetchAvatar("user").then((avatarUrl) => setUserAvatar(avatarUrl));
-    fetchAvatar("model").then((avatarUrl) => setModelAvatar(avatarUrl));
+    const token = sessionStorage.getItem("token");
+    if (!token) navigate('/login');
   }, []);
-
-  async function fetchAvatar(role) {
-    const response = await fetch(
-      `https://source.unsplash.com/random/100x100/?${role}`
-    );
-    return response.url;
-  }
 
   async function getResponse(prompt) {
     setLoading(true);
@@ -149,7 +141,7 @@ const LawAssistant = () => {
           <div className=" w-7xl lg:w-[1000px]  flex flex-col gap-x-2  border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
             <div className="Pharmos-inner-div flex gap-x-2 mx-auto">
               <h1 className="text-4xl lg:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
-                Hello, User
+                Hello, {sessionStorage.getItem("user").split(" ")[0]}
               </h1>
               <img
                 src={Starsvg}
@@ -173,13 +165,13 @@ const LawAssistant = () => {
                   >
                     {message.role === "user" ? (
                       <img
-                        src={userAvatar}
+                        src={`https://api.dicebear.com/8.x/initials/svg?seed=${sessionStorage.getItem("user").replace(' ', '%20')}`}
                         alt="User Avatar"
                         className="w-7 h-7 lg:w-10 lg:h-10 mt-3 lg:mt-1 rounded-full"
                       />
                     ) : (
                       <img
-                        src={userAvatar}
+                        src="https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif"
                         alt="User Avatar"
                         className="w-7 h-7 lg:w-10 lg:h-10 mt-3 lg:mt-1 rounded-full"
                       />
