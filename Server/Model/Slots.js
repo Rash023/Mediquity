@@ -1,27 +1,23 @@
 const mongoose = require("mongoose");
 
 const SlotSchema = new mongoose.Schema({
-  name: {
+  doctorId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Doctor",
+    required: true,
+  },
+  day: {
     type: String,
     required: true,
   },
-  specialization: {
+  time: {
     type: String,
     required: true,
   },
-  slots: [
+  appointments: [
     {
-      timing: {
-        type: String,
-        required: true,
-        enum: ["9-10", "10-11", "4-5", "5-6", "6-7"], // Valid slot timings
-      },
-      bookings: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User", // Reference to the User model
-        },
-      ],
+      type: mongoose.Schema.ObjectId,
+      ref: "Appointment",
     },
   ],
 });

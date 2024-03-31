@@ -3,6 +3,7 @@ const { createMedication } = require("../Controller/Medication");
 const { CreateSlots, BookSlots } = require("../Controller/Slots");
 const { fileuploader, SearchFile, getFiles } = require("../Controller/Files");
 const { contactUsController } = require("../Controller/ContactUs");
+const { docSignup, docLogin } = require("../Controller/Doctor");
 
 const express = require("express");
 const router = express.Router();
@@ -16,5 +17,6 @@ router.post("/upload", fileuploader); //route to upload the file for the user
 router.post("/search", SearchFile); //route to search from the uploaded files
 router.get("/viewFiles", getFiles); //route to view all the files
 router.post("/contactUs", contactUsController); //route for the contact us page
-
+router.post("/doctorSignup", docSignup); //route for doctor signup
+router.post("/doctorLogin", docLogin);
 module.exports = router;
