@@ -8,19 +8,19 @@ export const ProvideCardData = [
   {
     title: "Jurix",
     description:
-      "Jurix is your trusted Health Law Advisor. We specialize in providing legal support and guidance for individuals navigating the complexities of healthcare law.",
+      "Jurix is your trusted Health Law Advisor. We specialize in providing legal support and guidance for individuals, and helping them navigating the complexities of healthcare law easily.",
     link: "law-assistant",
   },
   {
     title: "PhysioPal",
     description:
-      "Personal guide to rehabilitation and wellness. This intuitive chatbot utilizes advanced algorithms to provide tailored advice, exercises, and support for your physiotherapy journey",
+      "Personal guide to rehabilitation and wellness. This intuitive chatbot utilizes advanced algorithms to provide tailored advice, exercises, and support for your customized physiotherapy journey",
     link: "physiotherapy-assistant",
   },
   {
     title: "Pharmos",
     description:
-      "Your exclusive medication ally. We specialize in customized medication support, offering expert guidance on precise dosages, strategic timing, and nuanced advice for all age groups.",
+      "Your exclusive medication ally. We specialize in providing customized medication support, offering expert guidance on precise dosages, strategic timing, and advice for all age groups.",
     link: "medicine-assistant",
   },
   {
@@ -32,7 +32,7 @@ export const ProvideCardData = [
   {
     title: "SMS/Mail Service",
     description:
-      "Stay on track with your medication regimen effortlessly. Receive timely reminders and personalized notifications via text message or email, ensuring you never miss a dose. ",
-    link: "",
+      "Stay on track with your medication regimen. Receive notifications and personalized reminders via SMS or email. Never miss a single dose and maintain adherence for a better health outcome.",
+    link: "/ping",
   },
 ];
