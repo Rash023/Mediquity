@@ -107,23 +107,44 @@ exports.login = async (req, res) => {
   }
 };
 
-
-exports.getDoctorBySpecialisation = async(req, res) => {
+exports.getDoctorBySpecialisation = async (req, res) => {
   try {
-    const {specialization} = req.query;
+    const { specialization } = req.query;
     console.log(specialization);
-    const doctors = await Doctor.find({specialization: specialization});
+    const doctors = await Doctor.find({ specialization: specialization });
     return res.status(200).json({
       success: true,
       doctors: doctors,
-      message: "Successfully fetched Doctor By Specialization"
-    })
-  }
-  catch(err) {
+      message: "Successfully fetched Doctor By Specialization",
+    });
+  } catch (err) {
     console.error(err);
     return res.status(500).json({
       successs: false,
-      message: "Error Getting Doctor By Specialization"
-    })
+      message: "Error Getting Doctor By Specialization",
+    });
   }
-}
+};
+
+exports.getSlots = async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (!id) {
+      return res.status(500).json({
+        success: false,
+        message: "Please provide Doctor ID",
+      });
+    }
+    const slots = await Doctor.findById({ _id: id }).populate("slots").exec();
+    return res.status(200).json({
+      success: true,
+      slots: slots,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      successs: false,
+      message: "Error Getting Doctor By Specialization",
+    });
+  }
+};
