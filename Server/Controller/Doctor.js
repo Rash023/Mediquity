@@ -152,7 +152,7 @@ exports.getSlots = async (req, res) => {
     ///id for the doctor registration
     const { id } = req.query;
     if (!id) {
-      return res.status(500).json({
+      return res.status(200).json({
         success: false,
         message: "Please provide Doctor ID",
       });

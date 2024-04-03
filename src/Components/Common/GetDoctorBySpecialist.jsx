@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Doctor from "../../Asset/Doctor.png"
 
 
 const GetDoctorBySpecialist = () => {
     const { specialist } = useParams();
-
+    const navigate = useNavigate();
     const [Doctors, setdoctors] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const GetDoctorBySpecialist = () => {
                 console.log(response);
                 setdoctors(response);
             } catch (error) {
-                console.error("Error fetching documents:", error);
+                console.error("Error fetching doctors:", error);
             }
         };
         fetchDoctors();
@@ -41,7 +41,9 @@ const GetDoctorBySpecialist = () => {
                                 <div className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl mt-4 lg:text-2xl uppercase select-none tracking-[1px] text-center">{`Dr. ${doctor.name}`}</div>
                                 <div className='flex justify-center'>
                                     <button
-                                        className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]">
+                                        className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]"
+                                        onClick={()=>navigate(`/view-slots/${doctor._id}`)}
+                                        >
                                     Book
                                     </button>
                                 </div>

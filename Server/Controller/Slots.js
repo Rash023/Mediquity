@@ -7,7 +7,7 @@ exports.addSlots = async (req, res) => {
   try {
     const { days, time } = req.body;
     const token =
-      req.body.token || req.header("Authorization").replace("bearer ", "");
+      req.body.token || req.header("Authorization").replace("Bearer ", "");
     console.log(token);
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const id = decodedToken.id;

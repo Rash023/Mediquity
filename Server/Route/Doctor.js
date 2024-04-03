@@ -10,5 +10,6 @@ router.post("/addSlots", addSlots);
 router.get("/getDoctorBySpecialisation", getDoctorBySpecialisation);
 router.get("/getDoctorSlots", getSlots);
 
+
 module.exports = router;
 
