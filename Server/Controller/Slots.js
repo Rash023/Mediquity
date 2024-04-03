@@ -59,10 +59,15 @@ exports.getSlots = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const id = decodedToken.id;
 
-    const data = await Slots.find({ doctorId: id });
+    const response = await Slots.find({ doctorId: id });
+
+    const responseFilter = response.filter(
+      (slot) => slot.appointments.length < 4
+    );
+
     return res.status(200).json({
       success: true,
-      data: data,
+      data: responseFilter,
       message: "Data found Sucessfully",
     });
   } catch (error) {
