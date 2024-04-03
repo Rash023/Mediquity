@@ -21,13 +21,13 @@ export const services = [
     title: "Video Conference",
     description:
       "Connect with our qualified medical professionals through personalized video consultations. Receive expert advice, discuss treatment options, and address health concerns at the comfort of your home. Experience convenient and easily accessible healthcare.",
-    link: "https://meta.com/",
+    link: "/video-call",
   },
   {
     title: "Book Doctors",
     description:
       "Easily schedule appointments with our specialized physicians across various disciplines. From primary care to specialized treatments, find the right healthcare provider for your unique needs. Access quality care when and where you need it.",
-    link: "https://amazon.com/",
+    link: "/book-doctor",
   },
   {
     title: "SMS/Mail Service",

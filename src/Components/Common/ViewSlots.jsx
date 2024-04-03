@@ -22,39 +22,29 @@ const ViewSlots = () => {
     }, [docId]);
 
     return (
-        <div className='min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] '>
-            <div className='flex flex-col pt-11 w-[70%] '>
-
-
-
-                <div className=' '>
-                    <div className='flex  gap-y-5 mt-5'>
-                        {/* <h1 className='select-none text-2xl lg:text-5xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 ml-7 font-sans font-bold uppercase tracking-[1px]'>Doctor Details</h1> */}
-                        <div>
-                            <img src={Doctor} className='rounded-full ml-14 h-[400px] w-[400px]' />
-                        </div>
-                        <div className='flex items-center pl-8'>
-                            <div className='flex flex-col'>
+        <div className='min-h-[100vh] min-w-fit dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] '>
+            <div className='flex flex-col w-[100%]'>
+                <div className='flex lg:flex-row flex-col gap-y-10 mt-[8%] w-full lg:justify-center lg:gap-x-44 items-center'>
+                    <div>
+                        <img src={Doctor} className='rounded-full h-[400px] lg:w-[400px] w-[350px]' alt='Doctor' />
+                    </div>
+            
+                    <div className='lg:w-[2px] w-[80%] lg:h-[400px] h-[5px] bg-white rounded-md'/>
+                    <div className='flex items-center'>
+                        <div className='flex flex-col gap-y-5 lg:justify-center items-center'>
+                            
+                            <div className='flex lg:flex-row flex-col gap-x-5 lg:items-baseline gap-y-3'>
+                                <div className='text-white text-5xl uppercase first-letter:text-6xl'>Name <span className='lg:inline-block hidden'>-</span> </div>
                                 <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl font-bold uppercase select-none tracking-[1px] text-center'>Dr. {slotDetails?.data?.slots?.name}</div>
-                                <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl font-bold uppercase select-none tracking-[1px] text-center mb-6'>{slotDetails?.data?.slots?.specialization}</div>
                             </div>
+
+                            <div className='flex lg:flex-row flex-col gap-x-5 lg:items-baseline gap-y-3'>
+                                <div className='text-white text-5xl uppercase first-letter:text-6xl'>Specialization <span className='lg:inline-block hidden'>-</span> </div>
+                                <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl font-bold uppercase select-none tracking-[1px] text-center'>{slotDetails?.data?.slots?.specialization}</div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-
-
-                {/* <div className='w-1 h-32 bg-white '></div> */}
-
-                <div>
-                    <h1 className='select-none text-2xl lg:text-5xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  font-sans font-bold uppercase tracking-[1px]'>slot Details</h1>
-                    {
-                        slotDetails?.data?.slots?.slots.map((slot, index) => (
-                            <div key={index}>
-                                <div className='text-white'>{slot.day}</div>
-                                <div className='text-white'>{slot.time}</div>
-                            </div>
-                        ))
-                    }
                 </div>
             </div>
         </div>

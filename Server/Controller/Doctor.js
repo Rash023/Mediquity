@@ -128,8 +128,8 @@ exports.getDoctorBySpecialisation = async (req, res) => {
 
 exports.getSlots = async (req, res) => {
   try {
-    const {id} = req.query;
-    if (!id) {
+    const { id } = req.query;
+    if  (!id) {
       return res.status(200).json({
         success: false,
         message: "Please provide Doctor ID",
