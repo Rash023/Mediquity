@@ -14,7 +14,7 @@ export const ProvideCardData = [
   {
     title: "PhysioPal",
     description:
-      "Personal guide to rehabilitation and wellness. This intuitive chatbot utilizes advanced algorithms to provide tailored advice, exercises, and support for your physiotherapy journey",
+      "Personal guide to rehabilitation and wellness. This intuitive chatbot utilizes advanced algorithms to provide tailored advice, exercises, and support for your physiotherapy journey.",
     link: "physiotherapy-assistant",
   },
   {
@@ -26,7 +26,7 @@ export const ProvideCardData = [
   {
     title: "Vinicius",
     description:
-      "Your companion on the path to mental well-being. Think of me as the therapist in your pocket, minus the couch and awkward silences",
+      "Your companion on the path to mental well-being. Think of me as the therapist in your pocket, minus the couch and awkward silences.",
     link: "disease-analysis",
   },
   {
