@@ -41,6 +41,10 @@ const DoctorSchema = new mongoose.Schema({
       "Rheumatology",
     ],
   },
+  image: {
+    type: String,
+    required: true,
+  },
   slots: [
     {
       type: mongoose.Schema.ObjectId,

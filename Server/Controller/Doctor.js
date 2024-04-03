@@ -1,12 +1,25 @@
 const bcrypt = require("bcrypt");
 const Doctor = require("../Model/Doctor");
+const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
 
-//controller for doctor Signup
+//function to upload files to cloudinary
+async function uploadFiletoCloudinary(file, folder, quality) {
+  const options = { folder };
+  options.resource_type = "auto";
 
+  if (quality) {
+    options.quality = quality;
+  }
+
+  return await cloudinary.uploader.upload(file.tempFilePath, options);
+}
+
+//controller for doctor Signup
 exports.signup = async (req, res) => {
   try {
     const { name, email, password, specialization } = req.body;
+    const image = req.files.file;
 
     const existingUser = await Doctor.findOne({ email });
 
@@ -27,11 +40,14 @@ exports.signup = async (req, res) => {
       });
     }
 
+    const uploadDetails = await uploadFiletoCloudinary(image, "uploads");
+    const imageUrl = uploadDetails.secure_url;
     await Doctor.create({
       name,
       email,
       password: hashPassword,
       specialization,
+      image: imageUrl,
     });
 
     return res.status(200).json({
@@ -46,6 +62,8 @@ exports.signup = async (req, res) => {
     });
   }
 };
+
+//login for doctor
 
 exports.login = async (req, res) => {
   try {
@@ -107,6 +125,8 @@ exports.login = async (req, res) => {
   }
 };
 
+//handler to fetch all doctors with specialization
+
 exports.getDoctorBySpecialisation = async (req, res) => {
   try {
     const { specialization } = req.query;
@@ -126,9 +146,11 @@ exports.getDoctorBySpecialisation = async (req, res) => {
   }
 };
 
+//handler to get the booking slots the doctor
 exports.getSlots = async (req, res) => {
   try {
-    const {id} = req.query;
+    ///id for the doctor registration
+    const { id } = req.query;
     if (!id) {
       return res.status(500).json({
         success: false,
@@ -144,7 +166,7 @@ exports.getSlots = async (req, res) => {
     console.error(err);
     return res.status(500).json({
       successs: false,
-      message: "Error Getting Doctor By Specialization",
+      message: "Error Getting Slots for the doctor",
     });
   }
 };

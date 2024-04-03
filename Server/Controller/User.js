@@ -2,10 +2,11 @@ const bcrypt = require("bcrypt");
 const User = require("../Model/User");
 const jwt = require("jsonwebtoken");
 
+//handler for user Registration
 exports.Signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    
+
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -15,7 +16,6 @@ exports.Signup = async (req, res) => {
       });
     }
 
-    
     let hashPassword;
     try {
       hashPassword = await bcrypt.hash(password, 10);
@@ -26,7 +26,6 @@ exports.Signup = async (req, res) => {
       });
     }
 
-    
     await User.create({
       name,
       email,
@@ -46,6 +45,8 @@ exports.Signup = async (req, res) => {
     });
   }
 };
+
+//handler for user login
 
 exports.login = async (req, res) => {
   try {
@@ -73,7 +74,6 @@ exports.login = async (req, res) => {
     };
 
     if (await bcrypt.compare(password, user.password)) {
-      
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "24h",
       });
@@ -95,7 +95,6 @@ exports.login = async (req, res) => {
         message: "User logged in successfully",
       });
     } else {
-      
       return res.status(403).json({
         success: false,
         message: "Incorrect password",

@@ -32,6 +32,12 @@ exports.createAppointment = async (req, res) => {
         message: "Invalid Slot",
       });
     }
+    if (slot.appointment.length >= 4) {
+      return res.status(401).json({
+        success: false,
+        message: "All slots are full",
+      });
+    }
 
     const newAppointment = new Model({
       doctorId,
