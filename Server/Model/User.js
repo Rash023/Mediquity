@@ -26,6 +26,13 @@ const UserSchema = new mongoose.Schema({
       ref: "File",
     },
   ],
+  appointments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Appointment",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", UserSchema);
