@@ -28,7 +28,7 @@ exports.createAppointment = async (req, res) => {
 
     const { doctorId, day, slotId } = req.body;
     const str = generateRandomString(5);
-    const link = `http://localhost:3000/video-call?roomID=uzYwOhttp://localhost:3000/video-call?roomID=${str}`;
+    const link = `http://localhost:3000/video-call?roomID=${str}`;
     if (!link) {
       return res.status(401).json({
         success: false,

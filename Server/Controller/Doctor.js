@@ -147,22 +147,35 @@ exports.getDoctorBySpecialisation = async (req, res) => {
     });
   }
 };
+function getHoursBetween(startTime, endTime) {
+  // Parse start time
+  const [startHour, startMinute] = startTime.split(":").map(Number);
+  const startTotalMinutes = startHour * 60 + startMinute;
+
+  // Parse end time
+  const [endHour, endMinute] = endTime.split(":").map(Number);
+  const endTotalMinutes = endHour * 60 + endMinute;
+
+  // Calculate the difference
+  const hourDifference = Math.abs((endTotalMinutes - startTotalMinutes) / 60);
+
+  return hourDifference;
+}
 
 //handler to get the booking slots the doctor
 exports.getDoctorSlots = async (req, res) => {
   try {
-    const token = req.body.token;
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const id = decodedToken.id;
+    const { id } = req.query;
 
     const response = await Slot.find({ doctorId: id });
 
     const responseFilter = response.map((slot) => {
-      const [startTime, endTime] = slot.time
-        .split("-")
-        .map((time) => new Date(`01/01/2000 ${time}`).getTime()); // Convert slot time to milliseconds
-      const hourDiff = (endTime - startTime) / (1000 * 60 * 60); // Calculate hour difference
+      const newSlotTime = slot.time.slice(0, -3);
+      const [startTime, endTime] = newSlotTime.split("-");
+      hourDiff = getHoursBetween(startTime, endTime);
       const slotSize = hourDiff / 0.5; // Divide by 0.5
+      console.log(hourDiff);
+      console.log(slotSize);
       const isFull = slot.appointments.length >= slotSize;
 
       return {
