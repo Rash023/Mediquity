@@ -121,7 +121,8 @@ exports.userDetail = async(req, res) => {
     const token = authHeader.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.id;
-    const userDetail = await User.findById({_id: userId});
+    const userDetail = await User.findById(userId).select('name email');
+
     if(!userDetail) {
       return res.status(403).json({
         success: false,
