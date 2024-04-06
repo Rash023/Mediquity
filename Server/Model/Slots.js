@@ -8,15 +8,6 @@ const SlotSchema = new mongoose.Schema({
   },
   day: {
     type: String,
-    enum: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
     required: true,
   },
   time: {

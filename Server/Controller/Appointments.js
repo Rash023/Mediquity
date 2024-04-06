@@ -21,12 +21,18 @@ console.log(randomString);
 
 exports.createAppointment = async (req, res) => {
   try {
-    const token =
-      req.body.token || req.header("Authorization").replace("Bearer", "");
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Bearer token not found in Authorization header",
+      });
+    }
+    const token = authHeader.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const patientId = decodedToken.id;
 
-    const { doctorId, day, slotId } = req.body;
+    const { doctorId, slotId } = req.body;
     const str = generateRandomString(5);
     const link = `http://localhost:3000/video-call?roomID=${str}`;
     if (!link) {
@@ -38,7 +44,7 @@ exports.createAppointment = async (req, res) => {
 
     const slot = await Slot.findById(slotId);
     const time = slot.time;
-
+    const day = slot.day;
     if (!slot) {
       return res.status(401).json({
         success: false,

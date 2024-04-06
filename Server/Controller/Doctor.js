@@ -2,10 +2,8 @@ const bcrypt = require("bcrypt");
 const Doctor = require("../Model/Doctor");
 const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
-const moment = require("moment");
 const Slot = require("../Model/Slots");
 
-//function to upload files to cloudinary
 async function uploadFiletoCloudinary(file, folder, quality) {
   const options = { folder };
   options.resource_type = "auto";
@@ -17,7 +15,6 @@ async function uploadFiletoCloudinary(file, folder, quality) {
   return await cloudinary.uploader.upload(file.tempFilePath, options);
 }
 
-//controller for doctor Signup
 exports.signup = async (req, res) => {
   try {
     const { name, email, password, specialization } = req.body;
@@ -64,8 +61,6 @@ exports.signup = async (req, res) => {
     });
   }
 };
-
-//login for doctor
 
 exports.login = async (req, res) => {
   try {
@@ -127,8 +122,6 @@ exports.login = async (req, res) => {
   }
 };
 
-//handler to fetch all doctors with specialization
-
 exports.getDoctorBySpecialisation = async (req, res) => {
   try {
     const { specialization } = req.query;
@@ -148,34 +141,30 @@ exports.getDoctorBySpecialisation = async (req, res) => {
   }
 };
 function getHoursBetween(startTime, endTime) {
-  // Parse start time
   const [startHour, startMinute] = startTime.split(":").map(Number);
   const startTotalMinutes = startHour * 60 + startMinute;
 
-  // Parse end time
   const [endHour, endMinute] = endTime.split(":").map(Number);
   const endTotalMinutes = endHour * 60 + endMinute;
 
-  // Calculate the difference
   const hourDifference = Math.abs((endTotalMinutes - startTotalMinutes) / 60);
 
   return hourDifference;
 }
 
-//handler to get the booking slots the doctor
 exports.getDoctorSlots = async (req, res) => {
   try {
     const { id } = req.query;
 
-    const response = await Slot.find({ doctorId: id });
+    const response = await Slot.find({ doctorId: id })
+      .populate({ path: "doctorId", select: "name specialization" })
+      .exec();
 
     const responseFilter = response.map((slot) => {
       const newSlotTime = slot.time.slice(0, -3);
       const [startTime, endTime] = newSlotTime.split("-");
-      hourDiff = getHoursBetween(startTime, endTime);
-      const slotSize = hourDiff / 0.5; // Divide by 0.5
-      console.log(hourDiff);
-      console.log(slotSize);
+      const hourDiff = getHoursBetween(startTime, endTime);
+      const slotSize = hourDiff / 0.5;
       const isFull = slot.appointments.length >= slotSize;
 
       return {
