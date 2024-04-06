@@ -106,7 +106,7 @@ exports.getAppointments = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const id = decodedToken.id;
     const appointments = await Appointment.find({ patientId: id }).populate({
-      path: "patientId",
+      path: "doctorId",
       select: "name email",
     });
     return res.status(200).json({
