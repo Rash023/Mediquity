@@ -31,7 +31,7 @@ const ViewSlots = () => {
     };
     const handleConfirmBooking = async() => {
         try {
-            const response = await axios.post(`http://localhost:4000/api/v1/bookAppointment/`,{
+            const response = await axios.post(`http://localhost:4000/api/v1/user/bookAppointment/`,{
                 doctorId: docId,
                 slotId: selectedSlot._id
             }, {

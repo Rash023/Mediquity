@@ -17,7 +17,7 @@ const ViewDocument = () => {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/v1/viewFiles", {
+                const response = await axios.get("http://localhost:4000/api/v1/user/viewFiles", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -46,7 +46,7 @@ const ViewDocument = () => {
         e.preventDefault();
         try {
 
-            const response = await axios.post("http://localhost:4000/api/v1/search", {
+            const response = await axios.post("http://localhost:4000/api/v1/user/search", {
                 searchQuery: searchTerm,
             }, {
                 headers: {
