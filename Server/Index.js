@@ -27,7 +27,6 @@ app.use(
 );
 
 cloudinaryConnect();
-
 app.use("/api/v1/predict", predictionRoute);
 app.listen(PORT, () => {
   console.log(`App is listening at ${PORT}`);
@@ -35,5 +34,5 @@ app.listen(PORT, () => {
 
 
 
-app.use("/api/v1", userRoute);
+app.use("/api/v1/user", userRoute);
 app.use("/api/v1/doctor",doctorRoute);
