@@ -1,4 +1,4 @@
-const { Signup, login } = require("../Controller/User");
+const { Signup, login, userDetail } = require("../Controller/User");
 const { createMedication } = require("../Controller/Medication");
 const { fileuploader, SearchFile, getFiles } = require("../Controller/Files");
 const { contactUsController } = require("../Controller/ContactUs");
@@ -11,7 +11,7 @@ const {
 const express = require("express");
 const router = express.Router();
 
-router.get("/",userDetails);
+router.get("/",userDetail);
 router.post("/login", login); 
 router.post("/signup", Signup); 
 router.post("/medication", createMedication); 
