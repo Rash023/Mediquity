@@ -1,10 +1,23 @@
 const Model = require("../Model/Appointments");
 const jwt = require("jsonwebtoken");
 const Slot = require("../Model/Slots");
+const User = require("../Model/User");
 
 require("dotenv").config();
 
 //handler to create appointments
+function generateRandomString(length) {
+  let result = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+const randomString = generateRandomString(4);
+console.log(randomString);
 
 exports.createAppointment = async (req, res) => {
   try {
@@ -12,7 +25,8 @@ exports.createAppointment = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const patientId = decodedToken.id;
 
-    const { doctorId, day, time, link } = req.body;
+    const { doctorId, day, time } = req.body;
+    const link = generateRandomString(4);
 
     if (!link) {
       return res.status(401).json({
@@ -32,12 +46,6 @@ exports.createAppointment = async (req, res) => {
         message: "Invalid Slot",
       });
     }
-    if (slot.appointment.length >= 4) {
-      return res.status(401).json({
-        success: false,
-        message: "All slots are full",
-      });
-    }
 
     const newAppointment = new Model({
       doctorId,
@@ -48,7 +56,7 @@ exports.createAppointment = async (req, res) => {
     });
 
     await newAppointment.save();
-    console.log("here");
+
     const appointment = await Model.findOne({
       doctorId,
       patientId,
@@ -58,8 +66,12 @@ exports.createAppointment = async (req, res) => {
     });
 
     const slotdata = await Slot.findOne({ doctorId, day, time });
+    const user = await User.findById(patientId);
+
+    user.appointments.push(appointment._id);
 
     slotdata.appointments.push(appointment._id);
+
     await slotdata.save();
 
     return res.status(200).json({

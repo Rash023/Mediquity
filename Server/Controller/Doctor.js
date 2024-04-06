@@ -3,10 +3,24 @@ const Doctor = require("../Model/Doctor");
 const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
 
+<<<<<<< Updated upstream
 //function to upload files to cloudinary
 async function uploadFiletoCloudinary(file, folder, quality) {
   const options = { folder };
   options.resource_type = "auto";
+=======
+//controller for doctor Signup
+
+exports.docSignup = async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      password,
+      specialization,
+      slots: { days, time },
+    } = req.body;
+>>>>>>> Stashed changes
 
   if (quality) {
     options.quality = quality;
@@ -50,6 +64,38 @@ exports.signup = async (req, res) => {
       image: imageUrl,
     });
 
+<<<<<<< Updated upstream
+=======
+    const user = await Model.findOne({ email });
+
+    //adding slots in the slots schema
+    for (const day of days) {
+      const slot = new Slots({
+        doctorId: user._id,
+        day,
+        time,
+      });
+      const savedSlot = await slot.save();
+    }
+    const id = user._id;
+
+    const foundSlots = await Slots.find({ doctorId: id });
+
+    if (!foundSlots || foundSlots.length == 0) {
+      return res.status(200).json({
+        success: true,
+        message: "Doctor created successfully",
+      });
+    }
+
+    //updating the doctor data with the slots object id
+    const updatedDoctor = await Model.findByIdAndUpdate(
+      id,
+      { $push: { slots: { $each: foundSlots.map((slot) => slot._id) } } },
+      { new: true }
+    );
+
+>>>>>>> Stashed changes
     return res.status(200).json({
       success: true,
       message: "Doctor created Succesfully",
@@ -63,9 +109,15 @@ exports.signup = async (req, res) => {
   }
 };
 
+<<<<<<< Updated upstream
 //login for doctor
 
 exports.login = async (req, res) => {
+=======
+//controller for doctor login
+
+exports.docLogin = async (req, res) => {
+>>>>>>> Stashed changes
   try {
     const { email, password } = req.body;
 
