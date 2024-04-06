@@ -27,8 +27,8 @@ exports.createAppointment = async (req, res) => {
     const patientId = decodedToken.id;
 
     const { doctorId, day, slotId } = req.body;
-    const link = generateRandomString(4);
-
+    const str = generateRandomString(5);
+    const link = `http://localhost:3000/video-call?roomID=uzYwOhttp://localhost:3000/video-call?roomID=${str}`;
     if (!link) {
       return res.status(401).json({
         success: false,
@@ -72,6 +72,7 @@ exports.createAppointment = async (req, res) => {
     slotdata.appointments.push(appointment._id);
 
     await slotdata.save();
+    await user.save();
 
     return res.status(200).json({
       success: true,
