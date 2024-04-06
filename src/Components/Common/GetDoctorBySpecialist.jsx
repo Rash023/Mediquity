@@ -35,7 +35,7 @@ const GetDoctorBySpecialist = () => {
                         <div className='w-fit h-fit border border-white rounded-[30px] bg-black p-10 mt-3 mb-6'>
                             <div>
                                 <div>
-                                    <img src={Doctor} className='rounded-lg' />
+                                    <img src={Doctor} className='rounded-lg' alt=''/>
                                 </div>
 
                                 <div className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl mt-4 lg:text-2xl uppercase select-none tracking-[1px] text-center">{`Dr. ${doctor.name}`}</div>
