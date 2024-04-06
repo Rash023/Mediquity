@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const Doctor = require("../Model/Doctor");
 const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
+const moment = require("moment");
+const Slot = require("../Model/Slots");
 
 //function to upload files to cloudinary
 async function uploadFiletoCloudinary(file, folder, quality) {
@@ -147,25 +149,38 @@ exports.getDoctorBySpecialisation = async (req, res) => {
 };
 
 //handler to get the booking slots the doctor
-exports.getSlots = async (req, res) => {
+exports.getDoctorSlots = async (req, res) => {
   try {
-    const {id} = req.query;
-    if (!id) {
-      return res.status(200).json({
-        success: false,
-        message: "Please provide Doctor ID",
-      });
-    }
-    const slots = await Doctor.findById({ _id: id }).populate("slots").exec();
+    const token = req.body.token;
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const id = decodedToken.id;
+
+    const response = await Slot.find({ doctorId: id });
+
+    const responseFilter = response.map((slot) => {
+      const [startTime, endTime] = slot.time
+        .split("-")
+        .map((time) => new Date(`01/01/2000 ${time}`).getTime()); // Convert slot time to milliseconds
+      const hourDiff = (endTime - startTime) / (1000 * 60 * 60); // Calculate hour difference
+      const slotSize = hourDiff / 0.5; // Divide by 0.5
+      const isFull = slot.appointments.length >= slotSize;
+
+      return {
+        ...slot.toObject(),
+        isFull: isFull,
+      };
+    });
+
     return res.status(200).json({
       success: true,
-      slots: slots,
+      data: responseFilter,
+      message: "Data found successfully",
     });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({
-      successs: false,
-      message: "Error Getting Slots for the doctor",
+      success: false,
+      message: "Internal Server Error",
     });
   }
 };

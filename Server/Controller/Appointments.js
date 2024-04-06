@@ -21,11 +21,12 @@ console.log(randomString);
 
 exports.createAppointment = async (req, res) => {
   try {
-    const token = req.body.token;
+    const token =
+      req.body.token || req.header("Authorization").replace("Bearer", "");
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const patientId = decodedToken.id;
 
-    const { doctorId, day, time } = req.body;
+    const { doctorId, day, slotId } = req.body;
     const link = generateRandomString(4);
 
     if (!link) {
@@ -35,11 +36,9 @@ exports.createAppointment = async (req, res) => {
       });
     }
 
-    const slot = await Slot.findOne({
-      doctorId: doctorId,
-      day: day,
-      time: time,
-    });
+    const slot = await Slot.findById(slotId);
+    const time = slot.time;
+
     if (!slot) {
       return res.status(401).json({
         success: false,
@@ -65,7 +64,7 @@ exports.createAppointment = async (req, res) => {
       link,
     });
 
-    const slotdata = await Slot.findOne({ doctorId, day, time });
+    const slotdata = await Slot.findById(slotId);
     const user = await User.findById(patientId);
 
     user.appointments.push(appointment._id);
