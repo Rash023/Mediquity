@@ -28,6 +28,7 @@ import TuberculosisDetection from "./Components/Core/Disease/Tuberculosis.jsx";
 import KidneyStoneDetection from "./Components/Core/Disease/KidneyStone.jsx";
 import GetDoctorBySpecialist from "./Components/Common/GetDoctorBySpecialist.jsx";
 import ViewSlots from "./Components/Common/ViewSlots.jsx";
+import AllAppointments from "./Components/Common/AllAppointments.jsx";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
         <Route path="/view-document" element={<ViewDocument />} />
         <Route path="/get-doctor/:specialist" element={<GetDoctorBySpecialist />} />
         <Route path="/view-slots/:docId" element={<ViewSlots />} />
+        <Route path="/getallappointments" element={<AllAppointments />} />
       </Routes>
     </div>
   );

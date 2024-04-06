@@ -143,7 +143,7 @@ const BookDoctor = () => {
                 ))}
               </select>
             </div>
-{/* 
+            {/* 
     <div className="flex lg:flex-row flex-col w-full gap-x-2 lg:mt-[4%] mt-[10%]">
               <div className="lg:w-[60%] w-full">
                 <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
