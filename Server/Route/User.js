@@ -11,6 +11,7 @@ const {
 const express = require("express");
 const router = express.Router();
 
+router.get("/",userDetails);
 router.post("/login", login); 
 router.post("/signup", Signup); 
 router.post("/medication", createMedication); 
