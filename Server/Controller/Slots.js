@@ -61,14 +61,15 @@ exports.getSlots = async (req, res) => {
 
     const response = await Slots.find({ doctorId: id });
 
-    const responseFilter = response.filter(
-      (slot) => slot.appointments.length < 4
-    );
+    const responseFilter = response.map((slot) => ({
+      ...slot.toObject(),
+      isFull: slot.appointments.length >= 4,
+    }));
 
     return res.status(200).json({
       success: true,
       data: responseFilter,
-      message: "Data found Sucessfully",
+      message: "Data found successfully",
     });
   } catch (error) {
     console.error(error);
