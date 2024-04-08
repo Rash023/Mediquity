@@ -6,7 +6,7 @@ const { getSlots } = require("../Controller/Slots");
 const {
   createAppointment,
   getAppointments,
-  cancelAppointment,
+  // cancelAppointment,
 } = require("../Controller/Appointments");
 
 const express = require("express");
@@ -22,6 +22,6 @@ router.get("/viewFiles", getFiles);
 router.post("/contactUs", contactUsController);
 router.post("/bookAppointment", createAppointment);
 router.get("/getAppointments", getAppointments);
-router.get("/cancelAppointment", cancelAppointment);
+// router.get("/cancelAppointment", cancelAppointment);
 router.get("/getSlots", getSlots);
 module.exports = router;

@@ -120,8 +120,6 @@ exports.getAppointments = async (req, res) => {
   }
 };
 
-?
-
 // exports.cancelAppointment = async (req, res) => {
 //   try {
 //     //appointment id
