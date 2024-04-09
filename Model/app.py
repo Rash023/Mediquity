@@ -14,14 +14,14 @@ app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
 
 # MODEL
-pneumonia_model = load_model('D:\Minor\Model\PNEUMONIA\Model\Pneumonia.h5')
-osteoporosis_model = load_model(r'D:\Minor\Model\OSTEOPOROSIS\Model\Osteoporosis.h5')
-kidney_stone_model = load_model(r'D:\Minor\Model\KIDNEY STONE\Model\Kidney_Stone.h5')
-tuberculosis_model = load_model(r'D:\Minor\Model\TUBERCULOSIS\Model\Tuberculosis.h5')
-brain_tumor_model = load_model('D:\Minor\Model\BRAIN TUMOR\Model\model.h5')
+pneumonia_model = load_model('./PNEUMONIA/Model/Pneumonia.h5')
+osteoporosis_model = load_model(r'./OSTEOPOROSIS/Model/Osteoporosis.h5')
+kidney_stone_model = load_model(r'./KIDNEY STONE/Model/Kidney_Stone.h5')
+tuberculosis_model = load_model(r'./TUBERCULOSIS/Model/Tuberculosis.h5')
+brain_tumor_model = load_model('./BRAIN TUMOR/Model/model.h5')
 image_gen = ImageDataGenerator(
     preprocessing_function=tf.keras.applications.mobilenet_v2.preprocess_input)
-with open('D:\ML\DISEASE PREDICTION\DIABETES\Model\diabetesPredictionModel.pkl', 'rb') as file:
+with open('./DIABETES/Model/diabetesPredictionModel.pkl', 'rb') as file:
     diabetes_model = pkl.load(file)
 
 # PREPROCESSING
