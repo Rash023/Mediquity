@@ -14,16 +14,12 @@
 
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## INTRODUCTION
-
+<br>
 
 
 
 <p>Introducing Mediquity, a pinnacle of healthcare innovation, where cutting-edge AI meets compassionate care. Our platform is a symphony of precision and efficacy, harnessing the boundless potential of artificial intelligence to revolutionize wellness. Mediquity empowers users with personalized insights and proactive guidance, fostering healthy lifestyles and preventing illness. With unparalleled efficiency, we streamline healthcare delivery, optimizing outcomes and resource utilization. Join us on this transformative journey towards a future where health and well-being know no bounds. Welcome to Mediquity, where every interaction is a step towards a brighter, healthier tomorrow.</p>
 
-
-# HEALTHBOT SERVICES
 
 ## FEATURES
 
@@ -90,8 +86,6 @@
 
 ## TECHNOLOGY STACK
 
-Mediquity is built using the following technologies:
-
 ### FRONTEND
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -104,9 +98,6 @@ Mediquity is built using the following technologies:
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) <img src="https://img.shields.io/badge/Cloudinary-white?style=for-the-badge&logo=Microsoft%20OneDrive&logoColor=0078D4">
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 
-## FEEDBACK
-
-Feel free to send us feedback on [file an issue](https://github.com/Rash023/Minor). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
 
 ## BUILD PROCESS
 
@@ -122,21 +113,7 @@ Feel free to send us feedback on [file an issue](https://github.com/Rash023/Mino
   - `npm run start` to start node dependencies
   - `python app.py` to start the node dependencies
 
-## DEVELOPERS [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)]
 
-<a href="mailto:21051026@kiit.ac.in" target="_blank">
-<img src="src/Asset/Abhrajit.png" width="100" height="100" style="border-radius: 50%;"></a>
-<a href="mailto:21052761@kiit.ac.in" target="_blank">
-<img src="src/Asset/hindol.jpg" width="100" height="100"  style="border-radius: 50%;"></a>
-<a href="mailto:21052746@kiit.ac.in" target="_blank">
-<img src="src/Asset/ayan.jpg" width= "100" height="100" style="border-radius: 50%;"></a>
-<a href="mailto:21052780@kiit.ac.in" target="_blank">
- <img src="src/Asset/Rashid.jpg" width="100" height="100" style="border-radius: 50%;"></a>
-<a href="mailto:21052741@kiit.ac.in" target="_blank">
-  <img src="src/Asset/Aritra.jpg" width="100" height="100" style="border-radius: 50%;">
-</a>
-
-<a >
 
 ## ACKNOWLEGMENT
 
