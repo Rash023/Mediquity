@@ -21,14 +21,14 @@ console.log(randomString);
 
 exports.createAppointment = async (req, res) => {
   try {
-    const authHeader = req.headers["authorization"];
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    const token =
+      req.body.token || req.header("Authorization").replace("Bearer", "");
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Bearer token not found in Authorization header",
       });
     }
-    const token = authHeader.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const patientId = decodedToken.id;
 
@@ -43,8 +43,7 @@ exports.createAppointment = async (req, res) => {
     }
 
     const slot = await Slot.findById(slotId);
-    const time = slot.time;
-    const day = slot.day;
+
     if (!slot) {
       return res.status(401).json({
         success: false,
@@ -55,8 +54,7 @@ exports.createAppointment = async (req, res) => {
     const newAppointment = new Model({
       doctorId,
       patientId,
-      day,
-      time,
+      slotId,
       link,
     });
 
@@ -65,8 +63,7 @@ exports.createAppointment = async (req, res) => {
     const appointment = await Model.findOne({
       doctorId,
       patientId,
-      day,
-      time,
+      slotId,
       link,
     });
 
@@ -122,3 +119,50 @@ exports.getAppointments = async (req, res) => {
     });
   }
 };
+
+// exports.cancelAppointment = async (req, res) => {
+//   try {
+//     //appointment id
+//     const { id } = req.body.token;
+
+//     if (!id) {
+//       return res.status(401).json({
+//         success: false,
+//         message: "Enter appointment",
+//       });
+//     }
+
+//     const data = Appointment.findById(id);
+
+//     const userId = data.userId;
+//     const slotId = data.slotId;
+
+//     const slot = Slot.findById(slotId);
+//     let currentDate = new Date();
+//     const day = slot.day;
+//     const startTime = slot.time.substring(2);
+//     const endTime = slot.time.substring(4, 6);
+//     console.log(startTime, endTime);
+
+//     const currDay = new Date.getDay();
+//     let hours = currentDate.getHours();
+//     let minutes = currentDate.getMinutes();
+
+//     // Add leading zeros if necessary
+//     hours = hours < 10 ? "0" + hours : hours;
+//     minutes = minutes < 10 ? "0" + minutes : minutes;
+
+//     // Format the time as HH:MM
+//     const currentTime = `${hours}:${minutes}`;
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Appointment Removed Succesfully",
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Internal Server Error",
+//     });
+//   }
+// };
