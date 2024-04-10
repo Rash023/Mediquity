@@ -1,5 +1,5 @@
 opencv-python
 numpy
-tensorflow
+tensorflow==2.15.0
 flask-cors
 gunicorn

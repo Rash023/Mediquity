@@ -9,6 +9,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from flask_cors import CORS
 import tensorflow as tf
 import base64
+import gunicorn
 
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
