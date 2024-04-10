@@ -3,6 +3,8 @@ const Slots = require("../Model/Slots");
 const Doctor = require("../Model/Doctor");
 const jwt = require("jsonwebtoken");
 
+//handler to add slots for the doctor
+
 exports.addSlots = async (req, res) => {
   try {
     const { days, time } = req.body;

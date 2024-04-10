@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 
 const cloudinary = require("cloudinary").v2;
 
+//helper function for file upload to cloudinary
+
 async function uploadFiletoCloudinary(file, folder, quality) {
   const options = { folder };
   options.resource_type = "auto";
@@ -19,6 +21,8 @@ async function uploadFiletoCloudinary(file, folder, quality) {
 function isFileTypeSupported(type, supportTypes) {
   return supportTypes.includes(type);
 }
+
+//handler function to upload files to cloudinary
 
 exports.fileuploader = async (req, res) => {
   try {
@@ -92,6 +96,8 @@ exports.fileuploader = async (req, res) => {
   }
 };
 
+//handler function to search file for the user
+
 exports.SearchFile = async (req, res) => {
   // console.log("hello");
   try {
@@ -118,7 +124,7 @@ exports.SearchFile = async (req, res) => {
       userId: userId,
       filename: { $regex: regex },
     });
-    console.log(files)
+    console.log(files);
     return res.status(200).json({
       success: true,
       files: files,
