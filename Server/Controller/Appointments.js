@@ -2,11 +2,9 @@ const jwt = require("jsonwebtoken");
 const Slot = require("../Model/Slots");
 const User = require("../Model/User");
 const Appointment = require("../Model/Appointments");
-const { ObjectId } = require("mongodb");
-const { default: mongoose } = require("mongoose");
+const Slots = require("../Model/Slots");
 
-require("dotenv").config();
-
+/* HELPER FUNCTION TO GENERATE VIDEO CALL CODE */
 function generateRandomString(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -48,10 +46,14 @@ exports.createAppointment = async (req, res) => {
         message: "Invalid Slot",
       });
     }
+    const day = slot.day;
+    const time = slot.time;
     const newAppointment = new Appointment({
       doctorId,
-      patientId,
       slotId,
+      patientId,
+      day,
+      time,
       link,
     });
 
@@ -103,12 +105,13 @@ exports.getAppointments = async (req, res) => {
     const currentDate = new Date();
     const appointmentsWithCancel = appointments.map((appointment) => {
       const appointmentObject = appointment.toObject();
-      const day = appointmentObject.slotId.day;
-      const time = appointmentObject.slotId.time;
+      const day = appointmentObject.day;
+      const time = appointmentObject.time;
       const dayParts = day.split(".");
       const parsedDay = new Date(dayParts[2], dayParts[1] - 1, dayParts[0]);
       const timeParts = time.split("-");
-      const endTimeParts = timeParts[1].split(":");
+      /* CAN CANCEL IF CURRENT DATE IS LESS THAN STARTING TIME OF APPOINTMENT */
+      const endTimeParts = timeParts[0].split(":");
       const parsedEndtime = new Date(parsedDay);
       parsedEndtime.setHours(parseInt(endTimeParts[0], 10));
       parsedEndtime.setMinutes(parseInt(endTimeParts[1], 10));
@@ -131,49 +134,96 @@ exports.getAppointments = async (req, res) => {
   }
 };
 
-// exports.cancelAppointment = async (req, res) => {
-//   try {
-//     //appointment id
-//     const { id } = req.body.token;
-
-//     if (!id) {
-//       return res.status(401).json({
-//         success: false,
-//         message: "Enter appointment",
-//       });
-//     }
-
-//     const data = Appointment.findById(id);
-
-//     const userId = data.userId;
-//     const slotId = data.slotId;
-
-//     const slot = Slot.findById(slotId);
-//     let currentDate = new Date();
-//     const day = slot.day;
-//     const startTime = slot.time.substring(2);
-//     const endTime = slot.time.substring(4, 6);
-//     console.log(startTime, endTime);
-
-//     const currDay = new Date.getDay();
-//     let hours = currentDate.getHours();
-//     let minutes = currentDate.getMinutes();
-
-//     // Add leading zeros if necessary
-//     hours = hours < 10 ? "0" + hours : hours;
-//     minutes = minutes < 10 ? "0" + minutes : minutes;
-
-//     // Format the time as HH:MM
-//     const currentTime = `${hours}:${minutes}`;
-
-//     return res.status(200).json({
-//       success: true,
-//       message: "Appointment Removed Succesfully",
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: "Internal Server Error",
-//     });
-//   }
-// };
+/* CANCEL APPOINTMENT */
+exports.cancelAppointment = async (req, res) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Bearer token not found in Authorization header",
+      });
+    }
+    const token = authHeader.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    /* LOGIN USER ID */
+    const id = decodedToken.id;
+    const { appointmentId } = req.body;
+    if (!appointmentId) {
+      return res.status(500).json({
+        success: false,
+        message: "Please provide an Appointment ID",
+      });
+    }
+    /* APPOINTMENT TO CANCEL */
+    const appointment = await Appointment.findById({ _id: appointmentId })
+      .populate({
+        path: "doctorId",
+        select: "name email",
+      })
+      .populate({
+        path: "slotId",
+        select: "day time",
+      });
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Please provide a valid Appointment ID",
+      });
+    }
+    if (appointment.patientId.toString() !== id) {
+      return res.status(401).json({
+        success: false,
+        message: "You are not authorized",
+      });
+    }
+    const currentDate = new Date();
+    const day = appointment.day;
+    const time = appointment.time;
+    const dayParts = day.split(".");
+    const parsedDay = new Date(dayParts[2], dayParts[1] - 1, dayParts[0]);
+    const timeParts = time.split("-");
+    /* CAN CANCEL IF CURRENT DATE IS LESS THAN STARTING TIME OF APPOINTMENT */
+    const endTimeParts = timeParts[0].split(":");
+    const parsedEndtime = new Date(parsedDay);
+    parsedEndtime.setHours(parseInt(endTimeParts[0], 10));
+    parsedEndtime.setMinutes(parseInt(endTimeParts[1], 10));
+    parsedEndtime.setSeconds(0);
+    if (parsedEndtime < currentDate) {
+      return res.status(500).json({
+        success: false,
+        message: "Unable to cancel Appointment now",
+      });
+    }
+    /* PULL FROM SLOT */
+    await Slots.findByIdAndUpdate(
+      { _id: appointment.slotId._id },
+      {
+        $pull: {
+          appointments: appointment._id,
+        },
+      }
+    );
+    /* PULL FROM USER */
+    await User.findByIdAndUpdate(
+      { _id: id },
+      {
+        $pull: {
+          appointments: appointment._id,
+        },
+      }
+    );
+    /* REMOVE FROM APPOINTMENT */
+    await Appointment.findByIdAndDelete({ _id: appointment._id });
+    return res.status(200).json({
+      success: true,
+      message: "Successfully cancelled Appointment",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};

@@ -6,6 +6,7 @@ const { getSlots } = require("../Controller/Slots");
 const {
   createAppointment,
   getAppointments,
+  cancelAppointment,
 } = require("../Controller/Appointments");
 
 const express = require("express");
@@ -30,6 +31,8 @@ router.post("/contactUs", contactUsController);
 router.post("/bookAppointment", createAppointment);
 
 router.get("/getAppointments", getAppointments);
+
+router.delete("/cancelAppointment", cancelAppointment);
 
 router.get("/getSlots", getSlots);
 

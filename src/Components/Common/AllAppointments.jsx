@@ -3,6 +3,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { IoLink } from "react-icons/io5";
 import User from '../../Asset/user.jpg'
+import { toast } from 'react-toastify';
 
 const AllAppointments = () => {
   const [Appointments, setappointments] = useState([]);
@@ -109,13 +110,20 @@ const AllAppointments = () => {
                   <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl font-bold uppercase select-none tracking-[1px] text-center first-letter:text-3xl lg:no-underline underline decoration-slate-500 underline-offset-4'>Time <span className='lg:inline hidden'>-</span> </div>
                   <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-md lg:text-2xl font-bold select-none tracking-[1px] text-center lg:mt-0 mt-[1%]'>{appointment?.slotId?.time}</div>
                 </div>
-                <div className="flex w-full justify-center">
+                <div className="flex w-full justify-center gap-x-2">
                   <button
                     type="submit"
                     className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]"
                     onClick={() => window.open(`${appointment.link}`, '_blank')}
                   >
                     Join
+                  </button>
+                  <button
+                    type="submit"
+                    className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] ${appointment.canCancel ? '' : 'opacity-60'}`}
+                    onClick={!appointment.canCancel ? () => toast.error("Sorry! You can't cancel now") : () => {}}
+                  >
+                    Cancel
                   </button>
                 </div>
               </div>
