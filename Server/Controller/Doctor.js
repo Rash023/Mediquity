@@ -4,6 +4,8 @@ const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
 const Slot = require("../Model/Slots");
 
+//helper function for uploading file to cloudinary
+
 async function uploadFiletoCloudinary(file, folder, quality) {
   const options = { folder };
   options.resource_type = "auto";
@@ -14,6 +16,8 @@ async function uploadFiletoCloudinary(file, folder, quality) {
 
   return await cloudinary.uploader.upload(file.tempFilePath, options);
 }
+
+//handler for Doctor signup
 
 exports.signup = async (req, res) => {
   try {
@@ -61,6 +65,8 @@ exports.signup = async (req, res) => {
     });
   }
 };
+
+//handler to login for user
 
 exports.login = async (req, res) => {
   try {

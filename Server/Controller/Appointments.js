@@ -6,6 +6,7 @@ const Appointment = require("../Model/Appointments");
 
 require("dotenv").config();
 
+//function to generate random string for meet link
 function generateRandomString(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -19,6 +20,7 @@ function generateRandomString(length) {
 const randomString = generateRandomString(4);
 console.log(randomString);
 
+//handler to create appointments for the user
 exports.createAppointment = async (req, res) => {
   try {
     const token =
@@ -89,6 +91,8 @@ exports.createAppointment = async (req, res) => {
     });
   }
 };
+
+//handler to get all appointments of the user
 
 exports.getAppointments = async (req, res) => {
   try {

@@ -5,6 +5,8 @@ const Medication = require("../Model/Medication");
 const { medicationEmail } = require("../mail/templates/medicationform");
 const mailSender = require("../Util/mailSender");
 
+//handler to create medication entry for user
+
 exports.createMedication = async (req, res) => {
   try {
     const token = req.body.token;
@@ -71,6 +73,8 @@ exports.createMedication = async (req, res) => {
   }
 };
 
+//handler function to Check Ping schedule
+
 const checkMedicationSchedule = async () => {
   try {
     const currentDate = new Date();
@@ -84,13 +88,20 @@ const checkMedicationSchedule = async () => {
     for (const medication of medications) {
       for (const time of medication.times) {
         const timeParts = time.split(":");
-        const medicationTime = parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
+        const medicationTime =
+          parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
         if (currentTime === medicationTime - 5) {
           const user = await User.findById(medication.userId);
           await mailSender(
             user.email,
             "Medication Reminder",
-            medicationEmail(medication.name, medication.type, medication.dosage, medication.days, medication.times)
+            medicationEmail(
+              medication.name,
+              medication.type,
+              medication.dosage,
+              medication.days,
+              medication.times
+            )
           );
         }
       }
