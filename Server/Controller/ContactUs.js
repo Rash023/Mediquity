@@ -1,4 +1,4 @@
-const { contactUsEmail } = require("../mail/templates/ContactForm");
+const { contactUsEmail } = require("../Mail/Template/ContactForm");
 const mailSender = require("../Util/MailSender");
 
 /* CONTACT US */

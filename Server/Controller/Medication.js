@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../Model/User");
 const cron = require("node-cron");
 const Medication = require("../Model/Medication");
-const { medicationEmail } = require("../mail/templates/MedicationForm");
+const { medicationEmail } = require("../Mail/Template/MedicationForm");
 const mailSender = require("../Util/MailSender");
 
 /* CREATE MEDICATION FOR USER */

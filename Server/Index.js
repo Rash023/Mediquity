@@ -13,7 +13,7 @@ const doctorRoute = require("./Route/Doctor");
 dotenv.config();
 
 /* CONNECT TO DB */
-require("./Configuration/database").connect();
+require("./Configuration/Database").connect();
 
 /* API TESTING */
 app.use(express.json());

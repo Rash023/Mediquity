@@ -9,6 +9,8 @@ const AllAppointments = () => {
   const [Appointments, setappointments] = useState([]);
   const token = sessionStorage.getItem("token");
   const [userdetails, setuserdetails] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getuserdetails = async () => {
@@ -46,10 +48,33 @@ const AllAppointments = () => {
     getAppointments();
   }, [token])
 
-  const handleSlotClick = (slot) => {
-    console.log("appointments clicked");
+  const handleAppointmentClick = (appointment) => {
+    setSelectedAppointment(appointment);
+    setShowModal(true);
   };
 
+  const handleConfirmCancel = async () => {
+    try {
+      toast.loading();
+      const response = await axios.delete(`http://localhost:4000/api/v1/user/cancelAppointment`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`
+        },
+        data: {
+          appointmentId: selectedAppointment._id
+        }
+      });
+      toast.dismiss();
+      toast.success("Appointment Cancelled Successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      toast.error("Please Try Again");
+      console.error("Error fetching slots:", error);
+    }
+    setShowModal(false);
+  };
 
   return (
     <div className='min-h-[100vh] min-w-[100vw] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-clip'>
@@ -88,7 +113,7 @@ const AllAppointments = () => {
           </div>
           <div className='grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
             {Appointments?.data?.appointments?.map((appointment, index) => (
-              <div key={index} className={` h-fit w-full flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4`} onClick={() => handleSlotClick()}>
+              <div key={index} className={` h-fit w-full flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4`}>
                 <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-3xl font-bold select-none tracking-[1px] text-center underline decoration-slate-500 underline-offset-4'>{index + 1}</div>
                 {/* NAME */}
                 <div className='flex gap-x-4 justify-center lg:items-baseline lg:flex-row flex-col'>
@@ -121,7 +146,7 @@ const AllAppointments = () => {
                   <button
                     type="submit"
                     className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] ${appointment.canCancel ? '' : 'opacity-60'}`}
-                    onClick={!appointment.canCancel ? () => toast.error("Sorry! You can't cancel now") : () => {}}
+                    onClick={!appointment.canCancel ? () => toast.error("Sorry! You can't cancel now") : () => handleAppointmentClick(appointment)}
                   >
                     Cancel
                   </button>
@@ -129,7 +154,29 @@ const AllAppointments = () => {
               </div>
             ))}
           </div>
+          {
+            Appointments?.data?.appointments?.length <= 0 &&
+            <div className='text-gray-500 uppercase text-md tracking-[1.2px] flex justify-center -mt-[6%] items-baseline select-none'>
+              <span className='text-xl'>N</span>o <span className='text-xl lg:ml-[0.5%] ml-[1.5%]'>A</span>ppointment <span className='text-xl lg:ml-[0.5%] ml-[1.5%]'>F</span>ound
+            </div>
+          }
         </div>
+      </div>
+      <div>
+        {/* Modal */}
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-2">
+            <div className="absolute inset-0 bg-black opacity-50" onClick={() => setShowModal(false)}></div>
+            <div className="relative bg-white p-8 rounded-md shadow-md">
+              <h2 className="text-2xl mb-4 uppercase tracking-[1.5px]">Confirm Cancel</h2>
+              <p className='uppercase tracking-[1.2px]'>Are you sure you want to cancel the appointment for {selectedAppointment.day} at {selectedAppointment.time}?</p>
+              <div className="flex justify-end mt-4">
+                <button className="px-4 py-2 bg-green-500 text-white rounded-md mr-4 uppercase tracking-[1.2px]" onClick={handleConfirmCancel}>Yes</button>
+                <button className="px-4 py-2 bg-red-500 text-white rounded-md uppercase tracking-[1.2px]" onClick={() => setShowModal(false)}>No</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
