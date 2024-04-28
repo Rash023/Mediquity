@@ -85,7 +85,7 @@ const AllAppointments = () => {
           <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[1%]'>
             Appointment
           </div>
-          <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
+          <div className='grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
             {Appointments?.data?.appointments?.map((appointment, index) => (
               <div key={index} className={` h-fit w-full flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4`} onClick={() => handleSlotClick()}>
                 <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-3xl font-bold select-none tracking-[1px] text-center underline decoration-slate-500 underline-offset-4'>{index + 1}</div>
