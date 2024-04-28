@@ -7,6 +7,8 @@ import {
 } from "framer-motion";
 import { cn } from "../../Util/cn.ts";
 import { Link, useNavigate } from "react-router-dom";
+import { IoIosLogOut } from "react-icons/io";
+import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 
 export const FloatingNav = ({
   navItems,
@@ -78,7 +80,8 @@ export const FloatingNav = ({
         {!sessionStorage.getItem("token") ? (
           <a href="/login">
             <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-              <span className="uppercase tracking-[2px]">Login</span>
+              <span className="uppercase tracking-[2px] md:block hidden">Login</span>
+              <span className="h-4 w-4 text-white md:hidden block"><MdOutlineLogin /></span>
               <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
             </button>
           </a>
@@ -87,7 +90,9 @@ export const FloatingNav = ({
             onClick={handleLogout}
             className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
           >
-            <span className="uppercase tracking-[2px]">Logout</span>
+            <span className="uppercase tracking-[2px] md:block hidden">Logout</span>
+            <span className="h-4 w-4 text-white md:hidden block"><MdOutlineLogout /></span>
+            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
           </button>
         )}
       </motion.div>
