@@ -1,3 +1,4 @@
+/* MEDICATION EMAIL TEMPLATE FOR EMAIL */
 exports.medicationEmail = (
     name,
     type,

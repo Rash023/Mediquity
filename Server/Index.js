@@ -9,16 +9,24 @@ const predictionRoute = require("./Route/Prediction");
 const userRoute = require("./Route/User");
 const doctorRoute = require("./Route/Doctor");
 
+/* ENV */
+dotenv.config();
+
+/* CONNECT TO DB */
 require("./Configuration/database").connect();
 
-dotenv.config();
+/* API TESTING */
 app.use(express.json());
+
+/* CORS */
 app.use(
   cors({
     origin: "*",
     credentials: true,
   })
 );
+
+/* FILE UPLOAD */
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -26,11 +34,15 @@ app.use(
   })
 );
 
+/* CLOUDINARY */
 cloudinaryConnect();
+
+/* CONNECT TO PORT */
 app.listen(PORT, () => {
   console.log(`App is listening at ${PORT}`);
 });
 
+/* MOUNT ROUTES */
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/doctor", doctorRoute);
 app.use("/api/v1/predict", predictionRoute);

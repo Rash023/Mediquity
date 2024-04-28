@@ -1,8 +1,8 @@
 const express = require("express");
+const router = express.Router();
 const { addSlots } = require("../Controller/Slots");
 const { signup, login, getDoctorSlots } = require("../Controller/Doctor");
 const { getDoctorBySpecialisation } = require("../Controller/Doctor");
-const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/login", login);

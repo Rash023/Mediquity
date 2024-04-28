@@ -1,3 +1,4 @@
+/* CONTACT US TEMPLATE FOR EMAIL */
 exports.contactUsEmail = (
   email,
   firstname,

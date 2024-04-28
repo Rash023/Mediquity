@@ -1,29 +1,25 @@
-const { cloudinaryConnect } = require("../Configuration/Cloudinary");
 const File = require("../Model/Files");
 const User = require("../Model/User");
 const jwt = require("jsonwebtoken");
 
 const cloudinary = require("cloudinary").v2;
 
-//helper function for file upload to cloudinary
-
+/* HELPER FUNCTION TO UPLOAD FILE TO CLOUDINARY */
 async function uploadFiletoCloudinary(file, folder, quality) {
   const options = { folder };
   options.resource_type = "auto";
-
   if (quality) {
     options.quality = quality;
   }
-
   return await cloudinary.uploader.upload(file.tempFilePath, options);
 }
 
+/* HELPER FUNCTION TO CHECK IF GIVEN FILE IS SUPPORTED */
 function isFileTypeSupported(type, supportTypes) {
   return supportTypes.includes(type);
 }
 
-//handler function to upload files to cloudinary
-
+/* UPLOAD FILES FOR USER */
 exports.fileuploader = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
@@ -96,10 +92,8 @@ exports.fileuploader = async (req, res) => {
   }
 };
 
-//handler function to search file for the user
-
+/* SEARCH FILE */
 exports.SearchFile = async (req, res) => {
-  // console.log("hello");
   try {
     const authHeader = req.headers["authorization"];
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -109,7 +103,6 @@ exports.SearchFile = async (req, res) => {
       });
     }
     const token = authHeader.split(" ")[1];
-    // console.log(token);
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -138,6 +131,7 @@ exports.SearchFile = async (req, res) => {
   }
 };
 
+/* GET FILES */
 exports.getFiles = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
@@ -156,7 +150,6 @@ exports.getFiles = async (req, res) => {
     }
     let decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.id;
-
     const files = await File.find({ userId: userId });
     return res.status(200).json({
       success: true,
