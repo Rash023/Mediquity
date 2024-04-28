@@ -102,12 +102,12 @@ const AllAppointments = () => {
                 {/* DAY */}
                 <div className='flex gap-x-4 justify-center lg:items-baseline lg:flex-row flex-col'>
                   <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl font-bold uppercase select-none tracking-[1px] text-center first-letter:text-3xl lg:no-underline underline decoration-slate-500 underline-offset-4'>Date <span className='lg:inline hidden'>-</span> </div>
-                  <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-md lg:text-2xl font-bold select-none tracking-[1px] text-center lg:mt-0 mt-[1%]'>{appointment?.day}</div>
+                  <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-md lg:text-2xl font-bold select-none tracking-[1px] text-center lg:mt-0 mt-[1%]'>{appointment?.slotId?.day}</div>
                 </div>
                 {/* TIME */}
                 <div className='flex gap-x-4 justify-center lg:items-baseline lg:flex-row flex-col'>
                   <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl font-bold uppercase select-none tracking-[1px] text-center first-letter:text-3xl lg:no-underline underline decoration-slate-500 underline-offset-4'>Time <span className='lg:inline hidden'>-</span> </div>
-                  <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-md lg:text-2xl font-bold select-none tracking-[1px] text-center lg:mt-0 mt-[1%]'>{appointment?.time}</div>
+                  <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-md lg:text-2xl font-bold select-none tracking-[1px] text-center lg:mt-0 mt-[1%]'>{appointment?.slotId?.time}</div>
                 </div>
                 <div className="flex w-full justify-center">
                   <button
