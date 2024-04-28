@@ -6,18 +6,14 @@ const AppointmentSchema = new mongoose.Schema({
     ref: "Doctor",
     required: true,
   },
-
+  slotId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Slot",
+    required: true,
+  },
   patientId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: true,
-  },
-  day: {
-    type: String,
-    required: true,
-  },
-  time: {
-    type: String,
     required: true,
   },
   link: {

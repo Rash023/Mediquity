@@ -83,7 +83,6 @@ cron.schedule("* * * * *", async () => {
   try {
     const currentDate = new Date();
     const slots = await Slots.find();
-    const slotsToBeUpdated = [];
     for (const slot of slots) {
       const day = slot.day;
       const time = slot.time;

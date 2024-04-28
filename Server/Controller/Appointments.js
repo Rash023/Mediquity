@@ -1,12 +1,12 @@
-const Model = require("../Model/Appointments");
 const jwt = require("jsonwebtoken");
 const Slot = require("../Model/Slots");
 const User = require("../Model/User");
 const Appointment = require("../Model/Appointments");
+const { ObjectId } = require("mongodb");
+const { default: mongoose } = require("mongoose");
 
 require("dotenv").config();
 
-//function to generate random string for meet link
 function generateRandomString(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -17,14 +17,11 @@ function generateRandomString(length) {
   return result;
 }
 
-const randomString = generateRandomString(4);
-console.log(randomString);
-
-//handler to create appointments for the user
+/* CREATE APPOINTMENT */
 exports.createAppointment = async (req, res) => {
   try {
     const token =
-      req.body.token || req.header("Authorization").replace("Bearer", "");
+      req.body.token || req.header("Authorization").replace("Bearer ", "");
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -35,48 +32,36 @@ exports.createAppointment = async (req, res) => {
     const patientId = decodedToken.id;
 
     const { doctorId, slotId } = req.body;
-    const str = generateRandomString(5);
-    const link = `http://localhost:3000/video-call?roomID=${str}`;
-    if (!link) {
-      return res.status(401).json({
+    const code = generateRandomString(5);
+    const link = `http://localhost:3000/video-call?roomID=${code}`;
+    const slot = await Slot.findById(slotId);
+    if (slot.doctorId.toString() !== doctorId) {
+      return res.status(400).json({
         success: false,
-        message: "Invalid Link",
+        message: "Please provide a valid slot for the doctor.",
       });
     }
-
-    const slot = await Slot.findById(slotId);
-
+    const user = await User.findById(patientId);
     if (!slot) {
       return res.status(401).json({
         success: false,
         message: "Invalid Slot",
       });
     }
-
-    const newAppointment = new Model({
+    const newAppointment = new Appointment({
       doctorId,
       patientId,
       slotId,
       link,
     });
 
-    await newAppointment.save();
+    const savedAppointment = await newAppointment.save();
 
-    const appointment = await Model.findOne({
-      doctorId,
-      patientId,
-      slotId,
-      link,
-    });
+    user.appointments.push(savedAppointment._id);
 
-    const slotdata = await Slot.findById(slotId);
-    const user = await User.findById(patientId);
+    slot.appointments.push(savedAppointment._id);
 
-    user.appointments.push(appointment._id);
-
-    slotdata.appointments.push(appointment._id);
-
-    await slotdata.save();
+    await slot.save();
     await user.save();
 
     return res.status(200).json({
@@ -92,8 +77,7 @@ exports.createAppointment = async (req, res) => {
   }
 };
 
-//handler to get all appointments of the user
-
+/* GET ALL APPOINTMENTS */
 exports.getAppointments = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
@@ -106,13 +90,36 @@ exports.getAppointments = async (req, res) => {
     const token = authHeader.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const id = decodedToken.id;
-    const appointments = await Appointment.find({ patientId: id }).populate({
-      path: "doctorId",
-      select: "name email",
+    const appointments = await Appointment.find({ patientId: id })
+      .populate({
+        path: "doctorId",
+        select: "name email",
+      })
+      .populate({
+        path: "slotId",
+        select: "day time",
+      });
+
+    const currentDate = new Date();
+    const appointmentsWithCancel = appointments.map((appointment) => {
+      const appointmentObject = appointment.toObject();
+      const day = appointmentObject.slotId.day;
+      const time = appointmentObject.slotId.time;
+      const dayParts = day.split(".");
+      const parsedDay = new Date(dayParts[2], dayParts[1] - 1, dayParts[0]);
+      const timeParts = time.split("-");
+      const endTimeParts = timeParts[1].split(":");
+      const parsedEndtime = new Date(parsedDay);
+      parsedEndtime.setHours(parseInt(endTimeParts[0], 10));
+      parsedEndtime.setMinutes(parseInt(endTimeParts[1], 10));
+      parsedEndtime.setSeconds(0);
+      appointmentObject.canCancel = parsedEndtime > currentDate;
+      return appointmentObject;
     });
+
     return res.status(200).json({
       success: true,
-      appointments: appointments,
+      appointments: appointmentsWithCancel,
       message: "Appointments found successfully",
     });
   } catch (error) {
