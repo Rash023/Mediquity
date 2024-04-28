@@ -155,7 +155,6 @@ function getHoursBetween(startTime, endTime) {
 exports.getDoctorSlots = async (req, res) => {
   try {
     const { id } = req.query;
-
     const response = await Slot.find({ doctorId: id })
       .populate({ path: "doctorId", select: "name specialization" })
       .exec();
