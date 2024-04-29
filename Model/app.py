@@ -147,4 +147,4 @@ def predict_tuberculosis():
     return jsonify({'prediction': class_labels[predicted_class]})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
