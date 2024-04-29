@@ -9,7 +9,6 @@ from keras.preprocessing.image import ImageDataGenerator
 from flask_cors import CORS
 import tensorflow as tf
 import base64
-import gunicorn
 
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
@@ -147,5 +146,5 @@ def predict_tuberculosis():
     class_labels = ['Normal', 'Tuberculosis']
     return jsonify({'prediction': class_labels[predicted_class]})
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)

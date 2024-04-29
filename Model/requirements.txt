@@ -1,5 +1,9 @@
-opencv-python
-numpy
+Flask==3.0.1
+Flask-Cors==4.0.0
+opencv-python==4.9.0.80
+numpy==1.26.3
 tensorflow==2.15.0
-flask-cors
-gunicorn
+keras==2.15.0
+pillow==10.2.0
+scikit-image==0.22.0
+scikit-learn==1.4.0

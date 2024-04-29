@@ -1,0 +1,53 @@
+services:
+  web:
+    depends_on:
+      - api
+      - model
+    build: ./Client
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: ./Client/package.json
+          action: rebuild
+        - path: ./Client/package-lock.json
+          action: rebuild
+        - path: ./Client
+          target: /app
+          action: sync
+
+  api:
+    build: ./Server
+    ports: 
+      - 4000:4000
+    environment:
+      DATABASE_URL: "mongodb+srv://mediquity:mediquity@cluster0.322jk3m.mongodb.net/"
+      PORT: 4000
+      API_KEY: "516337169296598"
+      API_SECRET: "t_faj3i3WIEmu3lG8eWsdJlPpik"
+      CLOUD_NAME: "dvpulu3cc"
+      JWT_SECRET: "Mediquity"
+      MAIL_HOST: "smtp.gmail.com"
+      MAIL_USER: "wdforall@gmail.com"
+      MAIL_PASS: "oildohkketrnioqd"
+    develop:
+      watch:
+        - path: ./Server/package.json
+          action: rebuild
+        - path: ./Server/package-lock.json
+          action: rebuild
+        - path: ./Server
+          target: /app
+          action: sync
+
+  model:
+    build: ./Model
+    ports:
+      - 5000:5000
+    develop:
+      watch:
+        - path: ./Model/requirements.txt
+          action: rebuild
+        - path: ./Model
+          target: /app
+          action: sync
