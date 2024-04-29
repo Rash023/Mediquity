@@ -82,11 +82,11 @@ const checkMedicationSchedule = async () => {
             user.email,
             "Medication Reminder",
             medicationEmail(
+              user.name,
               medication.name,
               medication.type,
               medication.dosage,
-              medication.days,
-              medication.times
+              time
             )
           );
         }

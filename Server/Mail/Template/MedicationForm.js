@@ -1,12 +1,12 @@
 /* MEDICATION EMAIL TEMPLATE FOR EMAIL */
 exports.medicationEmail = (
-    name,
-    type,
-    dosage, 
-    days,
-    times,
-  ) => {
-    return `<!DOCTYPE html>
+  userName,
+  medicineName,
+  type,
+  dosage,
+  time
+) => {
+  return `<!DOCTYPE html>
   <html>
   
   <head>
@@ -77,16 +77,16 @@ exports.medicationEmail = (
       <a href="http://localhost:3000">Mediquity</a>
           <div class="message">Medication Information</div>
           <div class="body">
-              <p>Dear ${name},</p>
-              <p>Thank you for providing your medication details. Here's the information:</p>
-              <p>Type: ${type}</p>
-              <p>Dosage: ${dosage}</p>
-              <p>Frequency: ${days} days, ${times} times a day</p>
+            <p>Dear ${userName},</p>
+            <p>Thank you for providing your medication details. Here's the information:</p>
+            <p>Medicine Name: ${medicineName}</p>
+            <p>Type: ${type}</p>
+            <p>Dosage: ${dosage}</p>
+            <p>Time: ${time}</p>
           </div>
           <div class="support">If you have any questions or concerns, feel free to contact us at <a href="mailto:info@example.com">info@example.com</a>.</div>
       </div>
   </body>
   
   </html>`;
-  }
-  
+};
