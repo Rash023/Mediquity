@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import User from '../../Asset/Profile/User.jpg'
 import { toast } from 'react-toastify';
 
-const AllAppointments = () => {
+const Profile = () => {
   const [Appointments, setappointments] = useState([]);
   const token = sessionStorage.getItem("token");
   const [userdetails, setuserdetails] = useState([]);
@@ -77,7 +77,7 @@ const AllAppointments = () => {
 
   return (
     <div className='min-h-[100vh] min-w-[100vw] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-clip'>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col">
         <div className='flex xl:flex-row flex-col gap-y-10 mt-[8%] w-full lg:justify-center lg:gap-x-20 items-center'>
           <div>
             <img src={User} className='rounded-full lg:h-[400px] h-[350px] lg:w-[400px] w-[350px]' alt='Doctor' />
@@ -181,4 +181,4 @@ const AllAppointments = () => {
   )
 }
 
-export default AllAppointments
+export default Profile;

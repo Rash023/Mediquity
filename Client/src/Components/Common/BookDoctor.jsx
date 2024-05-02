@@ -61,26 +61,6 @@ const BookDoctor = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "https://mediquity-gtoc.onrender.com/api/v1/Medication",
-        {
-          patientName,
-          description,
-          specialist,
-        }
-      );
-
-      if (response.ok) {
-        toast.success("Your data is Saved Successfully", { autoClose: 2000 });
-      } else {
-        toast.error("Failed to save data", { autoClose: 2000 });
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Please Try Again", { autoClose: 2000 });
-    }
     navigate(`/get-doctor/${specialist}`);
   };
 

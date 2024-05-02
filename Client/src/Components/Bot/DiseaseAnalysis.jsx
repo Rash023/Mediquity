@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import Markdown from "markdown-it";
 import "./Style/PersonalTherapist.css";
 import axios from "axios";
 import { FaUpload } from "react-icons/fa";
 
-const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-const md = new Markdown();
 
 const DiseaseAnalysis = () => {
   const [loading, setLoading] = useState(false);

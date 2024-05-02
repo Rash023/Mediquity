@@ -2,7 +2,7 @@
 
 
 <p align="center">
-    <img alt="Download on the App Store" title="App Store" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeng2bHBhc29yaGRpZnBiaXhicDF2cTBiOG8zYjBmd2N5ZDU4NTY4NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ioc4gFZMELI1BZZxpV/giphy.gif" width="500" style="border-radius: 10px;">
+    <img alt="Mediquity" title="App Store" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeng2bHBhc29yaGRpZnBiaXhicDF2cTBiOG8zYjBmd2N5ZDU4NTY4NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ioc4gFZMELI1BZZxpV/giphy.gif" width="500" style="border-radius: 10px;">
 
 </p>
 <p align="center">

@@ -81,25 +81,16 @@ const PersonalTherapist = () => {
   }, [history]);
 
   const parseMessage = (message) => {
-    // Check if the message is in pointwise format
     if (message.startsWith("- ")) {
-      // Split the message into individual points
       const points = message.split("- ").filter(Boolean);
-
-      // Create a list using Markdown for each point
       const listItems = points
         .map((point, index) => `- ${md.renderInline(point.trim())}`)
         .join("\n");
 
       return `<ul>${listItems}</ul>`;
     }
-
-    // Check if the message is in tabular format
     if (message.includes("|")) {
-      // Split the message into rows
       const rows = message.split("\n").map((row) => row.trim());
-
-      // Parse each row into a table row
       const tableRows = rows
         .map((row) => {
           const columns = row
@@ -114,8 +105,6 @@ const PersonalTherapist = () => {
 
       return `<table>${tableRows}</table>`;
     }
-
-    // If no specific format is detected, render the message as usual
     return md.render(message);
   };
 
@@ -140,7 +129,7 @@ const PersonalTherapist = () => {
           <div className=" w-7xl lg:w-[1000px]  flex flex-col gap-x-2  border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
             <div className="Pharmos-inner-div flex gap-x-2 mx-auto">
               <h1 className="text-4xl lg:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
-                Hello, {sessionStorage.getItem("user").split(" ")[0]}
+                Hello, {sessionStorage.getItem("user")?.split(" ")[0]}
               </h1>
               <img
                 src={Starsvg}

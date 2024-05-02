@@ -30,7 +30,7 @@ const ViewSlots = () => {
     };
     const handleConfirmBooking = async () => {
         try {
-            await axios.post(`https://mediquity-gtoc.onrender.com/api/v1/user/bookAppointment/`, {
+            await axios.post(`https://mediquity-gtoc.onrender.com/api/v1/user/bookAppointment`, {
                 doctorId: doctorId,
                 slotId: selectedSlot._id
             }, {

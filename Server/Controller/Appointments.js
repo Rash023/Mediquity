@@ -31,7 +31,7 @@ exports.createAppointment = async (req, res) => {
 
     const { doctorId, slotId } = req.body;
     const code = generateRandomString(5);
-    const link = `http://localhost:3000/video-call?roomID=${code}`;
+    const link = `http://mediquity.vercel.app/video-call?roomID=${code}`;
     const slot = await Slot.findById(slotId);
     if (slot.doctorId.toString() !== doctorId) {
       return res.status(400).json({

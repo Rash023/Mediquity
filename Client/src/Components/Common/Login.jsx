@@ -25,7 +25,7 @@ const Login = () => {
         "https://mediquity-gtoc.onrender.com/api/v1/user/login",
         formData
       );
-      if (response.ok) {
+      if (response.status === 200) {
         toast.success("Login Successful!", { autoClose: 2000 });
         console.log(response.data);
         sessionStorage.setItem('token', response?.data?.token);
@@ -73,9 +73,9 @@ const Login = () => {
                 type="email"
                 placeholder="Enter email"
                 name="email"
-                value={formData.email} // Add value attribute
+                value={formData.email} 
                 onChange={changeHandler}
-                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm"
+                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm tracking-wider"
               />
             </div>
 
@@ -90,9 +90,9 @@ const Login = () => {
                 type="password"
                 placeholder="Enter Password"
                 name="password"
-                value={formData.password} // Add value attribute
+                value={formData.password}
                 onChange={changeHandler}
-                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm"
+                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm tracking-wider"
               />
             </div>
 

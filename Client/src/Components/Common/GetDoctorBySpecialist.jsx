@@ -13,10 +13,9 @@ const GetDoctorBySpecialist = () => {
         const fetchDoctors = async () => {
             try {
                 const response = await axios.get(`https://mediquity-gtoc.onrender.com/api/v1/doctor/getDoctorBySpecialisation?specialization=${specialist}`);
-                console.log(response);
                 setdoctors(response);
             } catch (error) {
-                console.error("Error fetching doctors:", error);
+                console.error(error);
             }
         };
         fetchDoctors();
