@@ -61,7 +61,7 @@ const MedicationForm = () => {
     console.log(medication);
     try {
       const response = await axios.post(
-        "https://mediquity-gtoc.onrender.com/api/v1/medication",
+        "https://mediquity-gtoc.onrender.com/api/v1/user/medication",
         medication,
       );
 

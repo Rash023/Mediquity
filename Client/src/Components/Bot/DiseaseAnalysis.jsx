@@ -25,7 +25,7 @@ const DiseaseAnalysis = () => {
         formData.append("image", file);
         setLoading(true);
         const response = await axios.post(
-          "http://localhost:4000/api/v1/predict/disease-predict",
+          "https://mediquity-gtoc.onrender.com/api/v1/predict/disease-predict",
           formData,
           {
             headers: {
