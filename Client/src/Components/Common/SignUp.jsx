@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,11 +22,10 @@ const SignUp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     try {
       const response = await axios.post(
-        "https://mediquity-gtoc.onrender.com/api/v1/user/Signup",
+        `${BASE_URL}/api/v1/user/Signup`,
         formData
       );
       console.log(response);
@@ -39,7 +39,7 @@ const SignUp = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error occurred. Please try again later.", {
+      toast.error("Please Try Again", {
         autoClose: 2000,
       });
     }

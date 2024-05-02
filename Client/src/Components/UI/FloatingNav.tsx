@@ -41,7 +41,7 @@ export const FloatingNav = ({
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user")
+    sessionStorage.removeItem("user");
     window.location.href = "/";
   };
   return (
@@ -65,10 +65,15 @@ export const FloatingNav = ({
       >
         {navItems.map((navItem: any, idx: number) => (
           <div
-            key={`link=${idx}`}
+            key={`link-${idx}`}
             onClick={() => navigate(navItem.link)}
             className={cn(
-              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
+              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer",
+              {
+                hidden:
+                  navItem.name === "Profile" &&
+                  !sessionStorage.getItem("token"),
+              }
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
@@ -77,11 +82,16 @@ export const FloatingNav = ({
             </span>
           </div>
         ))}
+
         {!sessionStorage.getItem("token") ? (
           <a href="/login">
             <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-              <span className="uppercase tracking-[2px] md:block hidden">Login</span>
-              <span className="h-4 w-4 text-white md:hidden block"><MdOutlineLogin /></span>
+              <span className="uppercase tracking-[2px] md:block hidden">
+                Login
+              </span>
+              <span className="h-4 w-4 text-white md:hidden block">
+                <MdOutlineLogin />
+              </span>
               <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
             </button>
           </a>
@@ -90,8 +100,12 @@ export const FloatingNav = ({
             onClick={handleLogout}
             className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
           >
-            <span className="uppercase tracking-[2px] md:block hidden">Logout</span>
-            <span className="h-4 w-4 text-white md:hidden block"><MdOutlineLogout /></span>
+            <span className="uppercase tracking-[2px] md:block hidden">
+              Logout
+            </span>
+            <span className="h-4 w-4 text-white md:hidden block">
+              <MdOutlineLogout />
+            </span>
             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
           </button>
         )}

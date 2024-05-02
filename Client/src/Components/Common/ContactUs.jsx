@@ -1,6 +1,4 @@
-"use client";
-import React, { Suspense } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 const World = React.lazy(() => import("../UI/globe.tsx").then((m) => ({ default: m.World })));
 
 export const GlobeDemo = () => {

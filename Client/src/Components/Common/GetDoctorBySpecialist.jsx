@@ -8,11 +8,12 @@ const GetDoctorBySpecialist = () => {
     const { specialist } = useParams();
     const navigate = useNavigate();
     const [Doctors, setdoctors] = useState([]);
+    const BASE_URL = process.env.REACT_APP_BASE_URL
 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
-                const response = await axios.get(`https://mediquity-gtoc.onrender.com/api/v1/doctor/getDoctorBySpecialisation?specialization=${specialist}`);
+                const response = await axios.get(`${BASE_URL}/api/v1/doctor/getDoctorBySpecialisation?specialization=${specialist}`);
                 setdoctors(response);
             } catch (error) {
                 console.error(error);

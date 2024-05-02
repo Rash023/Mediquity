@@ -12,6 +12,7 @@ const DiseaseAnalysis = () => {
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
+    const BASE_URL = process.env.REACT_APP_BASE_URL
     if (file) {
       const reader = new FileReader();
       reader.onloadend = async () => {
@@ -20,7 +21,7 @@ const DiseaseAnalysis = () => {
         formData.append("image", file);
         setLoading(true);
         const response = await axios.post(
-          "https://mediquity-gtoc.onrender.com/api/v1/predict/disease-predict",
+          `${BASE_URL}/api/v1/predict/disease-predict`,
           formData,
           {
             headers: {

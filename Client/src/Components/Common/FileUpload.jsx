@@ -13,6 +13,7 @@ const FileUpload = () => {
   const token = sessionStorage.getItem("token");
   const [SelectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const BASE_URL = process.env.REACT_APP_BASE_URL
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -34,8 +35,8 @@ const FileUpload = () => {
     formData.append("filename", FormDataa.name);
 
     try {
-      const response = await axios.post(
-        "https://mediquity-gtoc.onrender.com/api/v1/user/upload",
+      await axios.post(
+        `${BASE_URL}/api/v1/user/upload`,
         formData,
         {
           headers: {

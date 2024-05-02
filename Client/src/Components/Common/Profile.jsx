@@ -10,16 +10,16 @@ const Profile = () => {
   const [userdetails, setuserdetails] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     const getuserdetails = async () => {
       try {
-        const response = await axios.get("https://mediquity-gtoc.onrender.com/api/v1/user/", {
+        const response = await axios.get(`${BASE_URL}/api/v1/user/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log('user', response);
         setuserdetails(response);
 
       } catch (e) {
@@ -32,16 +32,15 @@ const Profile = () => {
   useEffect(() => {
     const getAppointments = async () => {
       try {
-        const response = await axios.get("https://mediquity-gtoc.onrender.com/api/v1/user/getAppointments", {
+        const response = await axios.get(`${BASE_URL}/api/v1/user/getAppointments`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response);
         setappointments(response);
 
       } catch (e) {
-        console.log(e.message);
+        console.error(e);
       }
     }
     getAppointments();
@@ -55,7 +54,7 @@ const Profile = () => {
   const handleConfirmCancel = async () => {
     try {
       toast.loading();
-      const response = await axios.delete(`https://mediquity-gtoc.onrender.com/api/v1/user/cancelAppointment`, {
+      await axios.delete(`${BASE_URL}/api/v1/user/cancelAppointment`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`
         },
@@ -78,7 +77,7 @@ const Profile = () => {
   return (
     <div className='min-h-[100vh] min-w-[100vw] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-clip'>
       <div className="flex flex-col">
-        <div className='flex xl:flex-row flex-col gap-y-10 mt-[8%] w-full lg:justify-center lg:gap-x-20 items-center'>
+        <div className='flex xl:flex-row flex-col gap-y-10 mt-[8%] lg:justify-center lg:gap-x-20 items-center'>
           <div>
             <img src={User} className='rounded-full lg:h-[400px] h-[350px] lg:w-[400px] w-[350px]' alt='Doctor' />
           </div>

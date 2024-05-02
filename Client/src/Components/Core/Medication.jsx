@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const MedicationForm = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [medication, setMedication] = useState({
     token: sessionStorage.getItem("token"),
     medicineName: "",
@@ -61,7 +62,7 @@ const MedicationForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://mediquity-gtoc.onrender.com/api/v1/user/medication",
+        `${BASE_URL}/api/v1/user/medication`,
         medication,
       );
 

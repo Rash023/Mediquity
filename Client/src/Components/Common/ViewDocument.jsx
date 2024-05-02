@@ -12,18 +12,19 @@ const ViewDocument = () => {
     const token = sessionStorage.getItem("token");
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get("https://mediquity-gtoc.onrender.com/api/v1/user/viewFiles", {
+                const response = await axios.get(`${BASE_URL}/api/v1/user/viewFiles`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
                 setDocuments(response?.data?.data);
             } catch (error) {
-                console.error("Error fetching documents:", error);
+                console.error(error);
             }
         };
         fetchDocuments();
@@ -45,7 +46,7 @@ const ViewDocument = () => {
         e.preventDefault();
         try {
 
-            const response = await axios.post("http://localhost:4000/api/v1/user/search", {
+            const response = await axios.post(`${BASE_URL}/api/v1/user/search`, {
                 searchQuery: searchTerm,
             }, {
                 headers: {
@@ -54,7 +55,7 @@ const ViewDocument = () => {
             });
             setDocuments(response?.data?.files);
         } catch (error) {
-            console.error("Error searching documents:", error);
+            console.error(error);
         }
     };
 

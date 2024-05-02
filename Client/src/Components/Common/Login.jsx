@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Login = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://mediquity-gtoc.onrender.com/api/v1/user/login",
+        `${BASE_URL}/api/v1/user/login`,
         formData
       );
       if (response.status === 200) {

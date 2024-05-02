@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { uploadImageToCloudinary } = require("../Util/ImageUploader");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const genAI = new GoogleGenerativeAI("AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk");
+require("dotenv").config();
+
+/* LLM MODEL */
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 /* HELPER FUNCTION */
 async function generateContent(imageUrl) {

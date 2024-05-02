@@ -6,7 +6,8 @@ import "./Style/MedicineAssistant.css";
 import Starsvg from "../../Asset/Profile/BardStar.svg";
 import { useNavigate } from "react-router-dom";
 
-const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);
+const API_KEY = process.env.REACT_APP_GEMINI_API_KEY
+const genAI = new GoogleGenerativeAI(`${API_KEY}`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const md = new Markdown();
 

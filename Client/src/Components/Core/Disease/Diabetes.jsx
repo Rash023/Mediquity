@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { BsFillSearchHeartFill } from "react-icons/bs";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DiabetesPrediction = () => {
-
+    const BASE_URL = process.env.REACT_APP_FLASK_URL;
     const [formData, setFormData] = useState({
         age: '',
         gender: '',
@@ -26,7 +28,7 @@ const DiabetesPrediction = () => {
         console.log(formData);
         setLoading(true);
         try {
-            const response = await fetch('http://127.0.0.1:5000/predict/diabetes', {
+            const response = await fetch(`${BASE_URL}/predict/diabetes`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,7 +39,8 @@ const DiabetesPrediction = () => {
             console.log(data);
             setPredictionResult(data.result);
         } catch (error) {
-            console.error('Error:', error);
+            console.error(error);
+            toast.error("Please Try Again");
         } finally {
             setLoading(false);
         }
@@ -162,7 +165,7 @@ const DiabetesPrediction = () => {
                             ) : (
                                 <>
                                     {loading ? (
-                                        <div className="loader" /> 
+                                        <div className="loader" />
                                     ) : (
                                         <button className='select-none uppercase text-lg md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold tracking-[1px]'>
                                             Predict

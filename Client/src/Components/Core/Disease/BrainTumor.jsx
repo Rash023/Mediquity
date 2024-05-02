@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { LuAsterisk } from "react-icons/lu";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BrainTumorDetection = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [predictionResult, setPredictionResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const BASE_URL = process.env.REACT_APP_FLASK_URL;
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -24,7 +27,7 @@ const BrainTumorDetection = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/predict/brain_tumor", {
+      const response = await fetch(`${BASE_URL}/predict/brain_tumor`, {
         method: "POST",
         body: formData,
       });
@@ -36,8 +39,8 @@ const BrainTumorDetection = () => {
       const data = await response.json();
       setPredictionResult(data.prediction);
     } catch (error) {
-      console.error("Error predicting brain tumor:", error);
-      alert("Error predicting brain tumor. Please try again later.");
+      console.error(error);
+      toast.error("Please Try Again");
     } finally {
       setIsLoading(false);
     }
