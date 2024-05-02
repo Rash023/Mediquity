@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -25,23 +25,20 @@ const Login = () => {
         "https://mediquity-gtoc.onrender.com/api/v1/user/login",
         formData
       );
-      if (response.status === 200) {
-        // Show success toast if login is successful
-        toast.success("Login successful!", { autoClose: 2000 });
+      if (response.ok) {
+        toast.success("Login Successful!", { autoClose: 2000 });
         console.log(response.data);
         sessionStorage.setItem('token', response?.data?.token);
         sessionStorage.setItem('user', response?.data?.user?.name);
         window.location.href = '/';
       } else {
-        // Show error toast if login fails
-        toast.error("Login failed. Please check your credentials.", {
+        toast.error("Please Try Again", {
           autoClose: 2000,
         });
       }
     } catch (error) {
-      console.error("Error:", error);
-      // Show error toast if an error occurs during login
-      toast.error("An error occurred. Please try again later.", {
+      console.error(error);
+      toast.error("Please Try Again", {
         autoClose: 2000,
       });
     }

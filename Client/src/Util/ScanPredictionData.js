@@ -1,11 +1,7 @@
-import Pnuemonia from "../Asset/Pneumonia-icon.jpg";
-import Brain from "../Asset/Brain-icon.png"
-import Diabetes from "../Asset/diabetes.jpg"
-import Tuberculosis from "../Asset/Tuberculosis.jpg"
-import Kidney from "../Asset/Kidney-Stone.jpg"
-
-
-import Osteoporosis from "../Asset/Osteoporosis.jpeg"
+import Diabetes from "../Asset/Prediction/Diabetes.jpg"
+import Tuberculosis from "../Asset/Prediction/Tuberculosis.jpg"
+import Kidney from "../Asset/Prediction/Kidney-Stone.jpg"
+import Osteoporosis from "../Asset/Prediction/Osteoporosis.jpeg"
 export const ScanPredictionData = [
   {
     label: "Pnuemonia Detection",

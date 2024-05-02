@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
-import "./Pneumonia.css";
 import { LuAsterisk } from "react-icons/lu";
 
 const PneumoniaDetection = () => {

@@ -29,22 +29,16 @@ const SignUp = () => {
         formData
       );
       console.log(response);
-      if (response.status === 200) {
-        // Show success toast if signup is successful
-        toast.success("Signup Successful!", { autoClose: 2000 });
-        console.log(response.data);
-
-        // Redirect to the home page after successful signup
-        window.location.href = "/"; // Redirect to the home page
+      if (response.ok) {
+        toast.success("Signup Successful!", { autoClose: 2000 })
+        window.location.href = "/";
       } else {
-        // Show error toast if signup fails
-        toast.error("Signup Error.", {
+        toast.error("Please Try Again", {
           autoClose: 2000,
         });
       }
     } catch (error) {
-      console.error("Error:", error);
-      // Show error toast if an error occurs during signup
+      console.error(error);
       toast.error("An error occurred. Please try again later.", {
         autoClose: 2000,
       });

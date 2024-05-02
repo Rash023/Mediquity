@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdAdd, MdDelete } from "react-icons/md";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+
 const MedicationForm = () => {
   const [medication, setMedication] = useState({
     token: sessionStorage.getItem("token"),
     medicineName: "",
     type: "",
-    dosage: "", // Changed to string to capture single dosage
+    dosage: "",
     days: new Array(7).fill(false),
-    times: [], // New field to store timeFields
+    times: [],
   });
 
   const [timeFields, setTimeFields] = useState([new Date()]);
@@ -58,59 +59,27 @@ const MedicationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(medication);
     try {
       const response = await axios.post(
         "https://mediquity-gtoc.onrender.com/api/v1/user/medication",
         medication,
       );
 
-      if(response) {
-        toast.success("Your data is Saved Successfully", { autoClose: 2000 });
+      if (response) {
+        toast.success("Medication Saved Successfully!", { autoClose: 2000 });
       } else {
-        toast.error("Failed to save data", { autoClose: 2000 });
+        toast.error("Please Try Again", { autoClose: 2000 });
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("An error occurred", { autoClose: 2000 });
-    }
-  };
-
-  const handleAddDosage = () => {
-    if (
-      medication.days.includes(true) &&
-      timeFields.length > 0 &&
-      medication.dosage !== ""
-    ) {
-      const selectedDays = medication.days.reduce((selected, day, index) => {
-        if (day) selected.push(daysOfWeek[index]);
-        return selected;
-      }, []);
-
-      const formattedTimes = timeFields.map((time) =>
-        time.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
-      );
-
-      setMedication({
-        ...medication,
-        dosage: medication.dosage,
-        times: formattedTimes,
-      });
-      setTimeFields([new Date()]);
-      setMedication({
-        ...medication,
-        dosage: "",
-      });
-      toast.success("Your data is Saved Successfully", { autoClose: 2000 });
-    } else {
-      toast.error("Please fill all fields", { autoClose: 2000 });
+      console.error(error)
+      toast.error("Please Try Again", { autoClose: 2000 });
     }
   };
 
   return (
     <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
       <h1 className="select-none text-4xl lg:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
-        Medication Details
+        Medication Detail
       </h1>
 
       <div className="flex justify-center mt-8 lg:mt-20 p-7">
@@ -245,7 +214,6 @@ const MedicationForm = () => {
           </form>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -44,14 +44,11 @@ const FileUpload = () => {
           },
         }
       );
-
-      console.log(response.data);
-
       setFormData({ name: "" });
       setSelectedFile(null);
       setIsLoading(false);
     } catch (error) {
-      console.error("Error uploading file:", error.message);
+      console.error("Please Try Again", error.message);
       setIsLoading(false);
     }
   };

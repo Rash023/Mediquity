@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form"
 import { apiConnector } from "../../Service/apiConnector"
 import { contactusEndpoint } from "../../Service/apis"
 import { toast } from "react-toastify";
-// import { motion } from "framer-motion";
-// import "./Contact.css"
 
 
 export const Contact = () => {
@@ -19,19 +17,17 @@ export const Contact = () => {
   } = useForm()
 
   const submitContactForm = async (data) => {
-    // console.log("Form Data - ", data)
     try {
       setLoading(true)
-      const res = await apiConnector(
+      await apiConnector(
         "POST",
         contactusEndpoint.CONTACT_US_API,
         data
       )
-      // console.log("Email Res - ", res)
       setLoading(false)
-      toast.success("Mail Send Successfully");
+      toast.success("Thank You for Contacting Us!");
     } catch (error) {
-      console.log("ERROR MESSAGE - ", error.message)
+      console.error(error)
       setLoading(false)
     }
   }

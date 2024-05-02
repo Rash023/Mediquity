@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
@@ -39,8 +38,6 @@ const BookDoctor = () => {
     "Radiology",
     "Rheumatology",
   ];
-
-  const slotTimingOptions = ["9 - 10", "10 - 11", "11 - 12", "4 - 5", "5 - 6", "6 - 7"];
 
   const handlePatientNameChange = (e) => {
     setPatientName(e.target.value);
@@ -81,8 +78,8 @@ const BookDoctor = () => {
         toast.error("Failed to save data", { autoClose: 2000 });
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("An error occurred", { autoClose: 2000 });
+      console.error(error);
+      toast.error("Please Try Again", { autoClose: 2000 });
     }
     navigate(`/get-doctor/${specialist}`);
   };
@@ -154,7 +151,6 @@ const BookDoctor = () => {
           </form>
         </div>
       </div>
-      <ToastContainer position="bottom-right" />
     </div>
   );
 };

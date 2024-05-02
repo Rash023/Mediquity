@@ -1,9 +1,7 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import { CardBody, CardContainer, CardItem } from "../UI/3DCard.tsx";
 import { useNavigate } from "react-router-dom";
 import { Blogs } from "../../Util/Blogs.js";
-
-import "./BlogCard.css";
 
 const BlogCard = ({ index }) => {
   const navigate = useNavigate();

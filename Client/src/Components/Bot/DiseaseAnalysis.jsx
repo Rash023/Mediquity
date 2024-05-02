@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Markdown from "markdown-it";
-import "./PersonalTherapist.css";
+import "./Style/PersonalTherapist.css";
 import axios from "axios";
 import { FaUpload } from "react-icons/fa";
 

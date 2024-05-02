@@ -1,25 +1,10 @@
 import React from 'react'
-import './Home.css'
-import Footer from '../Common/Footer'
 import { Navbar } from './Navbar'
 import ServiceCard from './ServiceCard'
 import { HeroSection } from './HeroSection'
 import ProvideCard from './ProvideCard'
 import ScanPredictionCard from './ScanPredictionCard'
 import Blog from './Blog'
-
-import SpotlightHero from './SpotLightHero'
-import Provide from './Provide'
-import ServicesFeatures from './ServicesFeatures'
-import OurDoctor from './OurDoctor'
-import BookAppointment from './BookAppointment'
-import Conclusion from './Conclusion'
-import ScandPrediction from './ScanPrediction'
-import OurBlogs from './OurBlogs'
-import { GeminiEffect } from './GeminiEffect'
-// import Navbar from '../Common/Navbar'
-
-
 
 
 export const Home = () => {
@@ -34,9 +19,6 @@ export const Home = () => {
           <ProvideCard/>
           <ScanPredictionCard/>
           <Blog />
-          <Footer /> 
-
-
         </div>
       </div>
     </>

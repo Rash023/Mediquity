@@ -1,5 +1,4 @@
 import React from 'react'
-import Exercise from "../../Asset/Exercise-Blog.gif";
 import { GoDotFill } from "react-icons/go";
 
 const PageContent = ({ content, index }) => {

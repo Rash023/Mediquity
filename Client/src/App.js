@@ -3,16 +3,14 @@ import "./App.css";
 import Login from "./Components/Common/Login";
 import SignUp from "./Components/Common/SignUp";
 import BrainTumor from "./Components/Core/Disease/BrainTumor";
-import Contributor from "./Components/Core/Contributor";
 import { Home } from "./Components/Core/Home";
-import { Dashboard } from "./Components/Common/Dashboard";
 import PersonalTherapist from "./Components/Bot/PersonalTherapist";
 import PhysioAssistant from "./Components/Bot/PhysioAssistant";
 import MedicineAssistant from "./Components/Bot/MedicineAssistant";
 import LawAssistant from "./Components/Bot/LawAssistant";
 import { News } from "./Components/Common/News";
 import DiseaseAnalysis from "./Components/Bot/DiseaseAnalysis";
-import Blogspage from "./Components/Common/Blogspage.jsx";
+import Blogspage from "./Components/Common/BlogPage.jsx";
 import PageContent from "./Components/Common/PageContent.jsx";
 
 import Pneumonia from "./Components/Core/Disease/Pneumonia";
@@ -28,7 +26,7 @@ import TuberculosisDetection from "./Components/Core/Disease/Tuberculosis.jsx";
 import KidneyStoneDetection from "./Components/Core/Disease/KidneyStone.jsx";
 import GetDoctorBySpecialist from "./Components/Common/GetDoctorBySpecialist.jsx";
 import ViewSlots from "./Components/Common/ViewSlots.jsx";
-import AllAppointments from "./Components/Common/AllAppointments.jsx";
+import AllAppointments from "./Components/Common/AllAppointment.jsx";
 
 function App() {
   return (
@@ -42,7 +40,6 @@ function App() {
         <Route path="/physiotherapy-assistant" element={<PhysioAssistant />} />
         <Route path="/disease-analysis" element={<DiseaseAnalysis />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/contributor" element={<Contributor />} />
         <Route path="/ping" element={<MedicationForm />} />
         <Route path="/news" element={<News />} />
         {/* DETECTION */}
@@ -73,7 +70,7 @@ function App() {
         <Route path="/file-upload" element={<FileUpload />} />
         <Route path="/view-document" element={<ViewDocument />} />
         <Route path="/get-doctor/:specialist" element={<GetDoctorBySpecialist />} />
-        <Route path="/view-slots/:docId" element={<ViewSlots />} />
+        <Route path="/view-slots/:doctorId" element={<ViewSlots />} />
         <Route path="/appointments" element={<AllAppointments />} />
       </Routes>
     </div>

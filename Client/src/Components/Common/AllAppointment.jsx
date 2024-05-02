@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { IoLink } from "react-icons/io5";
-import User from '../../Asset/user.jpg'
+import User from '../../Asset/Profile/User.jpg'
 import { toast } from 'react-toastify';
 
 const AllAppointments = () => {

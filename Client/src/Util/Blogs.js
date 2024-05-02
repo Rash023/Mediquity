@@ -1,9 +1,9 @@
-import Exercise from "../Asset/Exercise-icon.gif";
-import Diet from "../Asset/Diet-icon.gif";
-import Mental from "../Asset/Mental-icon.gif";
-import Sleep from "../Asset/Sleep-icon.gif";
-import Hydrate from "../Asset/Hydration-icon.gif";
-import Stress from "../Asset/Stress-icon.gif";
+import Exercise from "../Asset/Blog/Exercise-Icon.gif";
+import Diet from "../Asset/Blog/Diet-Icon.gif";
+import Mental from "../Asset/Blog/Mental-Icon.gif";
+import Sleep from "../Asset/Blog/Sleep-Icon.gif";
+import Hydrate from "../Asset/Blog/Hydration-Icon.gif";
+import Stress from "../Asset/Blog/Stress-Icon.gif";
 
 export const Blogs = [
   {

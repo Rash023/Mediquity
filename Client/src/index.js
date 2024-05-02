@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-      <ToastContainer /> {/* Place ToastContainer here */}
+      <ToastContainer />
       <App />
     </React.StrictMode>
   </BrowserRouter>

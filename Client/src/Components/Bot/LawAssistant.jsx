@@ -2,10 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMdSend } from "react-icons/io";
 import Markdown from "markdown-it";
-import "./LawAssistant.css";
-import { BackgroundBeams } from "../UI/BackgroundBeam.tsx";
-import { TracingBeam } from "../UI/TracingBeam.tsx";
-import Starsvg from "../../Asset/BardStar.svg";
+import "./Style/LawAssistant.css";
+import Starsvg from "../../Asset/Profile/BardStar.svg";
 import { useNavigate } from "react-router-dom";
 
 const genAI = new GoogleGenerativeAI(`AIzaSyB5v4JcdsO0gLlgPhSkPD6CZYefcWY7aHk`);

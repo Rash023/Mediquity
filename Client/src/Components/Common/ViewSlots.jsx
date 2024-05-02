@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import Doctor from "../../Asset/Doctor.png"
+import { useParams } from 'react-router-dom'
+import Doctor from "../../Asset/Profile/Doctor.png"
 import { LuAsterisk } from 'react-icons/lu';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,30 +9,29 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ViewSlots = () => {
     const [slotDetails, setSlotDetails] = useState([]);
-    const [selectedSlot, setSelectedSlot] = useState(null); // State to manage selected slot
-    const [showModal, setShowModal] = useState(false); // State to manage modal visibility
-    const { docId } = useParams();
+    const [selectedSlot, setSelectedSlot] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const { doctorId } = useParams();
 
     useEffect(() => {
         const fetchSlots = async () => {
             try {
-                const response = await axios.get(`https://mediquity-gtoc.onrender.com/api/v1/doctor/getDoctorSlots?id=${docId}`);
-                console.log(response);
+                const response = await axios.get(`https://mediquity-gtoc.onrender.com/api/v1/doctor/getDoctorSlots?id=${doctorId}`);
                 setSlotDetails(response);
             } catch (error) {
-                console.error("Error fetching slots:", error);
+                console.error(error);
             }
         };
         fetchSlots();
-    }, [docId]);
+    }, [doctorId]);
     const handleSlotClick = (slot) => {
         setSelectedSlot(slot);
         setShowModal(true);
     };
-    const handleConfirmBooking = async() => {
+    const handleConfirmBooking = async () => {
         try {
-            const response = await axios.post(`https://mediquity-gtoc.onrender.com/api/v1/user/bookAppointment/`,{
-                doctorId: docId,
+            await axios.post(`https://mediquity-gtoc.onrender.com/api/v1/user/bookAppointment/`, {
+                doctorId: doctorId,
                 slotId: selectedSlot._id
             }, {
                 headers: {
@@ -42,9 +41,9 @@ const ViewSlots = () => {
             toast.success("Appointment Added Successfully")
         } catch (error) {
             toast.error("Please Try Again")
-            console.error("Error fetching slots:", error);
+            console.error(error);
         }
-        
+
         setShowModal(false);
     };
     return (

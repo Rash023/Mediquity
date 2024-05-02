@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 const ViewDocument = () => {
     const [documents, setDocuments] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
     const token = sessionStorage.getItem("token");
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
@@ -59,11 +58,6 @@ const ViewDocument = () => {
         }
     };
 
-    const clearSearch = () => {
-        setSearchTerm("");
-        setSearchResults([]);
-    };
-
     useEffect(() => {
         if (!token) {
             navigate("/login");
@@ -97,7 +91,6 @@ const ViewDocument = () => {
                     </form>
                     <div className="lg:p-0 p-3">
                         <div className="lg:w-[50vw]  min-h-[300px] border rounded-[30px] mt-[7%] border-neutral-300 mx-auto flex-col bg-black p-14 grid lg:grid-cols-3 gap-5 grid-cols-1 items-baseline">
-                            {/* Display documents */}
                             {
                                 !documents.length ? (
                                     <div className="lg:w-[43vw]">
@@ -106,7 +99,6 @@ const ViewDocument = () => {
                                 ) : (
                                     documents.slice(currentIndex, currentIndex + 3).map((document, index) => (
                                         <div key={index} className="w-full h-[200px] relative mb-4 overflow-hidden cursor-pointer" onClick={() => handleClick(document.fileUrl)}>
-                                            {/* Render document content */}
                                             {document.fileUrl.toLowerCase().endsWith('.pdf') ? (
                                                 <div className="w-full h-full relative flex flex-col justify-center">
                                                     <FaFilePdf className="w-full h-[90%] object-cover rounded-[15px] p-2" color="red" size={50} />
