@@ -12,7 +12,7 @@ const GetDoctorBySpecialist = () => {
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/v1/doctor/getDoctorBySpecialisation?specialization=${specialist}`);
+                const response = await axios.get(`https://mediquity-gtoc.onrender.com/api/v1/doctor/getDoctorBySpecialisation?specialization=${specialist}`);
                 console.log(response);
                 setdoctors(response);
             } catch (error) {

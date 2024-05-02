@@ -67,7 +67,7 @@ const BookDoctor = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/Medication",
+        "https://mediquity-gtoc.onrender.com/api/v1/Medication",
         {
           patientName,
           description,
@@ -143,45 +143,6 @@ const BookDoctor = () => {
                 ))}
               </select>
             </div>
-            {/* 
-    <div className="flex lg:flex-row flex-col w-full gap-x-2 lg:mt-[4%] mt-[10%]">
-              <div className="lg:w-[60%] w-full">
-                <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
-                  Slot Timing
-                </label>
-                <select
-                  value={slotTiming}
-                  onChange={handleSlotTimingChange}
-                  className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm tracking-[1px] uppercase"
-                  required
-                >
-                  <option value="" className="text-black">
-                    Timing
-                  </option>
-                  {slotTimingOptions.map((option, index) => (
-                    <option key={index} value={option} className="text-black">
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="lg:w-[40%] w-full">
-                <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
-                  Date
-                </label>
-                <br />
-                <div className="flex flex-col">
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                    className="block mt-3 mb-3 text-white bg-transparent border w-full border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:text-sm placeholder:tracking-[2px] justify-center"
-                    required
-                  />
-                </div>
-              </div>
-            </div> */}
-
-
             <div className="flex justify-center">
               <button
                 type="submit"

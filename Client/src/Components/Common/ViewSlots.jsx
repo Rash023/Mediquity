@@ -16,7 +16,7 @@ const ViewSlots = () => {
     useEffect(() => {
         const fetchSlots = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/v1/doctor/getDoctorSlots?id=${docId}`);
+                const response = await axios.get(`https://mediquity-gtoc.onrender.com/api/v1/doctor/getDoctorSlots?id=${docId}`);
                 console.log(response);
                 setSlotDetails(response);
             } catch (error) {
@@ -31,7 +31,7 @@ const ViewSlots = () => {
     };
     const handleConfirmBooking = async() => {
         try {
-            const response = await axios.post(`http://localhost:4000/api/v1/user/bookAppointment/`,{
+            const response = await axios.post(`https://mediquity-gtoc.onrender.com/api/v1/user/bookAppointment/`,{
                 doctorId: docId,
                 slotId: selectedSlot._id
             }, {

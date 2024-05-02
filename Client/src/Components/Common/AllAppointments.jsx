@@ -15,7 +15,7 @@ const AllAppointments = () => {
   useEffect(() => {
     const getuserdetails = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/user/", {
+        const response = await axios.get("https://mediquity-gtoc.onrender.com/api/v1/user/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -33,7 +33,7 @@ const AllAppointments = () => {
   useEffect(() => {
     const getAppointments = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/user/getAppointments", {
+        const response = await axios.get("https://mediquity-gtoc.onrender.com/api/v1/user/getAppointments", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -56,7 +56,7 @@ const AllAppointments = () => {
   const handleConfirmCancel = async () => {
     try {
       toast.loading();
-      const response = await axios.delete(`http://localhost:4000/api/v1/user/cancelAppointment`, {
+      const response = await axios.delete(`https://mediquity-gtoc.onrender.com/api/v1/user/cancelAppointment`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`
         },
