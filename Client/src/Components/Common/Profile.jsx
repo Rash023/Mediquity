@@ -75,9 +75,9 @@ const Profile = () => {
   };
 
   return (
-    <div className='min-h-[100vh] min-w-[100vw] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-clip'>
+    <div className='min-h-[100vh] w-[99vw] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-clip'>
       <div className="flex flex-col">
-        <div className='flex xl:flex-row flex-col gap-y-10 mt-[8%] lg:justify-center lg:gap-x-20 items-center'>
+        <div className='flex xl:flex-row flex-col gap-y-10 mt-[1.9%] lg:justify-center lg:gap-x-20 items-center'>
           <div>
             <img src={User} className='rounded-full lg:h-[400px] h-[350px] lg:w-[400px] w-[350px]' alt='Doctor' />
           </div>
@@ -100,10 +100,10 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className='xl:w-0 w-[70%] xl:h-[400px] h-[5px] bg-white rounded-md mx-auto mt-[5%]' />
+        <div className='xl:w-0 w-[70%] xl:h-[380px] h-[5px] bg-white rounded-md mx-auto mt-[5%]' />
 
         <div className="flex flex-col w-full xl:-mt-[27%]">
-          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[4%]'>
+          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[178px]'>
             Your
           </div>
           <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[1%]'>
