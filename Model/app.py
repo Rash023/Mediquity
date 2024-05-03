@@ -18,7 +18,7 @@ pneumonia_model = load_model('./PNEUMONIA/Model/Pneumonia.h5')
 osteoporosis_model = load_model(r'./OSTEOPOROSIS/Model/Osteoporosis.h5')
 kidney_stone_model = load_model(r'./KIDNEY STONE/Model/Kidney_Stone.h5')
 tuberculosis_model = load_model(r'./TUBERCULOSIS/Model/Tuberculosis.h5')
-brain_tumor_model = load_model('./BRAIN TUMOR/Model/model.h5')
+brain_tumor_model = load_model('./BRAIN TUMOR/Model/Model.h5')
 image_gen = ImageDataGenerator(
     preprocessing_function=tf.keras.applications.mobilenet_v2.preprocess_input)
 with open('./DIABETES/Model/diabetesPredictionModel.pkl', 'rb') as file:

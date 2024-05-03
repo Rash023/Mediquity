@@ -10,7 +10,6 @@ import Blog from './Blog'
 export const Home = () => {
   return (
     <>
-      <Navbar />
       <div>
         <div className="h-fit-content  dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex flex-col items-center justify-center font-sans overflow-clip">
           <HeroSection />

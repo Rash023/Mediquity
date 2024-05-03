@@ -27,10 +27,13 @@ import KidneyStoneDetection from "./Components/Core/Disease/KidneyStone.jsx";
 import GetDoctorBySpecialist from "./Components/Common/GetDoctorBySpecialist.jsx";
 import ViewSlots from "./Components/Common/ViewSlots.jsx";
 import Profile from "./Components/Common/Profile.jsx";
+import About from "./Components/Common/About.jsx";
+import { Navbar } from "./Components/Core/Navbar.jsx";
 
 function App() {
   return (
     <div className="App">
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -64,7 +67,7 @@ function App() {
         {/* DETECTION */}
         <Route path="/blogspage/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
-        <Route path="/contactUs" element={<Contact />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/video-call" element={<VideoConference />} />
         <Route path="/book-doctor" element={<BookDoctor />} />
         <Route path="/file-upload" element={<FileUpload />} />
@@ -72,6 +75,7 @@ function App() {
         <Route path="/get-doctor/:specialist" element={<GetDoctorBySpecialist />} />
         <Route path="/view-slots/:doctorId" element={<ViewSlots />} />
         <Route path="/profile" element={<Profile/>} />
+        <Route path ="/about" element={<About/>} />
       </Routes>
     </div>
   );

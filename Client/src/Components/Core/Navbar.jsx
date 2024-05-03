@@ -20,7 +20,7 @@ export function Navbar() {
     },
     {
       name: "Contact",
-      link: "/contactUs",
+      link: "/contact",
       icon: (
         <IconMessage className="h-4 w-4 text-neutral-500 dark:text-white" />
       ),
