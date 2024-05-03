@@ -2,10 +2,12 @@ import Diabetes from "../Asset/Prediction/Diabetes.jpg"
 import Tuberculosis from "../Asset/Prediction/Tuberculosis.jpg"
 import Kidney from "../Asset/Prediction/Kidney-Stone.jpg"
 import Osteoporosis from "../Asset/Prediction/Osteoporosis.jpeg"
+import Pneumonia from "../Asset/Prediction/Pneumonia.jpg"
+import Brain from "../Asset/Prediction/Brain-Tumor.jpg"
 export const ScanPredictionData = [
   {
     label: "Pnuemonia Detection",
-    src: "https://fit-buddy-app.vercel.app/assets/images/Lung-image.jpg",
+    src: Pneumonia,
     route: "/detection/pneumonia",
   },
   {
@@ -15,7 +17,7 @@ export const ScanPredictionData = [
   },
   {
     label: "Brain Tumor Detection",
-    src: "https://fit-buddy-app.vercel.app/assets/images/brain.png",
+    src: Brain,
     route: "/detection/brain",
   },
   {
