@@ -15,10 +15,10 @@ const About = () => {
         <div className="bg-black bg-dot-white/[0.2] text-white">
             <section className="w-11/12 mx-auto">
                 <div className="relative mx-auto flex w-full max-w-maxContent flex-col justify-between gap-10 text-center">
-                    <header className="mx-auto py-20 text-[30px] font-semibold lg:w-[80%] font-sans tracking-widest leading-[1.2]">
-                        DRIVING AI INNOVATION IN HEALTHCARE FOR A
+                    <header className="mx-auto py-20 lg:text-[40px] text-[30px] font-semibold w-full font-sans tracking-widest leading-[1.2]">
+                        DRIVING AI INNOVATION IN HEALTHCARE FOR
                         <HighlightText text={"BRIGHTER FUTURE"} />
-                        <p className="mx-auto text-center font-extralight text-richblack-300 lg:w-[95%] font-ai lg:mt-[2%] mt-[6%] text-[20px]">
+                        <p className="mx-auto text-center font-extralight text-neutral-500 lg:w-[95%] font-ai lg:mt-[2%] mt-[6%] text-[20px]">
                             Mediquity is leading the charge in transforming healthcare through AI. We're dedicated to enhancing medical services and advancing patient care by offering state-of-the-art AI-powered solutions, harnessing cutting-edge technologies, and fostering a collaborative medical community.
                         </p>
                     </header>
@@ -31,7 +31,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section className="border-b border-richblack-700 lg:mt-0 -mt-10">
+            <section className="border-b border-richblack-700 lg:mt-0 -mt-10 w-10/12 mx-auto">
                 <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-richblack-500">
                     <div className="h-[100px] "></div>
                     <Quote />
@@ -45,10 +45,10 @@ const About = () => {
                             <h1 className="text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  font-sans bg-clip-text font-bold text-4xl lg:w-[90%] uppercase tracking-wider lg:text-lefttext-center">
                                 Our Founding Story
                             </h1>
-                            <p className="font-light text-richblack-300 lg:w-[95%] w-[100%] lg:text-2xl text-xl font-ai tracking-wider">
+                            <p className="font-light text-neutral-500 lg:w-[95%] w-[100%] lg:text-2xl text-xl font-ai tracking-wider">
                                 Our AI-driven health platform emerged from a collective vision and drive to revolutionize healthcare. It started with a team of healthcare professionals, technologists, and enthusiasts who identified the demand for accessible, adaptable, and top-tier health solutions in an ever-changing digital landscape.
                             </p>
-                            <p className="lg:text-2xl text-xl font-light text-richblack-300 lg:w-[95%] w-[100%] font-ai tracking-wider">
+                            <p className="lg:text-2xl text-xl font-light text-neutral-500 lg:w-[95%] w-[100%] font-ai tracking-wider">
                                 As seasoned healthcare professionals, we've witnessed the limitations of traditional healthcare systems. We firmly believe that access to quality healthcare should not be restricted by location or conventional methods. Our goal is to develop an AI-generated health platform that transcends these boundaries, empowering individuals from all walks of life to optimize their well-being.
                             </p>
                         </div>
@@ -68,7 +68,7 @@ const About = () => {
                             <h1 className="text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  font-sans bg-clip-text font-bold text-4xl lg:w-[70%] uppercase tracking-wider lg:text-left text-center">
                                 Our Vision
                             </h1>
-                            <p className="lg:text-2xl text-xl font-light text-richblack-300 lg:w-[95%] w-[100%] font-ai tracking-wider">
+                            <p className="lg:text-2xl text-xl font-light text-neutral-500 lg:w-[95%] w-[100%] font-ai tracking-wider">
                                 With this vision in mind, we set out on a journey to create an
                                 e-learning platform that would revolutionize the way people
                                 learn. Our team of dedicated experts worked tirelessly to
@@ -81,7 +81,7 @@ const About = () => {
                             <h1 className="text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  font-sans bg-clip-text font-bold text-4xl lg:w-[80%] uppercase tracking-wider lg:text-left text-center">
                                 Our Mission
                             </h1>
-                            <p className="lg:text-2xl text-xl font-medium text-richblack-300 lg:w-[95%] w-[100%] font-ai tracking-wider">
+                            <p className="lg:text-2xl text-xl font-medium text-neutral-500 lg:w-[95%] w-[100%] font-ai tracking-wider">
                                 Our mission goes beyond just delivering courses online. We wanted to create a vibrant community of learners, where individuals can connect, collaborate, and learn from one another. We believe that knowledge thrives in an environment of sharing and dialogue, and we foster this spirit of collaboration through forums, live sessions, and networking opportunities.
                             </p>
                         </div>

@@ -27,7 +27,7 @@ export const Blogs = [
     image: Hydrate,
   },
   {
-    title: "Stress Management Techniques",
+    title: "Stress Management",
     image: Stress,
   },
 ];
