@@ -29,6 +29,7 @@ import ViewSlots from "./Components/Common/ViewSlots.jsx";
 import Profile from "./Components/Common/Profile.jsx";
 import About from "./Components/Common/About.jsx";
 import { Navbar } from "./Components/Core/Navbar.jsx";
+import ContributorsPage from "./Components/Common/ContributorsPage.jsx";
 
 function App() {
   return (
@@ -75,7 +76,8 @@ function App() {
         <Route path="/get-doctor/:specialist" element={<GetDoctorBySpecialist />} />
         <Route path="/view-slots/:doctorId" element={<ViewSlots />} />
         <Route path="/profile" element={<Profile/>} />
-        <Route path ="/about" element={<About/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path='/contributor' element={<ContributorsPage/>} /> 
       </Routes>
     </div>
   );
