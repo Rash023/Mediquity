@@ -15,7 +15,7 @@ export function ContributorsPage() {
         </div>
 
         <div className="py-20 flex flex-col lg:flex-row items-center justify-center h-[100vh] w-full gap-4 mx-auto px-8">
-          <Card title="Hindol" icon={<AceternityIcon />}>
+          <Card title="Hindol Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum quia omnis assumenda." icon={<AceternityIcon />}>
             <CanvasRevealEffect
               animationSpeed={5.1}
               containerClassName="bg-emerald-900"
