@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,16 +25,24 @@ const SignUp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    if (!formData.name.length || !formData.email.length || !formData.password.length) {
+      toast.error("Please Fill All The Field", {
+        autoClose: 2000,
+      });
+      return;
+    }
+    setLoading(true);
     try {
       const response = await axios.post(
         `${BASE_URL}/api/v1/user/Signup`,
         formData
       );
       console.log(response);
-      if (response.ok) {
-        toast.success("Signup Successful!", { autoClose: 2000 })
-        window.location.href = "/";
+      if (response.status === 200) {
+        toast.success("Registration Successful!", { autoClose: 2000 })
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } else {
         toast.error("Please Try Again", {
           autoClose: 2000,
@@ -42,6 +53,9 @@ const SignUp = () => {
       toast.error("Please Try Again", {
         autoClose: 2000,
       });
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -66,7 +80,7 @@ const SignUp = () => {
             <div className="">
               <label
                 htmlFor="name"
-                className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px] "
+                className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]"
               >
                 Name
               </label>
@@ -113,8 +127,10 @@ const SignUp = () => {
 
             <div className="text-center w-full lg:py-11 mt-6">
               <button
-                className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-[15px] h-[6vh] font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] uppercase tracking-[2px]"
+                className={`bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-[15px] h-[6vh] font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] uppercase tracking-[2px] ${loading ? 'cursor-wait' : ''}`}
+
                 type="submit"
+                disabled={loading}
               >
                 SignUp &rarr;
                 <BottomGradient />

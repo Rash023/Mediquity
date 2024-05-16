@@ -74,7 +74,7 @@ const Login = () => {
                 type="email"
                 placeholder="Enter email"
                 name="email"
-                value={formData.email} 
+                value={formData.email}
                 onChange={changeHandler}
                 className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-4 py-3 placeholder:uppercase placeholder:tracking-[1px] placeholder:text-sm tracking-wider"
               />
@@ -112,7 +112,7 @@ const Login = () => {
                 Don't have an account?
               </div>
               <a
-                href="/SignUp"
+                href="/signup"
                 className="font-bold floating-animation gemini-font text-sm cursor-pointer hover:underline"
               >
                 Register

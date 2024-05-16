@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../Model/User");
+const Doctor = require("../Model/Doctor");
 const jwt = require("jsonwebtoken");
 
 /* USER REGISTRATION */
@@ -26,7 +27,6 @@ exports.Signup = async (req, res) => {
       name,
       email,
       password: hashPassword,
-      role: "User",
     });
     return res.status(200).json({
       success: true,

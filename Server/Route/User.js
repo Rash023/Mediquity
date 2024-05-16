@@ -12,7 +12,6 @@ const {
   cancelAppointment,
 } = require("../Controller/Appointments");
 
-
 router.get("/", userDetail);
 router.post("/login", login);
 router.post("/signup", Signup);

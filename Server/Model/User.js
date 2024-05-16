@@ -10,14 +10,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    default: "USER",
+    immutable: true,
+  },
   password: {
     type: String,
     required: true,
-  },
-  role: {
-    type: String,
-    enum: ["User", "Doctor"],
-    default: "User",
   },
   files: [
     {
