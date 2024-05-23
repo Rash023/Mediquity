@@ -16,6 +16,8 @@ router.get("/", userDetail);
 router.post("/login", login);
 router.post("/signup", Signup);
 router.post("/medication", createMedication);
+router.delete("/deleteMedication", deleteMedication);
+router.get("/getMedication", getMedications);
 router.post("/upload", fileuploader);
 router.post("/search", SearchFile);
 router.get("/viewFiles", getFiles);
