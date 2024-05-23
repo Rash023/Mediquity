@@ -100,8 +100,7 @@ const checkMedicationSchedule = async () => {
 /* CRON JOB */
 cron.schedule("* * * * *", checkMedicationSchedule);
 
-
-//handler to delete medication of the user
+/* DELETE MEDICATION FOR USER */
 exports.deleteMedication = async (req, res) => {
   try {
     const token =
@@ -111,9 +110,9 @@ exports.deleteMedication = async (req, res) => {
 
     const user = User.findById(id);
     if (!user) {
-      return res.status(401).json({
+      return res.status(404).json({
         success: false,
-        message: "Uesr not logged in",
+        message: "Invalid Token",
       });
     }
 
@@ -122,7 +121,7 @@ exports.deleteMedication = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Medication deleted succesfully",
+      message: "Medication Deleted succesfully",
     });
   } catch (error) {
     return res.status(500).json({
@@ -132,7 +131,7 @@ exports.deleteMedication = async (req, res) => {
   }
 };
 
-//handler to get all the medications
+/* GET ALL MEDICATIONS */
 exports.getMedications = async (req, res) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
@@ -145,7 +144,7 @@ exports.getMedications = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Uesr not logged in",
+        message: "Invalid Token",
       });
     }
 
@@ -153,7 +152,7 @@ exports.getMedications = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Data fetched succesfully",
+      message: "Successfully fetched all Medications",
       data: response,
     });
   } catch (erorr) {
@@ -163,4 +162,3 @@ exports.getMedications = async (req, res) => {
     });
   }
 };
-

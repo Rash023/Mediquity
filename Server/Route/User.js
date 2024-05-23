@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { Signup, login, userDetail } = require("../Controller/User");
-const { createMedication } = require("../Controller/Medication");
+const { createMedication, deleteMedication, getMedications } = require("../Controller/Medication");
 const { fileuploader, SearchFile, getFiles } = require("../Controller/Files");
 const { contactUsController } = require("../Controller/ContactUs");
 const { getSlots } = require("../Controller/Slots");
