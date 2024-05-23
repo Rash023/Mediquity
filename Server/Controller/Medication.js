@@ -99,3 +99,68 @@ const checkMedicationSchedule = async () => {
 
 /* CRON JOB */
 cron.schedule("* * * * *", checkMedicationSchedule);
+
+
+//handler to delete medication of the user
+exports.deleteMedication = async (req, res) => {
+  try {
+    const token =
+      req.body.token || req.header("Authorization").replace("Bearer ", "");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const id = decodedToken.id;
+
+    const user = User.findById(id);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Uesr not logged in",
+      });
+    }
+
+    const { medicationId } = req.body;
+    await Medication.deleteOne({ _id: medicationId, userId: id });
+
+    return res.status(200).json({
+      success: true,
+      message: "Medication deleted succesfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      sucecss: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+//handler to get all the medications
+exports.getMedications = async (req, res) => {
+  try {
+    const token = req.header("Authorization").replace("Bearer ", "");
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const id = decodedToken.id;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Uesr not logged in",
+      });
+    }
+
+    const response = await Medication.find({ userId: id });
+
+    return res.status(200).json({
+      success: true,
+      message: "Data fetched succesfully",
+      data: response,
+    });
+  } catch (erorr) {
+    return res.status(500).json({
+      sucecss: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
