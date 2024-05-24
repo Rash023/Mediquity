@@ -117,6 +117,17 @@ exports.deleteMedication = async (req, res) => {
     }
 
     const { medicationId } = req.body;
+    const medication = await Medication.findOne({
+      _id: medicationId,
+      userId: id,
+    });
+    if (!medication) {
+      return res.status(401).json({
+        success: false,
+        message: "You are not authorized to delete this Medication",
+      });
+    }
+
     await Medication.deleteOne({ _id: medicationId, userId: id });
 
     return res.status(200).json({
