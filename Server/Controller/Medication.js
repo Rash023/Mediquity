@@ -21,16 +21,10 @@ exports.createMedication = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "User not found",
+        message: "Invalid Token",
       });
     }
     const { medicineName, type, dosage, days, times } = req.body;
-    const formattedTimes = times.map((time) => {
-      const timeString = new Date(time);
-      const hours = timeString.getHours().toString().padStart(2, "0");
-      const minutes = timeString.getMinutes().toString().padStart(2, "0");
-      return `${hours}:${minutes}`;
-    });
     const daysOfWeek = [
       "Monday",
       "Tuesday",
@@ -46,9 +40,14 @@ exports.createMedication = async (req, res) => {
       type: type,
       dosage: dosage,
       days: daysOfWeek,
-      times: formattedTimes,
+      times: times,
     });
-    await medication.save();
+    const savedMedication = await medication.save();
+    await User.findByIdAndUpdate(user._id, {
+      $push: {
+        medications: savedMedication,
+      },
+    });
     return res.status(200).json({
       success: true,
       message: "Medication Added Successfully",
@@ -70,6 +69,7 @@ const checkMedicationSchedule = async () => {
     const currentTime = currentDate.getHours() * 60 + currentDate.getMinutes();
     const medications = await Medication.find({
       days: { $elemMatch: { $eq: currentDay } },
+      status: "Live",
     }).populate("userId");
     for (const medication of medications) {
       for (const time of medication.times) {
@@ -158,13 +158,57 @@ exports.getMedications = async (req, res) => {
         message: "Invalid Token",
       });
     }
-
-    const response = await Medication.find({ userId: id });
-
+    const response = await Medication.find({ userId: user._id });
     return res.status(200).json({
       success: true,
       message: "Successfully fetched all Medications",
       data: response,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      sucecss: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+/* UPDATE MEDICATION STATUS */
+exports.updateMedicationStatus = async (req, res) => {
+  try {
+    const { medicationId, status } = req.body;
+    const token = req.header("Authorization").replace("Bearer ", "");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const id = decodedToken.id;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid Token",
+      });
+    }
+    const medication = await Medication.findById(medicationId);
+    if (!medication) {
+      return res.status(404).json({
+        success: false,
+        message: "Please provide a valid Medication ID",
+      });
+    }
+
+    if (!medication.userId.equals(user._id)) {
+      return res.status(401).json({
+        success: false,
+        message: "You are not authorized to update this Medication",
+      });
+    }
+
+    await Medication.findByIdAndUpdate(medicationId, {
+      status: status,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully updated Medication status",
     });
   } catch (erorr) {
     return res.status(500).json({

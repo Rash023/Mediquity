@@ -14,10 +14,10 @@ const MedicationForm = () => {
     type: "",
     dosage: "",
     days: new Array(7).fill(false),
-    times: [],
+    time: "",
   });
 
-  const [timeFields, setTimeFields] = useState([new Date()]);
+  const [time, setTime] = useState(new Date());
 
   const daysOfWeek = [
     "Monday",
@@ -40,42 +40,44 @@ const MedicationForm = () => {
     setMedication({ ...medication, days: updatedDays });
   };
 
-  const handleTimeChange = (index, time) => {
-    const updatedTimeFields = [...timeFields];
-    updatedTimeFields[index] = time;
-    setTimeFields(updatedTimeFields);
-    setMedication({ ...medication, times: updatedTimeFields });
-  };
-
-  const addTimeField = () => {
-    setTimeFields([...timeFields, new Date()]);
-  };
-
-  const removeTimeField = (index) => {
-    const updatedTimeFields = [...timeFields];
-    updatedTimeFields.splice(index, 1);
-    setTimeFields(updatedTimeFields);
-    setMedication({ ...medication, times: updatedTimeFields });
+  const handleTimeChange = (time) => {
+    setTime(time);
+    setMedication({ ...medication, time: time });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const date = new Date(medication.time);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const transformedTime = `${hours}:${minutes}`;
+    const updatedMedication = { ...medication, times: transformedTime };
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/v1/user/medication`,
-        medication,
+        `${BASE_URL}/api/v1/medication/addMedication`,
+        updatedMedication
       );
 
       if (response) {
         toast.success("Medication Saved Successfully!", { autoClose: 2000 });
+        setMedication({
+          token: sessionStorage.getItem("token"),
+          medicineName: "",
+          type: "",
+          dosage: "",
+          days: new Array(7).fill(false),
+          time: ""
+        });
+        setTime(new Date());
       } else {
         toast.error("Please Try Again", { autoClose: 2000 });
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toast.error("Please Try Again", { autoClose: 2000 });
     }
   };
+
 
   return (
     <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
@@ -149,44 +151,25 @@ const MedicationForm = () => {
                 ))}
               </div>
             </div>
-
-            {timeFields.map((time, index) => (
-              <div key={index} className="flex flex-col items-baseline mt-[8%]">
-                <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
-                  Time
-                </label>
-                <div className="flex gap-2 items-center">
-                  <DatePicker
-                    selected={time}
-                    onChange={(newTime) => handleTimeChange(index, newTime)}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={1}
-                    timeFormat="HH:mm"
-                    timeCaption="Time"
-                    dateFormat="HH:mm"
-                    className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-3 py-2 placeholder:uppercase placeholder:tracking-[2px] placeholder:text-sm"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeTimeField(index)}
-                    className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg text-xl p-2 ${timeFields.length <= 1 ? "cursor-not-allowed" : ""
-                      }`}
-                    disabled={timeFields.length <= 1}
-                  >
-                    <MdDelete />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={addTimeField}
-                    className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg text-xl p-2"
-                  >
-                    <MdAdd />
-                  </button>
-                </div>
+            <div className="flex flex-col items-baseline mt-[8%]">
+              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
+                Time
+              </label>
+              <div className="flex gap-2 items-center">
+                <DatePicker
+                  selected={time}
+                  onChange={(newTime) => handleTimeChange(newTime)}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={1}
+                  timeFormat="HH:mm"
+                  timeCaption="Time"
+                  dateFormat="HH:mm"
+                  className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-3 py-2 placeholder:uppercase placeholder:tracking-[2px] placeholder:text-sm"
+                  required
+                />
               </div>
-            ))}
+            </div>
 
             <div className="mt-[8%]">
               <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
