@@ -33,6 +33,13 @@ const UserSchema = new mongoose.Schema({
       ref: "Appointment",
     },
   ],
+  medications: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Medication",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", UserSchema);

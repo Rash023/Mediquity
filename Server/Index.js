@@ -8,6 +8,7 @@ const { cloudinaryConnect } = require("./Configuration/Cloudinary");
 const predictionRoute = require("./Route/Prediction");
 const userRoute = require("./Route/User");
 const doctorRoute = require("./Route/Doctor");
+const medicationRoute = require("./Route/Medication");
 
 /* ENV */
 dotenv.config();
@@ -46,3 +47,4 @@ app.listen(PORT, () => {
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/doctor", doctorRoute);
 app.use("/api/v1/predict", predictionRoute);
+app.use("/api/v1/medication", medicationRoute);

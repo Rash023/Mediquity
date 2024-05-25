@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const { Signup, login, userDetail } = require("../Controller/User");
-const { createMedication, deleteMedication, getMedications } = require("../Controller/Medication");
 const { fileuploader, SearchFile, getFiles } = require("../Controller/Files");
 const { contactUsController } = require("../Controller/ContactUs");
 const { getSlots } = require("../Controller/Slots");
@@ -15,9 +14,6 @@ const {
 router.get("/", userDetail);
 router.post("/login", login);
 router.post("/signup", Signup);
-router.post("/medication", createMedication);
-router.delete("/deleteMedication", deleteMedication);
-router.get("/getMedication", getMedications);
 router.post("/upload", fileuploader);
 router.post("/search", SearchFile);
 router.get("/viewFiles", getFiles);
