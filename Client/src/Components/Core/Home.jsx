@@ -1,11 +1,11 @@
-import React from 'react'
-import { Navbar } from './Navbar'
-import ServiceCard from './ServiceCard'
-import { HeroSection } from './HeroSection'
-import ProvideCard from './ProvideCard'
-import ScanPredictionCard from './ScanPredictionCard'
-import Blog from './Blog'
-
+import React from "react";
+import { Navbar } from "./Navbar";
+import ServiceCard from "./ServiceCard";
+import { HeroSection } from "./HeroSection";
+import ProvideCard from "./ProvideCard";
+import ScanPredictionCard from "./ScanPredictionCard";
+import Blog from "./Blog";
+import { Footer } from "./Footer";
 
 export const Home = () => {
   return (
@@ -18,8 +18,12 @@ export const Home = () => {
           <ProvideCard />
           <ScanPredictionCard />
           <Blog />
+
+          <Footer />
+
+          <div className="h-4"></div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
