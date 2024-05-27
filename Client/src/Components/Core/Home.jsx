@@ -18,6 +18,8 @@ export const Home = () => {
           <ProvideCard />
           <ScanPredictionCard />
           <Blog />
+           <Footer />
+          <div className="h-4"></div>
         </div>
       </div>
     </>
