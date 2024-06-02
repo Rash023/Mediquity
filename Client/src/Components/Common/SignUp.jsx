@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { axiosInstance } from "../../Service/apiConnector";
+
 
 const SignUp = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL
@@ -34,8 +34,8 @@ const SignUp = () => {
     }
     setLoading(true);
     try {
-      const response = await axiosInstance.post(
-        `/api/v1/user/Signup`,
+      const response = await axios.post(
+        `${BASE_URL}/api/v1/user/Signup`,
         formData
       );
       console.log(response);
