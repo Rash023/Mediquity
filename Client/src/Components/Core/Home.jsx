@@ -5,7 +5,7 @@ import { HeroSection } from './HeroSection'
 import ProvideCard from './ProvideCard'
 import ScanPredictionCard from './ScanPredictionCard'
 import Blog from './Blog'
-
+import { Footer } from "./Footer";
 
 export const Home = () => {
   return (
