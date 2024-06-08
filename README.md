@@ -102,7 +102,7 @@
 ## BUILD PROCESS
 
 - <b>Clone Or Download the Repository</b>
-  - `git clone https://github.com/Rash023/Minor`
+  - `git clone https://github.com/Rash023/Mediquity.git`
 - <b>FOR FRONTEND:</b>
   - `npm i` to install dependencies
   - `npm run start`
