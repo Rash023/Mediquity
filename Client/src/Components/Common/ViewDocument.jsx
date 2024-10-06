@@ -48,6 +48,7 @@ const ViewDocument = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
+        if (!searchTerm.trim()) return;
         setLoading(true);
         try {
             const response = await axios.post(`${BASE_URL}/api/v1/user/search`, {
@@ -57,7 +58,7 @@ const ViewDocument = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setDocuments(response?.data?.files);
+            setDocuments(response?.data?.files ?? []);
         } catch (error) {
             console.error(error);
         } finally {

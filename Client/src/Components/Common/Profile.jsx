@@ -197,7 +197,7 @@ const Profile = () => {
     <div className='min-h-[100vh] w-[99vw] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-clip'>
       <div className="flex flex-col">
         <div className='flex xl:flex-row flex-col gap-y-10 mt-[1.9%] lg:justify-center lg:gap-x-20 items-center'>
-          
+
           <div>
             {loading.userDetails ? (
               <div className='animate-pulse rounded-full bg-gray-400 lg:h-[400px] h-[350px] lg:w-[400px] w-[350px]' />
@@ -205,7 +205,7 @@ const Profile = () => {
               <img src={User} className='rounded-full lg:h-[400px] h-[350px] lg:w-[400px] w-[350px]' alt='Doctor' />
             )}
           </div>
-          
+
           <div className='xl:w-[2px] w-[70%] xl:h-[400px] h-[5px] bg-white rounded-md' />
 
           <div className='flex items-center'>
@@ -251,8 +251,13 @@ const Profile = () => {
         <div className='xl:w-0 w-[70%] xl:h-[380px] h-[5px] bg-white rounded-md mx-auto mt-[5%]' />
 
         {/* APPOINTMENTS */}
-          <div className="flex flex-col w-full xl:-mt-[27%]">
-          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[178px]'>Your Appointment</div>
+        <div className="flex flex-col w-full lg:-mt-[28%] -mt-[18%]">
+          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[178px]'>
+            Your
+          </div>
+          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[1%]'>
+            Appointment
+          </div>
           <div className='grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
             {loading.appointments ? (
               <>
@@ -308,8 +313,13 @@ const Profile = () => {
         </div>
 
         {/* MEDICATION */}
-        <div className="flex flex-col w-full">
-          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto'>Your Medications</div>
+        <div className="flex flex-col w-full -mt-[9%]">
+          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[178px]'>
+            Your
+          </div>
+          <div className='select-none text-gray-300 lg:text-5xl text-4xl uppercase first-letter:text-6xl tracking-[2px] mx-auto mt-[1%]'>
+            Medication
+          </div>
           <div className='grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
             {loading.medications ? (
               <>
@@ -371,7 +381,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      
+
       {/* MODAL */}
       <div>
         {/* Appointment Modal */}

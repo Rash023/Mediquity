@@ -1,5 +1,5 @@
 import React from "react";
-import { Blogs } from "../../Util/Blogs";
+import { blogs } from "../../Util/Blogs";
 import BlogCard from "./BlogCard";
 
 const Blog = () => {
@@ -9,7 +9,7 @@ const Blog = () => {
         Blogs
       </p>
       <div className="w-full px-8 mt-[4%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-8">
-        {Blogs.map((service,index) => (
+        {blogs.map((service,index) => (
           <BlogCard index={index}/>
         ))}
       </div>

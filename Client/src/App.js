@@ -28,12 +28,10 @@ import GetDoctorBySpecialist from "./Components/Common/GetDoctorBySpecialist.jsx
 import ViewSlots from "./Components/Common/ViewSlots.jsx";
 import Profile from "./Components/Common/Profile.jsx";
 import About from "./Components/Common/About.jsx";
-import { Navbar } from "./Components/Core/Navbar.jsx";
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

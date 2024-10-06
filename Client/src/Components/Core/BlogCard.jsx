@@ -1,7 +1,7 @@
 import { React } from "react";
 import { CardBody, CardContainer, CardItem } from "../UI/3DCard.tsx";
 import { useNavigate } from "react-router-dom";
-import { Blogs } from "../../Util/Blogs.js";
+import { blogs } from "../../Util/Blogs.js";
 import { MdDateRange } from "react-icons/md";
 import { TiUser } from "react-icons/ti";
 
@@ -17,11 +17,11 @@ const BlogCard = ({ index }) => {
           translateZ="50"
           className="text-xl font-bold text-neutral-600 dark:text-white uppercase tracking-[1.1px]"
         >
-          {Blogs[index].title}
+          {blogs[index].title}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <img
-            src={Blogs[index].image}
+            src={blogs[index].image}
             height="1000"
             width="1000"
             className="h-60 w-[99%] object-cover rounded-xl group-hover/card:shadow-xl opacity-90"
@@ -33,14 +33,14 @@ const BlogCard = ({ index }) => {
 
             <div className="flex gap-x-1 items-center">
               <MdDateRange size={16} className="flex-shrink-0" color="#3B82F6" />
-              <span className="text-base">
-                6th Oct, 2024
+              <span className="text-sm tracking-wide lg:text-base">
+                {blogs[index].date}
               </span>
             </div>
 
             <div className="flex gap-x-1 items-center">
               <TiUser size={16} className="flex-shrink-0" color="#3B82F6" />
-              <span className="text-base">
+              <span className="text-sm tracking-wide lg:text-base">
                 By Admin
               </span>
             </div>
@@ -55,7 +55,7 @@ const BlogCard = ({ index }) => {
             className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
           ></CardItem>
 
-          <div className="bg-[#3b82f6] p-2 rounded-lg">
+          <div className="bg-[#3b82f6] p-2 rounded-lg lg:mt-0 -mt-[10%]">
             <button
               className="text-white font-semibold tracking-wide"
               onClick={clickHandler}

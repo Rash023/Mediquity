@@ -6,8 +6,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "../../Util/cn.ts";
-import { Link, useNavigate } from "react-router-dom";
-import { IoIosLogOut } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 
 export const FloatingNav = ({
@@ -23,13 +22,13 @@ export const FloatingNav = ({
 }) => {
   const { scrollYProgress } = useScroll();
   const navigate = useNavigate();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    let direction = current - scrollYProgress.getPrevious();
+    let direction = current - (scrollYProgress.getPrevious?.() ?? 0);
 
     if (scrollYProgress.get() < 0.001) {
-      setVisible(false);
+      setVisible(true);
     } else {
       if (direction < 0) {
         setVisible(true);
@@ -44,6 +43,7 @@ export const FloatingNav = ({
     sessionStorage.removeItem("user");
     window.location.href = "/";
   };
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
