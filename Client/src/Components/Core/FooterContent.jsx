@@ -1,8 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export function FooterContent(props) {
-  const Navigate = useNavigate();
 
   return (
     <div className="flex select-none">

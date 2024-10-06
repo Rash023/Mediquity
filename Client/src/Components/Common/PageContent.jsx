@@ -16,7 +16,7 @@ const PageContent = ({ content, index }) => {
           </div>
           <div className='lg:pl-[8%] p-6'>
             <p className='text-white uppercase tracking-[2px] lg:text-5xl text-3xl lg:first-letter:text-6xl first-letter:text-4xl font-bold mb-[3%] lg:w-[100%] w-[80%]'>Introduction</p>
-            <div className="lg:text-2xl text-md text-neutral-300 w-full text-justify lg:tracking-[2px] tracking-[1.5px] font-extralight">{content.intro}</div>
+            <div className="lg:text-2xl text-md text-neutral-300 w-full lg:tracking-[2px] tracking-[1.5px] font-extralight">{content.intro}</div>
           </div>
         </div>
 
@@ -28,12 +28,12 @@ const PageContent = ({ content, index }) => {
                 <GoDotFill className='text-white' />
                 <h1 className='text-white mb-[10px] tracking-[1.5px] lg:first-letter:text-4xl first-letter:text-3xl text-xl uppercase font-bold lg:text-2xl'>{value.heading}</h1>
               </div>
-              <h1 className='lg:text-xl text-md mb-[3%] text-neutral-300 text-justify lg:tracking-[3px] tracking-[1px] font-extralight lg:pl-8 lg:pr-10 p-2'>{value.innerContent}</h1>
+              <h1 className='lg:text-xl text-md mb-[3%] text-neutral-300 lg:tracking-[3px] tracking-[1px] font-extralight lg:pl-8 lg:pr-10 p-2'>{value.innerContent}</h1>
             </div>
           ))
         }
         <p className='text-white uppercase tracking-[2px] lg:text-5xl text-3xl first-letter:text-4xl lg:first-letter:text-6xl pl-6 lg:pl-20 font-bold mt-[1%] mb-[1.5%]'>Conclusion</p>
-        <h1 className='lg:text-xl text-md mb-[3%] text-neutral-300 text-justify lg:tracking-[3px] tracking-[1px] font-extralight pl-[8%] pr-10'>{content.Conclusion}</h1>
+        <h1 className='lg:text-xl text-md mb-[3%] text-neutral-300 lg:tracking-[3px] tracking-[1px] font-extralight pl-[8%] pr-10'>{content.Conclusion}</h1>
         <p className='text-white uppercase tracking-[2px] lg:text-5xl text-3xl first-letter:text-4xl lg:first-letter:text-6xl lg:pl-20 font-bold mt-[1%] mb-[1.5%] lg:text-left text-center'> Tips of the day</p>
         {
           content.Tips.map((value, index) => (
@@ -42,7 +42,7 @@ const PageContent = ({ content, index }) => {
                 <GoDotFill className='text-white' />
                 <h1 className='text-white mb-[10px] tracking-[1.5px] lg:first-letter:text-4xl first-letter:text-3xl uppercase font-bold lg:text-2xl text-xl'>{value.heading}</h1>
               </div>
-              <h1 className='lg:text-xl text-md mb-[3%] text-neutral-300 text-justify lg:tracking-[3px] tracking-[1px] font-extralight pl-8 pr-10'>{value.innerContent}</h1>
+              <h1 className='lg:text-xl text-md mb-[3%] text-neutral-300 lg:tracking-[3px] tracking-[1px] font-extralight pl-8 pr-10'>{value.innerContent}</h1>
             </div>
           ))
         }

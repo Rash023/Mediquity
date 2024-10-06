@@ -29,7 +29,6 @@ import ViewSlots from "./Components/Common/ViewSlots.jsx";
 import Profile from "./Components/Common/Profile.jsx";
 import About from "./Components/Common/About.jsx";
 import { Navbar } from "./Components/Core/Navbar.jsx";
-import ContributorsPage from "./Components/Common/ContributorsPage.jsx";
 
 function App() {
   return (
@@ -66,7 +65,7 @@ function App() {
           element={<KidneyStoneDetection />}
         />
         {/* DETECTION */}
-        <Route path="/blogspage/:index" element={<Blogspage />} />
+        <Route path="/blog/:index" element={<Blogspage />} />
         <Route path="/pagecontent" element={<PageContent />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/video-call" element={<VideoConference />} />
@@ -77,7 +76,6 @@ function App() {
         <Route path="/view-slots/:doctorId" element={<ViewSlots />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/about" element={<About/>} />
-        <Route path='/contributor' element={<ContributorsPage/>} /> 
       </Routes>
     </div>
   );

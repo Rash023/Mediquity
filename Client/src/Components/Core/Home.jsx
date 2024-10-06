@@ -1,5 +1,4 @@
 import React from 'react'
-import { Navbar } from './Navbar'
 import ServiceCard from './ServiceCard'
 import { HeroSection } from './HeroSection'
 import ProvideCard from './ProvideCard'
@@ -18,9 +17,9 @@ export const Home = () => {
           <ProvideCard />
           <ScanPredictionCard />
           <Blog />
-           <Footer />
           <div className="h-4"></div>
         </div>
+        <Footer />
       </div>
     </>
   )

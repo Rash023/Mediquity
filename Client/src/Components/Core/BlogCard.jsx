@@ -2,11 +2,13 @@ import { React } from "react";
 import { CardBody, CardContainer, CardItem } from "../UI/3DCard.tsx";
 import { useNavigate } from "react-router-dom";
 import { Blogs } from "../../Util/Blogs.js";
+import { MdDateRange } from "react-icons/md";
+import { TiUser } from "react-icons/ti";
 
 const BlogCard = ({ index }) => {
   const navigate = useNavigate();
   const clickHandler = () => {
-    navigate(`/blogspage/${index}`);
+    navigate(`/blog/${index}`);
   };
   return (
     <CardContainer className="inter-var">
@@ -26,6 +28,26 @@ const BlogCard = ({ index }) => {
             alt="thumbnail"
           />
         </CardItem>
+        <CardItem translateZ="100" className="w-full mt-4 px-2">
+          <div className="flex justify-between text-white">
+
+            <div className="flex gap-x-1 items-center">
+              <MdDateRange size={16} className="flex-shrink-0" color="#3B82F6" />
+              <span className="text-base">
+                6th Oct, 2024
+              </span>
+            </div>
+
+            <div className="flex gap-x-1 items-center">
+              <TiUser size={16} className="flex-shrink-0" color="#3B82F6" />
+              <span className="text-base">
+                By Admin
+              </span>
+            </div>
+
+          </div>
+        </CardItem>
+
         <div className="flex justify-between items-center mt-20">
           <CardItem
             translateZ={20}
