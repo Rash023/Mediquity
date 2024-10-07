@@ -64,7 +64,7 @@ const FileUpload = () => {
       <div className="rounded-md flex flex-col items-center justify-center antialiased">
         <div className="lg:-mt-16">
           <div className="p-3 lg:p-0 ">
-            <h1 className="text-4xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+            <h1 className="text-4xl ipad:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
               Scan Reports
             </h1>
             <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] tracking-[1px] font-ai p-3 lg:p-0 text-justify">
@@ -143,7 +143,7 @@ const FileUpload = () => {
                 </div>
               </form>
             </div>
-            <div className="flex lg:items-center mt-4 lg:ml-6 gap-1">
+            <div className="flex ipad:items-center mt-4 ipad:ml-6 gap-1">
               <div className="text-red-500 text-md">
                 <LuAsterisk />
               </div>

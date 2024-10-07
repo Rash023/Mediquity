@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { MdAdd, MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -81,14 +80,14 @@ const MedicationForm = () => {
 
   return (
     <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
-      <h1 className="select-none text-4xl lg:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+      <h1 className="select-none text-4xl ipad:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
         Medication Detail
       </h1>
 
-      <div className="flex justify-center mt-8 lg:mt-20 p-7">
+      <div className="flex justify-center mt-8 ipad:mt-20 p-7">
         <div className="w-[630px] h-fit border border-white rounded-[30px] bg-black p-10">
           <form onSubmit={handleSubmit}>
-            <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
+            <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl uppercase select-none tracking-[1px]">
               Medicine Name
             </label>
             <input
@@ -102,7 +101,7 @@ const MedicationForm = () => {
             />
 
             <div className="mt-[8%]">
-              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
+              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl uppercase select-none tracking-[1px]">
                 Type
               </label>
               <select
@@ -128,10 +127,10 @@ const MedicationForm = () => {
             </div>
 
             <div className="mt-[8%]">
-              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
+              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl uppercase select-none tracking-[1px]">
                 Day
               </label>
-              <div className="grid grid-cols-1 lg:grid-cols-3">
+              <div className="grid grid-cols-1 ipad:grid-cols-3">
                 {daysOfWeek.map((day, index) => (
                   <label
                     key={index}
@@ -152,7 +151,7 @@ const MedicationForm = () => {
               </div>
             </div>
             <div className="flex flex-col items-baseline mt-[8%]">
-              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
+              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl uppercase select-none tracking-[1px]">
                 Time
               </label>
               <div className="flex gap-2 items-center">
@@ -172,7 +171,7 @@ const MedicationForm = () => {
             </div>
 
             <div className="mt-[8%]">
-              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]">
+              <label className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl uppercase select-none tracking-[1px]">
                 Dosage
               </label>
               <div className="flex gap-2 items-center">

@@ -83,11 +83,11 @@ const ViewDocument = () => {
         <div className="min-h-screen min-w-screen dark:bg-black bg-white dark:bg-dot-white-[0.2] bg-dot-black-[0.2] relative flex items-center justify-center">
             <div className="rounded-md flex flex-col items-center justify-center antialiased">
                 <div className="lg:-mt-18">
-                    <div className="p-3 lg:p-0 ">
+                    <div className="p-3 ipad:p-0">
                         <h1 className="text-4xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
                             View Report
                         </h1>
-                        <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] tracking-[1px] font-ai p-3 lg:p-0 text-justify">
+                        <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg ipad:text-[1.25rem] tracking-[1px] font-ai p-3 ipad:p-0 text-justify">
                             Welcome to Mediquity, your secure and easy-to-use platform for managing your vital medical documents. We prioritize your privacy and convenience, ensuring a seamless experience every time.
                         </p>
                     </div>
@@ -115,7 +115,7 @@ const ViewDocument = () => {
                                 </>
                             ) : !documents.length ? (
                                 <div className="lg:w-[43vw]">
-                                    <div className="  mt-16 lg:ml-10 ml-3 text-4xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px]">No files found!</div>
+                                    <div className="  mt-16 ipad:ml-10 ml-3 text-4xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px]">No files found!</div>
                                 </div>
                             ) : (
                                 documents.slice(currentIndex, currentIndex + 3).map((document, index) => (
@@ -141,7 +141,7 @@ const ViewDocument = () => {
                                 <button onClick={handleNext} disabled={currentIndex + 3 >= documents.length} className="text-white rounded-full border-2"><GrFormNext size={25} /></button>
                             </div>
                         )}
-                        <div className="flex lg:justify-center mt-4 lg:ml-6 gap-1">
+                        <div className="flex ipad:justify-center mt-4 ipad:ml-6 gap-1">
                             <div className="text-red-500 text-md"><LuAsterisk /></div>
                             <div className="text-neutral-500 my-1 text-[0.65rem] text-center tracking-[1px]">Information provided is subject to ongoing evolution and may not be entirely accurate.</div>
                         </div>

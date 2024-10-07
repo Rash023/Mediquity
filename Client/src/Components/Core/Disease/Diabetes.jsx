@@ -47,11 +47,11 @@ const DiabetesPrediction = () => {
     };
     return (
         <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
-            <h1 className="select-none text-4xl lg:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+            <h1 className="select-none text-4xl ipad:text-7xl pt-[4%] bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
                 DIABETES PREDICTION
             </h1>
 
-            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] text-center tracking-[1px] font-ai p-3 lg:p-0">
+            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg ipad:text-[1.5rem] lg:text-[1.25rem] text-center tracking-[1px] font-ai p-3 lg:p-0">
                 Greetings from{" "}
                 <span className="uppercase font-bold floating-animation gemini-font">
                     DiaCheck
@@ -75,7 +75,7 @@ const DiabetesPrediction = () => {
 
                         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 mb-4 mt-8">
                             <div>
-                                <label htmlFor="gender" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl uppercase select-none tracking-[1px]'>Gender</label>
+                                <label htmlFor="gender" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl uppercase select-none tracking-[1px]'>Gender</label>
                                 <div className='flex items-center'>
                                     <input type="radio" name='gender' className='block m-4  cursor-pointer' value="1" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]'>Male</span>
                                 </div>
@@ -85,7 +85,7 @@ const DiabetesPrediction = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="hypertension" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-xl lg:text-2xl select-none tracking-[1px]'>Hypertension</label>
+                                <label htmlFor="hypertension" className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-xl ipad:text-2xl select-none tracking-[1px]'>Hypertension</label>
                                 <div className='flex items-center'>
                                     <input type="radio" name='hypertension' className='block m-4 cursor-pointer' value="1" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]' >Yes</span>
                                 </div>
@@ -94,7 +94,7 @@ const DiabetesPrediction = () => {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="heart_disease" className='bg-clip-text text-transparent uppercase bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl select-none tracking-[1px]'>Heart Disease</label>
+                                <label htmlFor="heart_disease" className='bg-clip-text text-transparent uppercase bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl select-none tracking-[1px]'>Heart Disease</label>
                                 <div className='flex items-center'>
                                     <input type="radio" name='heart_disease' className='block m-4 cursor-pointer' value="1" onChange={changeHandler} /><span className='text-neutral-500  select-none  tracking-[0.5px]  ' >Yes</span>
                                 </div>
@@ -108,8 +108,8 @@ const DiabetesPrediction = () => {
 
 
                         <div>
-                            <label htmlFor="smoking_history" className='bg-clip-text select-none uppercase text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl tracking-[1px]'>Smoking History</label>
-                            <div className='flex flex-col lg:flex-row space-y-2 md:space-y-0 md:space-x-8'>
+                            <label htmlFor="smoking_history" className='bg-clip-text select-none uppercase text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl tracking-[1px]'>Smoking History</label>
+                            <div className='flex flex-col ipad:flex-row space-y-2 md:space-y-0 md:space-x-8'>
                                 <div className='flex items-center'>
                                     <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' value="0" onChange={changeHandler} />
                                     <span className='text-neutral-500  select-none  tracking-[0.5px]'>No Info</span>
@@ -125,7 +125,7 @@ const DiabetesPrediction = () => {
                             </div>
 
 
-                            <div className='flex flex-col lg:flex-row space-y-2 md:space-y-0 md:space-x-8'>
+                            <div className='flex flex-col ipad:flex-row space-y-2 md:space-y-0 md:space-x-8'>
                                 <div className='flex items-center'>
                                     <input type="radio" name='smoking_history' className='block m-4 cursor-pointer' onChange={changeHandler} value="3" />
                                     <span className='text-neutral-500  select-none  tracking-[0.5px]  ' >Former</span>
@@ -143,17 +143,17 @@ const DiabetesPrediction = () => {
                         <div className='h-[0.5px] w-[90%] bg-white  rounded-md ml-3 mb-6 mt-10' ></div>
 
                         <div>
-                            <label htmlFor="bmi" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-2xl tracking-[1px]'>BMI</label>
+                            <label htmlFor="bmi" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl ipad:text-2xl tracking-[1px]'>BMI</label>
                             <input type="text" name='bmi' onChange={changeHandler} placeholder="BMI Value (Float)" className='block mt-3 mb-6  text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-1 pl-1 py-3 lg:placeholder:pl-4 lg:pl-4 placeholder:uppercase  placeholder:tracking-[1px] placeholder:text-xs lg:placeholder:text-sm' />
                         </div>
 
                         <div>
-                            <label htmlFor="HbA1c_level" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-xl lg:text-2xl tracking-[1px]'>HbA1c level</label>
+                            <label htmlFor="HbA1c_level" className='bg-clip-text text-transparent select-none bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-xl ipad:text-2xl tracking-[1px]'>HbA1c level</label>
                             <input type="text" name='HbA1c_level' onChange={changeHandler} placeholder="HbA1c Level (Float)" className=' block mt-3 mb-6 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-1 pl-1 lg:placeholder:pl-4 lg:pl-4 py-3 placeholder:uppercase  placeholder:tracking-[1px] placeholder:text-xs lg:placeholder:text-sm' />
                         </div>
 
                         <div>
-                            <label htmlFor="blood_glucose_level" className='select-none bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-xl lg:text-2xl tracking-[1px]'>Blood Glucose Level</label>
+                            <label htmlFor="blood_glucose_level" className='select-none bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 uppercase text-xl ipad:text-2xl tracking-[1px]'>Blood Glucose Level</label>
                             <input type="text" name='blood_glucose_level' onChange={changeHandler} placeholder="Blood Glucose level (Int)" className=' block mt-3 mb-6 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-1 pl-1 lg:placeholder:pl-4 lg:pl-4 py-3 placeholder:uppercase  placeholder:tracking-[1px] placeholder:text-xs lg:placeholder:text-sm' />
                         </div>
 

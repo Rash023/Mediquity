@@ -8,14 +8,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Google Sans Display', 'Arial', 'sans-serif'],
-        cursive: ['Protest Riot', 'sans-serif'],
-        ai: ['Single Day', 'cursive'],
-        pt_sans: ['PT Sans', 'sans-serif']
+        sans: ["Google Sans Display", "Arial", "sans-serif"],
+        cursive: ["Protest Riot", "sans-serif"],
+        ai: ["Single Day", "cursive"],
+        pt_sans: ["PT Sans", "sans-serif"],
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
         "meteor-effect": "meteor 5s linear infinite",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        ipad: "1024px", 
+        lg: "1280px",
       },
       keyframes: {
         spotlight: {
@@ -76,7 +82,8 @@ module.exports = {
         { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
       );
     },
-    require("@tailwindcss/aspect-ratio"), addVariablesForColors
+    require("@tailwindcss/aspect-ratio"),
+    addVariablesForColors,
   ],
 };
 
@@ -90,5 +97,3 @@ function addVariablesForColors({ addBase, theme }) {
     ":root": newVars,
   });
 }
-
-
