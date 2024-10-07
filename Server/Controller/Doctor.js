@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const Doctor = require("../Model/Doctor");
+const Appointment = require("../Model/Appointments");
 const cloudinary = require("cloudinary").v2;
 const jwt = require("jsonwebtoken");
 const Slot = require("../Model/Slots");
@@ -28,7 +29,7 @@ function getHoursBetween(startTime, endTime) {
 exports.signup = async (req, res) => {
   try {
     const { name, email, password, specialization } = req.body;
-    const image = req.files.file
+    const image = req.files.file;
     const existingUser = await Doctor.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
@@ -112,7 +113,7 @@ exports.login = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({
       success: false,
       message: "Login Failure",
@@ -124,8 +125,34 @@ exports.login = async (req, res) => {
 exports.getDoctorBySpecialisation = async (req, res) => {
   try {
     const { specialization } = req.query;
-    console.log(specialization);
-    const doctors = await Doctor.find({ specialization: specialization });
+
+    /* TODO: */
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Bearer token not found in Authorization header",
+      });
+    }
+    const token = authHeader.split(" ")[1];
+
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid or expired token",
+      });
+    }
+
+    const userId = decodedToken.id;
+
+    const doctors = await Doctor.find({
+      specialization: specialization,
+      _id: { $ne: userId },
+    });
+
     return res.status(200).json({
       success: true,
       doctors: doctors,
@@ -162,6 +189,110 @@ exports.getDoctorSlots = async (req, res) => {
       success: true,
       data: responseFilter,
       message: "Data found successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+/* CANCEL APPOINTMENT */
+exports.cancelAppointment = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+    if (!appointmentId) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide Appointment ID",
+      });
+    }
+
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Bearer token not found in Authorization header",
+      });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid or expired token",
+      });
+    }
+
+    const doctorId = decodedToken.id;
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid Token",
+      });
+    }
+
+    const appointment = await Appointment.findById(appointmentId).populate({
+      path: "slotId",
+      select: "day time",
+    });
+
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Please provide a valid Appointment ID",
+      });
+    }
+
+    if (!appointment.doctorId.equals(doctor._id)) {
+      return res.status(401).json({
+        success: false,
+        message: "Doctor is unauthorized",
+      });
+    }
+
+    const currentDate = new Date();
+    const day = appointment.slotId.day;
+    const time = appointment.slotId.time;
+    const dayParts = day.split(".");
+    const parsedDay = new Date(dayParts[2], dayParts[1] - 1, dayParts[0]);
+    const timeParts = time.split("-");
+
+    const endTimeParts = timeParts[0].split(":");
+    const parsedEndtime = new Date(parsedDay);
+    parsedEndtime.setHours(parseInt(endTimeParts[0], 10));
+    parsedEndtime.setMinutes(parseInt(endTimeParts[1], 10));
+    parsedEndtime.setSeconds(0);
+
+    if (parsedEndtime < currentDate) {
+      return res.status(400).json({
+        success: false,
+        message: "Unable to cancel Appointment now",
+      });
+    }
+
+    await Slot.findByIdAndUpdate(
+      { _id: appointment.slotId._id },
+      { $pull: { appointments: appointment._id } }
+    );
+
+    await User.findByIdAndUpdate(
+      { _id: appointment.patientId },
+      { $pull: { appointments: appointment._id } }
+    );
+
+    await Appointment.findByIdAndDelete(appointmentId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully cancelled Appointment",
     });
   } catch (error) {
     console.error(error);

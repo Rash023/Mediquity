@@ -29,7 +29,7 @@ exports.createAppointment = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const patientId = decodedToken.id;
 
-    const { doctorId, slotId } = req.body;
+    const { doctorId, slotId, patientName, description } = req.body;
     const code = generateRandomString(5);
     const link = `http://mediquity.vercel.app/video-call?roomID=${code}`;
     const slot = await Slot.findById(slotId);
@@ -49,6 +49,8 @@ exports.createAppointment = async (req, res) => {
     const day = slot.day;
     const time = slot.time;
     const newAppointment = new Appointment({
+      patientName,
+      description,
       doctorId,
       slotId,
       patientId,
@@ -65,6 +67,8 @@ exports.createAppointment = async (req, res) => {
 
     await slot.save();
     await user.save();
+
+    /* TODO: Send email to User */
 
     return res.status(200).json({
       success: true,

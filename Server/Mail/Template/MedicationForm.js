@@ -1,11 +1,5 @@
 /* MEDICATION EMAIL TEMPLATE FOR EMAIL */
-exports.medicationEmail = (
-  userName,
-  medicineName,
-  type,
-  dosage,
-  time
-) => {
+exports.medicationEmail = (userName, medicineName, type, dosage, time) => {
   return `<!DOCTYPE html>
   <html>
   
@@ -74,7 +68,7 @@ exports.medicationEmail = (
   
   <body>
       <div class="container">
-      <a href="http://localhost:3000">Mediquity</a>
+      <a href="https://mediquity.vercel.app/">Mediquity</a>
           <div class="message">Medication Information</div>
           <div class="body">
             <p>Dear ${userName},</p>
