@@ -51,10 +51,10 @@ const OsteoporosisDetection = () => {
       <div className="rounded-md flex flex-col items-center justify-center antialiased">
         <div>
           <div className="p-3 lg:p-0">
-            <h1 className="text-4xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+            <h1 className="text-4xl ipad:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
               Osteoporosis Detection
             </h1>
-            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] tracking-[1px] font-ai p-3 lg:p-0 text-justify">
+            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg ipad:text-[1.25rem] tracking-[1px] font-ai p-3 lg:p-0 text-justify">
               Greetings from{" "}
               <span className="uppercase font-bold floating-animation gemini-font">
                 OsteoCheck

@@ -14,6 +14,7 @@ const Profile = () => {
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [selectedMedication, setSelectedMedication] = useState(null);
   const [showMedicationModal, setShowMedicationModal] = useState(null);
+  const [updateMedicationStatus, setUpdateMedicationStatus] = useState(false);
   const [loading, setLoading] = useState({
     appointments: true,
     medications: true,
@@ -92,6 +93,7 @@ const Profile = () => {
 
   const updateStatus = async (medication) => {
     try {
+      setUpdateMedicationStatus(true);
       const status = medication.status === "Live" ? "Pause" : "Live";
       await axios.put(
         `${BASE_URL}/api/v1/medication/updateStatus`,
@@ -110,6 +112,8 @@ const Profile = () => {
     } catch (err) {
       console.error(err);
       toast.error("Please Try Again");
+    } finally {
+      setUpdateMedicationStatus(false);
     }
   };
 
@@ -157,39 +161,21 @@ const Profile = () => {
     }
   };
 
-  const SkeletonLoader = ({ type }) => {
-    if (type === 'appointment') {
-      return (
-        <div className="animate-pulse flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4">
-          <div className="h-6 bg-gray-400 rounded w-1/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/3 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
-          <div className="flex space-x-2 mt-4">
-            <div className="h-8 bg-gray-500 rounded w-1/4"></div>
-            <div className="h-8 bg-gray-500 rounded w-1/4"></div>
-          </div>
-        </div>
-      );
-    }
+  const SkeletonLoader = () => {
 
-    if (type === 'medication') {
-      return (
-        <div className="animate-pulse flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4">
-          <div className="h-6 bg-gray-400 rounded w-1/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/3 mb-2"></div>
-          <div className="flex space-x-2 mt-4">
-            <div className="h-8 bg-gray-500 rounded w-1/4"></div>
-            <div className="h-8 bg-gray-500 rounded w-1/4"></div>
-          </div>
+    return (
+      <div className="animate-pulse flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4">
+        <div className="h-6 bg-gray-400 rounded w-1/4 mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/3 mb-2"></div>
+        <div className="flex space-x-2 mt-4">
+          <div className="h-8 bg-gray-500 rounded w-1/4"></div>
+          <div className="h-8 bg-gray-500 rounded w-1/4"></div>
         </div>
-      );
-    }
-    return null;
+      </div>
+    );
   };
 
 
@@ -212,14 +198,18 @@ const Profile = () => {
             <div className='flex flex-col gap-y-5 lg:justify-center items-center'>
               {loading.userDetails ? (
                 <>
-                  <div className='animate-pulse flex lg:flex-row flex-col items-center lg:gap-x-4 lg:gap-y-0 gap-y-4'>
-                    <div className='h-8 bg-gray-400 rounded w-28'></div>
-                    <div className='h-6 bg-gray-300 rounded w-40'></div>
+                  <div className='animate-pulse flex lg:flex-row flex-col lg:items-baseline items-center lg:gap-x-4 lg:gap-y-0 gap-y-4'>
+                    <div className='text-gray-300 text-5xl uppercase text-center first-letter:text-6xl'>
+                      Name <span className='lg:inline-block hidden'>-</span>{' '}
+                    </div>
+                    <div className='h-8 bg-gray-300 rounded w-64'></div>
                   </div>
 
-                  <div className='animate-pulse flex lg:flex-row flex-col items-center lg:gap-x-4 lg:gap-y-0 gap-y-4'>
-                    <div className='h-8 bg-gray-400 rounded w-28'></div>
-                    <div className='h-6 bg-gray-300 rounded w-60'></div>
+                  <div className='animate-pulse flex lg:flex-row flex-col lg:items-baseline items-center lg:gap-x-4 lg:gap-y-0 gap-y-4'>
+                    <div className='text-gray-300 text-5xl uppercase text-center first-letter:text-6xl'>
+                      Email <span className='lg:inline-block hidden'>-</span>{' '}
+                    </div>
+                    <div className='h-8 bg-gray-300 rounded w-64'></div>
                   </div>
                 </>
               ) : (
@@ -261,8 +251,8 @@ const Profile = () => {
           <div className='grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
             {loading.appointments ? (
               <>
-                <SkeletonLoader type="appointment" />
-                <SkeletonLoader type="appointment" />
+                <SkeletonLoader />
+                <SkeletonLoader />
               </>
             ) : (
               appointments?.appointments?.map((appointment, index) => (
@@ -291,14 +281,14 @@ const Profile = () => {
                   <div className="flex w-full justify-center gap-x-2">
                     <button
                       type="submit"
-                      className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]"
+                      className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] z-10"
                       onClick={() => window.open(`${appointment.link}`, '_blank')}
                     >
                       Join
                     </button>
                     <button
                       type="submit"
-                      className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] ${appointment.canCancel ? '' : 'opacity-50 cursor-not-allowed'}`}
+                      className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] ${appointment.canCancel ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'} z-10`}
                       disabled={!appointment.canCancel}
                       onClick={() => handleAppointmentClick(appointment)}
                     >
@@ -323,12 +313,13 @@ const Profile = () => {
           <div className='grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-x-12 w-full lg:p-20 p-10 gap-y-4'>
             {loading.medications ? (
               <>
-                <SkeletonLoader type="medication" />
-                <SkeletonLoader type="medication" />
+                <SkeletonLoader />
+                <SkeletonLoader />
               </>
             ) : (
               medications?.data?.map((medication, index) => (
-                <div key={index} className={`h-fit w-full flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4`}>
+                <div key={index} className={`h-fit w-full flex flex-col gap-y-4 border border-white rounded-[15px] bg-black p-4 relative`}>
+                  <TbEdit className='absolute right-2 top-2 text-gray-400 cursor-pointer lg:text-3xl text-2xl' />
                   <div className='bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-xl lg:text-3xl font-bold select-none tracking-[1px] text-center underline decoration-slate-500 underline-offset-4'>{index + 1}</div>
                   {/* NAME */}
                   <div className='flex gap-x-4 justify-center lg:items-baseline lg:flex-row flex-col'>
@@ -361,7 +352,8 @@ const Profile = () => {
                     <TbEdit size={24} className="cursor-pointer" onClick={() => { /* handle edit functionality here */ }} />
                     <button
                       type="submit"
-                      className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]"
+                      className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] ${updateMedicationStatus && "cursor-wait"}`}
+                      disabled={updateMedicationStatus}
                       onClick={() => updateStatus(medication)}
                     >
                       {medication.status === "Live" ? "Pause" : "Live"}

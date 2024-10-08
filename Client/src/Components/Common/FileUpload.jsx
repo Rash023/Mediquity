@@ -67,7 +67,7 @@ const FileUpload = () => {
             <h1 className="text-4xl ipad:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
               Scan Reports
             </h1>
-            <p className="select-none text-neutral-500 max-w-lg mx-auto text-lg lg:text-[1.25rem] tracking-[1px] font-ai p-3 lg:p-0 text-justify">
+            <p className="select-none text-neutral-500 max-w-2xl mx-auto text-lg md:text-xl lg:text-2xl tracking-[1px] font-ai p-3 lg:p-0 text-center">
               Having trouble uploading your medical files? You're in the right
               place! Welcome to{" "}
               <span className="uppercase font-bold floating-animation gemini-font">
@@ -79,7 +79,7 @@ const FileUpload = () => {
             </p>
           </div>
 
-          <div className="lg:p-0 p-3">
+          <div className="ipad:p-0 p-3">
             <div className="max-w-[450px] min-h-[300px] border rounded-[30px] mt-[7%] border-neutral-300 mx-auto flex flex-col bg-black p-14">
               <form onSubmit={submitHandler}>
                 <div className="flex flex-col gap-y-7">
@@ -104,7 +104,7 @@ const FileUpload = () => {
                   </div>
 
                   <div>
-                    {!SelectedFile ? (
+                    {!isLoading ? (
                       <>
                         <label htmlFor="uploadInput" className="cursor-pointer">
                           <FaUpload
@@ -127,23 +127,24 @@ const FileUpload = () => {
                         </div>
                       </>
                     ) : (
-                      <>
+                      <div className="mr-4">
                         <span className="loader"></span>
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
                 <div className="flex w-full justify-center">
                   <button
                     type="submit"
-                    className="text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px]"
+                    disabled={isLoading}
+                    className={`text-white bg-gradient-to-b from-neutral-200 to-neutral-600 rounded-lg py-2 px-4 mt-4 uppercase tracking-[2px] ${isLoading && "cursor-wait"}`}
                   >
                     Submit
                   </button>
                 </div>
               </form>
             </div>
-            <div className="flex ipad:items-center mt-4 ipad:ml-6 gap-1">
+            <div className="flex ipad:items-center mt-4 justify-center gap-1">
               <div className="text-red-500 text-md">
                 <LuAsterisk />
               </div>

@@ -10,7 +10,7 @@ export const ProvideCardData = [
     link: "law-assistant",
   },
   {
-    title: "PhysioPal",
+    title: "Physiop",
     description: "Your guide for rehabilitation and wellness. Tailored advice and support.",
     link: "physiotherapy-assistant",
   },

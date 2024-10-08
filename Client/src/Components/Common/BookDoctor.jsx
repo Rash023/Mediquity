@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
@@ -9,8 +7,6 @@ const BookDoctor = () => {
   const [patientName, setPatientName] = useState("");
   const [description, setDescription] = useState("");
   const [specialist, setSpecialist] = useState("");
-  const [slotTiming, setSlotTiming] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const navigate = useNavigate();
 
@@ -51,17 +47,10 @@ const BookDoctor = () => {
     setSpecialist(e.target.value);
   };
 
-  const handleSlotTimingChange = (e) => {
-    setSlotTiming(e.target.value);
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate(`/get-doctor/${specialist}`);
+    navigate(`/get-doctor/${specialist}?name=${patientName}&desc=${description}`);
   };
 
   return (
@@ -81,7 +70,7 @@ const BookDoctor = () => {
                 type="text"
                 value={patientName}
                 onChange={handlePatientNameChange}
-                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-2 py-3 placeholder:uppercase uppercase placeholder:tracking-[2px] placeholder:text-sm "
+                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-3 pl-3 py-3 placeholder:uppercase tracking-wide placeholder:tracking-[2px] placeholder:text-sm "
                 placeholder="Patient Name"
                 required
               />
@@ -94,7 +83,7 @@ const BookDoctor = () => {
               <textarea
                 value={description}
                 onChange={handleDescriptionChange}
-                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-4 pl-2 py-3 placeholder:uppercase uppercase placeholder:tracking-[2px] placeholder:text-sm "
+                className="block mt-3 mb-3 text-white w-[99%] bg-transparent border border-gray-100 rounded-lg placeholder:pl-3 pl-3 py-3 placeholder:uppercase tracking-wide placeholder:tracking-[2px] placeholder:text-sm "
                 placeholder="Description"
                 required
               />

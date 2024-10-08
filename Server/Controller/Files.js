@@ -163,3 +163,54 @@ exports.getFiles = async (req, res) => {
     });
   }
 };
+
+/* REMOVE FILE */
+exports.deleteFile = async (req, res) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        message: "Bearer token not found in Authorization header",
+      });
+    }
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Token not found",
+      });
+    }
+    let decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decodedToken.id;
+    const { fileId } = req.params;
+    const file = await File.findById(fileId);
+    if (!file) {
+      return res.status(404).json({
+        success: false,
+        message: "File not found",
+      });
+    }
+    if (file.userId.toString() !== userId.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "User is unauthorized to delete this file",
+      });
+    }
+    await File.findByIdAndDelete(fileId);
+    await User.findByIdAndUpdate(userId, {
+      $pull: { files: fileId },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "File successfully deleted",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
