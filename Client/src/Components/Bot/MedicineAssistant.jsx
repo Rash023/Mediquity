@@ -106,74 +106,73 @@ const MedicineAssistant = () => {
   };
 
   return (
-    <div className="h-full min-h-[100vh] w-full  rounded-md  bg-neutral-950 flex flex-col items-center justify-center antialiased med-Assistant">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl  lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-[1px] mb-[4%]">
+    <div className="min-h-screen w-full bg-neutral-950 flex flex-col items-center justify-center p-4 md:p-8 med-Assistant">
+      <div className="w-full max-w-4xl mx-auto">
+        <h1 className="text-6xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold uppercase tracking-wider mb-6 -ml-1">
           Pharmos
         </h1>
-        <p className="text-neutral-500 max-w-lg mx-auto my-1 text-lg lg:text-center tracking-[1px] font-ai p-3 text-justify lg:p-0">
+        <p className="text-neutral-500 max-w-2xl mx-auto my-4 text-lg md:text-xl lg:text-2xl text-center tracking-wide font-ai">
           Welcome to{" "}
           <span className="uppercase font-bold floating-animation gemini-font">
             Pharmos
           </span>
           , your exclusive medication ally. We specialize in customized
           medication support, offering expert guidance on precise dosages,
-          strategic timing, and nuanced advice for all age groups.,{" "}
+          strategic timing, and nuanced advice for all age groups.{" "}
           <span className="uppercase font-bold floating-animation gemini-font">
-            Pharmos,
+            Pharmos
           </span>{" "}
           epitomizes our steadfast dedication to pharmacy and personalized
           healthcare delivery.
         </p>
 
-        <div className="p-5 lg:p-0">
-          <div className=" w-7xl lg:w-[1000px]  flex flex-col gap-x-2  border border-white rounded-[30px] overflow-hidden p-12 mt-[5%]">
-            <div className="Pharmos-inner-div flex gap-x-2 mx-auto">
-              <h1 className="text-4xl lg:text-6xl text-white font-bold tracking-wider mb-4 text-center first-letter:capitalize chat-name font-ai">
+        <div className="mt-8 md:mt-12">
+          <div className="w-full border border-white rounded-3xl overflow-hidden p-6 md:p-8 lg:p-12">
+            <div className="flex items-center justify-center gap-x-4 mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-wider text-center first-letter:capitalize chat-name font-ai">
                 Hello, {sessionStorage.getItem("user")?.split(" ")[0]}
-              </h1>
+              </h2>
               <img
                 src={Starsvg}
                 alt="Star SVG"
-                className="h-6 w-6 animated-star"
+                className="h-8 w-8 md:h-10 md:w-10 animated-star"
               />
             </div>
-            <h1 className="text-2xl lg:text-5xl text-gray-600 font-bold tracking-wider mb-4 text-center first-letter:capitalize font-ai">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl text-gray-600 font-bold tracking-wider mb-8 text-center first-letter:capitalize font-ai">
               How can I help you today?
-            </h1>
+            </h3>
             <div
-              className="chat-container max-h-[300px] overflow-y-auto mt-[2%]"
+              className="chat-container max-h-[400px] md:max-h-[500px] overflow-y-auto mb-6"
               ref={chatContainerRef}
             >
               {!loading &&
                 history.slice(1).map((message, index) => (
                   <div
                     key={index}
-                    className={`flex place-items-center items-start space-x-2 mt-[2%] ${message.role === "model" ? "lg:justify-start" : "lg:justify-end"
+                    className={`flex items-start space-x-4 mb-4 ${message.role === "model" ? "justify-start" : "justify-end"
                       }`}
                   >
                     {message.role === "user" ? (
                       <img
                         src={`https://api.dicebear.com/8.x/initials/svg?seed=${sessionStorage.getItem("user").replace(' ', '%20')}`}
                         alt="User Avatar"
-                        className="w-7 h-7 lg:w-10 lg:h-10 mt-3 lg:mt-1 rounded-full"
+                        className="w-10 h-10 md:w-12 md:h-12 rounded-full"
                       />
                     ) : (
                       <img
                         src="https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif"
-                        alt="User Avatar"
-                        className="w-7 h-7 lg:w-10 lg:h-10 mt-3 lg:mt-1 rounded-full"
+                        alt="Assistant Avatar"
+                        className="w-10 h-10 md:w-12 md:h-12 rounded-full"
                       />
                     )}
                     <div
-                      className={` p-2 lg:p-4 rounded-[15px] lg:max-w-[50%] tracking-[2px] ${message.role === "user"
-                        ? "text-white bg-gray-800"
-                        : "text-white bg-slate-500"
-                        } max-w-xl break-words`}
+                      className={`p-4 rounded-2xl max-w-[75%] md:max-w-[65%] tracking-wide ${message.role === "user"
+                          ? "bg-gray-800 text-white"
+                          : "bg-slate-500 text-white"
+                        }`}
                       dangerouslySetInnerHTML={{
                         __html: parseMessage(message.parts),
                       }}
-                      style={{ margin: "0.5rem" }}
                     />
                   </div>
                 ))}
@@ -181,22 +180,21 @@ const MedicineAssistant = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="w-full flex place-items-center justify-center mt-[4%] gap-x-2"
+              className="w-full flex items-center justify-center gap-x-2"
             >
               <input
                 type="text"
                 value={newMessage}
-                className="rounded-[15px] w-full p-4 bg-black border border-neutral-500 placeholder:tracking-[1px] placeholder:font-ai text-white font-ai text-2xl placeholder:text-[1.25rem] lg:placeholder:text-2xl"
+                className="flex-grow rounded-2xl p-4 md:p-5 bg-black border border-neutral-500 text-white font-ai text-xl md:text-2xl placeholder:text-neutral-500 placeholder:tracking-wide"
                 placeholder="Enter your message"
                 onChange={(e) => setNewMessage(e.target.value)}
               />
-
-              <IoMdSend
-                className="text-neutral-300 cursor-pointer absolute lg:relative right-20 lg:right-0 text-3xl lg:text-5xl"
-                color=""
-                onClick={handleSubmit}
-              />
-
+              <button
+                type="submit"
+                className="bg-blue-500 text-white rounded-full p-2 md:p-3"
+              >
+                <IoMdSend className="text-xl md:text-2xl" />
+              </button>
             </form>
           </div>
         </div>
