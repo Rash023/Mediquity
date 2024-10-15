@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { setToken, setUser } from "../../Slice/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,6 +27,7 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         `${BASE_URL}/api/v1/user/login`,
@@ -28,10 +35,11 @@ const Login = () => {
       );
       if (response.status === 200) {
         toast.success("Login Successful!", { autoClose: 2000 });
-        console.log(response.data);
-        sessionStorage.setItem('token', response?.data?.token);
-        sessionStorage.setItem('user', response?.data?.user?.name);
-        window.location.href = '/';
+        dispatch(setToken(response?.data?.token));
+        dispatch(setUser(response?.data?.user));
+        localStorage.setItem("user", JSON.stringify(response?.data?.user));
+        localStorage.setItem("token", JSON.stringify(response?.data?.token));
+        navigate("/");
       } else {
         toast.error("Please Try Again", {
           autoClose: 2000,
@@ -42,6 +50,8 @@ const Login = () => {
       toast.error("Please Try Again", {
         autoClose: 2000,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,8 +109,11 @@ const Login = () => {
 
             <div className="text-center w-full lg:py-11 mt-6">
               <button
-                className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-[15px] h-[6vh] font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] uppercase tracking-[2px]"
+                className={`bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-[15px] h-[6vh] font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] uppercase tracking-[2px] ${
+                  loading ? "cursor-wait" : ""
+                }`}
                 type="submit"
+                disabled={loading}
               >
                 Login &rarr;
                 <BottomGradient />

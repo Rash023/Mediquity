@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Doctor from "../../Asset/Profile/Doctor.png"
+import { useSelector } from "react-redux";
 
 const GetDoctorBySpecialist = () => {
     const { specialist } = useParams();
@@ -9,7 +10,7 @@ const GetDoctorBySpecialist = () => {
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
-    const token = sessionStorage.getItem("token");
+    const { token } = useSelector((state) => state.auth);
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const queryParams = new URLSearchParams(location.search);

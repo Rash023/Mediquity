@@ -3,6 +3,7 @@ import { FaUpload } from "react-icons/fa";
 import { LuAsterisk } from "react-icons/lu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const FileUpload = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const FileUpload = () => {
   const [FormDataa, setFormData] = useState({
     name: "",
   });
-  const token = sessionStorage.getItem("token");
+  const { token } = useSelector((state) => state.auth);
   const [SelectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const BASE_URL = process.env.REACT_APP_BASE_URL

@@ -4,11 +4,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const MedicationForm = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const { token } = useSelector((state) => state.auth);
   const [medication, setMedication] = useState({
-    token: sessionStorage.getItem("token"),
+    token: token,
     medicineName: "",
     type: "",
     dosage: "",
@@ -47,8 +49,8 @@ const MedicationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const date = new Date(medication.time);
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
     const transformedTime = `${hours}:${minutes}`;
     const updatedMedication = { ...medication, times: transformedTime };
     try {
@@ -60,12 +62,12 @@ const MedicationForm = () => {
       if (response) {
         toast.success("Medication Saved Successfully!", { autoClose: 2000 });
         setMedication({
-          token: sessionStorage.getItem("token"),
+          token: token,
           medicineName: "",
           type: "",
           dosage: "",
           days: new Array(7).fill(false),
-          time: ""
+          time: "",
         });
         setTime(new Date());
       } else {
@@ -76,7 +78,6 @@ const MedicationForm = () => {
       toast.error("Please Try Again", { autoClose: 2000 });
     }
   };
-
 
   return (
     <div className="min-h-[100vh] dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">

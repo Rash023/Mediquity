@@ -7,12 +7,13 @@ import { FiEdit } from "react-icons/fi";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const ViewDocument = () => {
     const [documents, setDocuments] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
-    const token = sessionStorage.getItem("token");
+    const { token } = useSelector((state) => state.auth);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [documentToDelete, setDocumentToDelete] = useState(null);
     const navigate = useNavigate();

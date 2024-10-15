@@ -5,13 +5,17 @@ import Markdown from "markdown-it";
 import "./Style/LawAssistant.css";
 import Starsvg from "../../Asset/Profile/BardStar.svg";
 import { useNavigate } from "react-router-dom";
-
-const API_KEY = process.env.REACT_APP_GEMINI_API_KEY
+import { useSelector } from "react-redux";
+const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(`${API_KEY}`);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const md = new Markdown();
 
 const LawAssistant = () => {
+  const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  console.log("TOKEN", token);
+  console.log("USER", user);
   const [newMessage, setNewMessage] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -28,11 +32,8 @@ const LawAssistant = () => {
     },
   ]);
 
-
-
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if (!token) navigate('/login');
+    if (!token) navigate("/login");
   }, []);
 
   async function getResponse(prompt) {
@@ -126,7 +127,7 @@ const LawAssistant = () => {
           <div className="w-full border border-white rounded-3xl overflow-hidden p-6 md:p-8 lg:p-12">
             <div className="flex items-center justify-center gap-x-4 mb-6">
               <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-wider text-center first-letter:capitalize chat-name font-ai">
-                Hello, {sessionStorage.getItem("user")?.split(" ")[0]}
+                Hello, {user?.name.split(" ")[0]}
               </h2>
               <img
                 src={Starsvg}
@@ -145,12 +146,16 @@ const LawAssistant = () => {
                 history.slice(1).map((message, index) => (
                   <div
                     key={index}
-                    className={`flex items-start space-x-4 mb-4 ${message.role === "model" ? "justify-start" : "justify-end"
-                      }`}
+                    className={`flex items-start space-x-4 mb-4 ${
+                      message.role === "model" ? "justify-start" : "justify-end"
+                    }`}
                   >
                     {message.role === "user" ? (
                       <img
-                        src={`https://api.dicebear.com/8.x/initials/svg?seed=${sessionStorage.getItem("user").replace(' ', '%20')}`}
+                        src={`https://api.dicebear.com/8.x/initials/svg?seed=${user.replace(
+                          " ",
+                          "%20"
+                        )}`}
                         alt="User Avatar"
                         className="w-10 h-10 md:w-12 md:h-12 rounded-full"
                       />
@@ -162,10 +167,11 @@ const LawAssistant = () => {
                       />
                     )}
                     <div
-                      className={`p-4 rounded-2xl max-w-[75%] md:max-w-[65%] tracking-wide ${message.role === "user"
-                        ? "bg-gray-800 text-white"
-                        : "bg-slate-500 text-white"
-                        }`}
+                      className={`p-4 rounded-2xl max-w-[75%] md:max-w-[65%] tracking-wide ${
+                        message.role === "user"
+                          ? "bg-gray-800 text-white"
+                          : "bg-slate-500 text-white"
+                      }`}
                       dangerouslySetInnerHTML={{
                         __html: parseMessage(message.parts),
                       }}
@@ -192,7 +198,8 @@ const LawAssistant = () => {
                 <IoMdSend className="text-xl md:text-2xl" />
               </button>
             </form>
-          </div>      </div>
+          </div>{" "}
+        </div>
       </div>
     </div>
   );
