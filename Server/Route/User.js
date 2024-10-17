@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Signup, login, userDetail } = require("../Controller/User");
+const { signup, login, userDetail } = require("../Controller/User");
 const {
   fileuploader,
   SearchFile,
@@ -18,7 +18,7 @@ const {
 
 router.get("/", userDetail);
 router.post("/login", login);
-router.post("/signup", Signup);
+router.post("/signup", signup);
 router.post("/upload", fileuploader);
 router.delete("/deleteFile/:fileId", deleteFile);
 router.post("/search", SearchFile);

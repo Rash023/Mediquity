@@ -3,7 +3,7 @@ const User = require("../Model/User");
 const jwt = require("jsonwebtoken");
 
 /* USER REGISTRATION */
-exports.Signup = async (req, res) => {
+exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
