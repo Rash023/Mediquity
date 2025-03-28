@@ -151,11 +151,12 @@ const PhysioAssistant = () => {
                       }`}
                   >
                     {message.role === "user" ? (
-                      <img
-                        src={`https://api.dicebear.com/8.x/initials/svg?seed=${user.replace(' ', '%20')}`}
-                        alt="User Avatar"
-                        className="w-10 h-10 md:w-12 md:h-12 rounded-full"
-                      />
+                     <img
+  src={`https://api.dicebear.com/8.x/initials/svg?seed=${user?.name ? user.name.replace(' ', '%20') : 'Anonymous'}`}
+  alt="User Avatar"
+  className="w-10 h-10 md:w-12 md:h-12 rounded-full"
+/>
+
                     ) : (
                       <img
                         src="https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif"
