@@ -13,7 +13,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 const md = new Markdown();
 
 const PersonalTherapist = () => {
-  const { token } = useSelector((state) => state.auth);s
+  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.auth);
   const [newMessage, setNewMessage] = useState("");
   const navigate = useNavigate();
