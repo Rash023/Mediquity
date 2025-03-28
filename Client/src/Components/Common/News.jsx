@@ -25,10 +25,7 @@ export function News() {
         country: 'us'
       }).then(response => {
        
-          {
-            status: "ok",
-            articles: [...]
-          }
+          console.log(response);
       });
         console.log("REsponse", response);
         const articles = response?.data?.articles || [];
