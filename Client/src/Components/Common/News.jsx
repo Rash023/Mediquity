@@ -4,6 +4,8 @@ import { LayoutGrid } from "../UI/LayoutGrid.tsx";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { TextGenerateEffect } from "../UI/TextGenerateEffect.tsx";
 import { TracingBeam } from "../UI/TracingBeam.tsx";
+import NewsAPI from 'newsapi';
+const newsapi = new NewsAPI('24bbada55e9140efa6d99df9158fa3e5');
 
 export function News() {
   const [cards, setCards] = useState([]);
@@ -15,9 +17,19 @@ export function News() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=5ba1d439297d4a7299e6a4e7648a218c&page=${page}&pageSize=${cardsPerPage}`
-        );
+        const response =newsapi.v2.topHeadlines({
+        sources: 'bbc-news,the-verge',
+        q: 'bitcoin',
+        category: 'business',
+        language: 'en',
+        country: 'us'
+      }).then(response => {
+       
+          {
+            status: "ok",
+            articles: [...]
+          }
+      });
         console.log("REsponse", response);
         const articles = response?.data?.articles || [];
         const newsCards = articles.map((article, index) => ({
